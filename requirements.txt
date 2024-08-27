@@ -3,3 +3,4 @@ s3fs==2024.6.1
 st-files-connection
 python-pptx 
 python-dotenv
+openai
