@@ -74,7 +74,7 @@ def create_presentation(topic, slide_content):
         title_shape = shapes.title
         body_shape = shapes.placeholders[1]
         
-        title_shape.text = shapes.title
+        title_shape.text = slide_title
         tf = body_shape.text_frame
         for content_line in slide_content.split('\n'):
             p = tf.add_paragraph()
