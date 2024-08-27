@@ -64,9 +64,9 @@ def create_presentation(topic, slide_content):
         slide_content = '\n'.join(lines[1:]).replace('- ', '')
 
         # Title slide
-        slide = prs.slides.add_slide(title_slide_layout)
-        title = slide.shapes.title
-        title.text = slide_title
+        #slide = prs.slides.add_slide(title_slide_layout)
+        #title = slide.shapes.title
+        #title.text = slide_title
 
         # Content slide
         slide = prs.slides.add_slide(bullet_slide_layout)
@@ -74,7 +74,7 @@ def create_presentation(topic, slide_content):
         title_shape = shapes.title
         body_shape = shapes.placeholders[1]
         
-        title_shape.text = slide_title
+        title_shape.text = shapes.title
         tf = body_shape.text_frame
         for content_line in slide_content.split('\n'):
             p = tf.add_paragraph()
