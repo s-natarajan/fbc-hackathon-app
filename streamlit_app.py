@@ -13,11 +13,11 @@ st.write(
 from smart_open import smart_open
 
 #AWS Connection
-aws_key=os.environ['AWS_ACCESS_KEY_ID']
-aws_secret=os.environ['AWS_SECRET_ACCESS_KEY']
+#aws_key=os.environ['AWS_ACCESS_KEY_ID']
+#aws_secret=os.environ['AWS_SECRET_ACCESS_KEY']
 bucket_name = 'h4-hack-week-aug-2024'
 object_key = 'myfile.csv'
-path = 's3://{}:{}@{}/{}'.format(aws_key, aws_secret, bucket_name, object_key)
+path = 's3://{}:{}@{}/{}'.format("AKIA5DRNUTKHYRXM5LPV", "KOU2S7VqQQmB4974Vl5Ve0CRMxBPZ55RwR0HFM1O", bucket_name, object_key)
 
 
 #Connecting to AWS through smart_open python package and getting the data
