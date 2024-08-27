@@ -19,8 +19,9 @@ conn = st.connection('s3', type=FilesConnection)
 st.write("conn obtained")
 df = conn.read("fbc-hackathon-test/Operations ScoreCard - UX.csv", input_format="csv", ttl=600)
 st.write("df obtained")
+st.table(df)
 # Print results.
-for row in df.itertuples():
-    st.write(f"{row}")
+#for row in df.itertuples():
+    #st.write(f"{row}")
 
 
