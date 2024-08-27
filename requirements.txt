@@ -1,3 +1,4 @@
 streamlit
 s3fs==2024.6.1
 st-files-connection
+smart_open==1.10.1
