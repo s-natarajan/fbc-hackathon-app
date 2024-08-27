@@ -5,6 +5,8 @@ from pptx import Presentation
 from pptx.util import Inches
 from dotenv import load_dotenv
 import os
+from st_files_connection import FilesConnection
+import pandas as pd
 
 # Load environment variables from a .env file if present
 load_dotenv()
@@ -17,7 +19,17 @@ st.title('Slide Content Generator')
 
 # Function to generate slide content
 def generate_slide_content(topic, content):
-    prompt = f"Generate slide ideas for {topic}:\n\n{content}"
+
+    conn = st.connection('s3', type=FilesConnection)
+    st.write("conn obtained")
+    df = conn.read("fbc-hackathon-test/Operations ScoreCard - UX.csv", input_format="csv", ttl=600)
+    st.write("df obtained")
+    st.table(df)
+    # Print results.
+    #for row in df.itertuples():
+    #st.write(f"{row}")
+    
+    prompt = f"Generate slide ideas for {topic}:\n\n{df.to_string()}"
     
     # Use ChatCompletion with the new model and API method
     response = openai.chat.completions.create(
