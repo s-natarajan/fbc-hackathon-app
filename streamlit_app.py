@@ -11,17 +11,15 @@ st.write(
     "Hello World!"
 )
 
-from smart_open import smart_open
+from st_files_connection import FilesConnection
 
-#AWS Connection
-#aws_key=os.environ['AWS_ACCESS_KEY_ID']
-#aws_secret=os.environ['AWS_SECRET_ACCESS_KEY']
-bucket_name = 'h4-hack-week-aug-2024'
-object_key = 'myfile.csv'
-path = 's3://{}:{}@{}/{}'.format("AKIA5DRNUTKHYRXM5LPV", "KOU2S7VqQQmB4974Vl5Ve0CRMxBPZ55RwR0HFM1O", bucket_name, object_key)
+# Create connection object and retrieve file contents.
+# Specify input format is a csv and to cache the result for 600 seconds.
+conn = st.connection('s3', type=FilesConnection)
+df = conn.read("fbc-hackathon-test/myfile.csv", input_format="csv", ttl=600)
 
-data = pd.read_csv(smart_open(path),index_col=0)
-st.write(df)
-
+# Print results.
+for row in df.itertuples():
+    st.write(f"{row.Owner} has a :{row.Pet}:")
 
 
