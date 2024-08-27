@@ -16,8 +16,9 @@ from st_files_connection import FilesConnection
 # Create connection object and retrieve file contents.
 # Specify input format is a csv and to cache the result for 600 seconds.
 conn = st.connection('s3', type=FilesConnection)
+st.write("conn obtained")
 df = conn.read("fbc-hackathon-test/myfile.csv", input_format="csv", ttl=600)
-
+st.write("df obtained")
 # Print results.
 for row in df.itertuples():
     st.write(f"{row.Owner} has a :{row.Pet}:")
