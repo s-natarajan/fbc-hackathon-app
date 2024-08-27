@@ -10,7 +10,7 @@ import os
 load_dotenv()
 
 # Set your OpenAI API key
-openai.api_key = os.getenv('OPENAI_API_KEY')
+openai.api_key = st.text_input("OpenAI API Key", type="password")
 
 # Title of the Streamlit app
 st.title('Slide Content Generator')
