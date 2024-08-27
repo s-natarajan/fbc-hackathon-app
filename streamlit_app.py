@@ -35,7 +35,7 @@ def generate_slide_content(topic, content):
     response = openai.chat.completions.create(
         model="gpt-3.5-turbo",  # Specify the model
         messages=[
-            {"role": "system", "content": "You are a helpful assistant. Use the data from CSV file to summarize Billable, RPN & Growth metrics for a Franchise."},
+            {"role": "system", "content": "You are a helpful assistant. Use the data from CSV file to summarize Franchise summary details, Billable, RPN & Growth metrics separately for a Franchise."},
             {"role": "user", "content": prompt}
         ],
         temperature=0.7,
