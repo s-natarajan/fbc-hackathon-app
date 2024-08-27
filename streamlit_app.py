@@ -9,11 +9,22 @@ st.write(
 st.write(
     "Hello World!"
 )
-# Create connection object and retrieve file contents.
-# Specify input format is a csv and to cache the result for 600 seconds.
-conn = st.connection('s3', type=FilesConnection)
-df = conn.read("h4-hack-week-aug-2024/myfile.csv", input_format="csv", ttl=600)
 
-# Print results.
-for row in df.itertuples():
-    st.write(f"{row.Owner} has a :{row.Pet}:")
+from smart_open import smart_open
+
+#AWS Connection
+aws_key=os.environ['AWS_ACCESS_KEY_ID']
+aws_secret=os.environ['AWS_SECRET_ACCESS_KEY']
+bucket_name = 'h4-hack-week-aug-2024'
+object_key = 'myfile.csv'
+path = 's3://{}:{}@{}/{}'.format(aws_key, aws_secret, bucket_name, object_key)
+
+
+#Connecting to AWS through smart_open python package and getting the data
+@st.experimental_memo
+def load_data(path):
+    data = pd.read_csv(smart_open(path),index_col=0)
+    return data
+
+df = load_data(path) #saving the returned data into dataframe
+st.write(df)
