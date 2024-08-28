@@ -23,7 +23,7 @@ def generate_slide_content(topic, content):
     conn = st.connection('s3', type=FilesConnection)
     st.write("conn obtained")
     
-    df = conn.read("fbc-hackathon-test/Operations ScoreCard - UX.csv", input_format="csv", ttl=600)
+    df = conn.read("fbc-hackathon-test/growth.csv", input_format="csv", ttl=600)
     st.write("df obtained")
     #st.table(df)
     # Print results.
