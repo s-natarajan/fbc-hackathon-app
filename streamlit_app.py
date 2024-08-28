@@ -47,6 +47,7 @@ def generate_slide_content(topic, content):
         temperature=0.7,
     )
     generated_text = response.choices[0].message.content
+    st.write(f"Response: {generated_text}")
     match = re.search(r'\\{.*?\\}', generated_text, re.DOTALL)
     dictionary = None
     if match:
@@ -56,7 +57,7 @@ def generate_slide_content(topic, content):
         except (ValueError, SyntaxError):
             # Not a dictionary
             return None
-    st.write(dictionary)
+    st.write(f"is dict? {dictionary}")
     return dictionary
 
 # Function to create a PowerPoint presentation
