@@ -23,16 +23,16 @@ st.title('Slide Content Generator')
 def generate_slide_content(topic, content):
 
     conn = st.connection('s3', type=FilesConnection)
-    st.write("conn obtained")
+    #st.write("conn obtained")
     
     df = conn.read("fbc-hackathon-test/growth.csv", input_format="csv", ttl=600)
-    st.write("df obtained")
-    median = conn.read("fbc-hackathon-test/Network_Median.csv", input_format="csv", ttl=600)
+    #st.write("df obtained")
+    #median = conn.read("fbc-hackathon-test/Network_Median.csv", input_format="csv", ttl=600)
     #st.table(df)
     # Print results.
-    st.write(median.to_dict())
-    for row in median.itertuples():
-        st.write(f"{row}")
+    #st.write(median.to_dict())
+    #for row in median.itertuples():
+        #st.write(f"{row}")
     
     prompt = f"Generate slide ideas for {topic}:\n\n{df.to_string()}"
     prompt_txt = f"You are a helpful assistant that generates an executive summary of Franchise's performance metrics. For Franchise number: {topic} return the following details Franchisee First Name and Last Name, Network Performance Partner as FBC, State & Region as DO, Current & Previous year billable hours, Current & Previous year revenue, score and Network rank."
@@ -47,26 +47,8 @@ def generate_slide_content(topic, content):
         temperature=0.7,
     )
     generated_text = response.choices[0].message.content
-    st.write(f"generated text: {generated_text}")
+    #st.write(f"generated text: {generated_text}")
     return generated_text
-    
-# function to replace text in pptx first slide with selected filters
-def replace_text(replacements, shapes):
-    """function to replace text on a PowerPoint slide. Takes dict of {match: replacement, ... } and replaces all matches"""
-    for shape in shapes:
-        for match, replacement in replacements.items():
-            if shape.has_text_frame:
-                if (shape.text.find(match)) != -1:
-                    text_frame = shape.text_frame
-                    for paragraph in text_frame.paragraphs:
-                        whole_text = "".join(run.text for run in paragraph.runs)
-                        whole_text = whole_text.replace(str(match), str(replacement))
-                        for idx, run in enumerate(paragraph.runs):
-                            if idx != 0:
-                                p = paragraph._p
-                                p.remove(run._r)
-                        if bool(paragraph.runs):
-                            paragraph.runs[0].text = whole_text
                             
 # Function to create a PowerPoint presentation
 def create_presentation(topic, slide_content):
