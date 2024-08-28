@@ -10,7 +10,7 @@ import pandas as pd
 
 # Load environment variables from a .env file if present
 load_dotenv()
-path = os.path.dirname(__file__)
+#path = os.path.dirname(__file__)
 # Set your OpenAI API key
 openai.api_key = st.text_input("OpenAI API Key", type="password")
 
@@ -33,7 +33,7 @@ def generate_slide_content(topic, content):
         st.write(f"{row}")
     
     prompt = f"Generate slide ideas for {topic}:\n\n{df.to_string()}"
-    prompt_txt = f"You are a helpful assistant that generates an executive summary of Franchise's performance metrics. For Franchise number: {topic} first return only the following details First Name & Last Name as Franchisee, NetworkPerformancePartner as FBC, State as DO, Weighted Score and Rank. Then return only the current & previous year billable hours, growth hours %. Then return current and previous year total revenue."
+    prompt_txt = f"You are a helpful assistant that generates an executive summary of Franchise's performance metrics. For Franchise number: {topic} first return only the following details First Name & Last Name as Franchisee, NetworkPerformancePartner as FBC, State as DO, Weighted Score, Rank, Current Billable hours, Previous year billable hours, Growth hours %, Current total revenue, Previous year total revenue."
 
     # Use ChatCompletion with the new model and API method
     response = openai.chat.completions.create(
@@ -49,10 +49,10 @@ def generate_slide_content(topic, content):
 
 # Function to create a PowerPoint presentation
 def create_presentation(topic, slide_content):
-    pptx = path + '//' + 'template.pptx'
-    prs = Presentation(pptx)
+    #pptx = path + '//' + 'template.pptx'
+    prs = Presentation()
     title_slide_layout = prs.slide_layouts[0]
-    bullet_slide_layout = prs.slide_layouts.get_by_name('Purple_Circle_Corners')
+    bullet_slide_layout = prs.slide_layouts[1]
 
     # Title slide
     slide = prs.slides.add_slide(title_slide_layout)
