@@ -24,16 +24,16 @@ def generate_slide_content(topic, content):
     st.write("conn obtained")
     
     df = conn.read("fbc-hackathon-test/growth.csv", input_format="csv", ttl=600)
-    st.write("df obtained")
+    #st.write("df obtained")
     median = conn.read("fbc-hackathon-test/Network_Median.csv", input_format="csv", ttl=600)
     #st.table(df)
     # Print results.
-    st.write(median.to_dict())
-    for row in median.itertuples():
-        st.write(f"{row}")
+    #st.write(median.to_dict())
+    #for row in median.itertuples():
+    #    st.write(f"{row}")
     
     prompt = f"Generate slide ideas for {topic}:\n\n{df.to_string()}"
-    prompt_txt = f"You are a helpful assistant that generates an executive summary of Franchise's performance metrics. For Franchise number: {topic} first return only the following details First Name & Last Name as Franchisee, NetworkPerformancePartner as FBC, State as DO, Weighted Score, Rank, Current Billable hours, Previous year billable hours, Growth hours %, Current total revenue, Previous year total revenue."
+    prompt_txt = f"You are a helpful assistant that generates an executive summary of Franchise's performance metrics. For Franchise number: {topic} first return only the following details First Name & Last Name as Franchisee, NetworkPerformancePartner as FBC, State as DO, Weighted Score, Rank, Current Billable hours, Previous year billable hours, Growth hours %, Current total revenue, Previous year total revenue. Then aggregate the number across all franchises for the owner and return the results calling out key insights."
 
     # Use ChatCompletion with the new model and API method
     response = openai.chat.completions.create(
