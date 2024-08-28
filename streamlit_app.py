@@ -74,42 +74,42 @@ def create_presentation(topic, slide_content):
     subtitle.text = "Generated using OpenAI and Streamlit"
 
     for key, value in data.items():
-    if isinstance(value, list):
-        print(f"{key}:")
-        for item in value:
+        if isinstance(value, list):
+            print(f"{key}:")
+            for item in value:
+                slide = prs.slides.add_slide(bullet_slide_layout)
+                shapes = slide.shapes
+                title_shape = shapes.title
+                body_shape = shapes.placeholders[1]
+                title_shape.text = f"{key}"
+                tf = body_shape.text_frame
+                for sub_key, sub_value in item.items():
+                    print(f"  {sub_key}: {sub_value}")
+                    p = tf.add_paragraph()
+                    p.text+= f"  {sub_key}: {sub_value} \n\n"
+                #print()  # Line break between items
+        elif isinstance(value, dict):
+            print(f"{key}:")
             slide = prs.slides.add_slide(bullet_slide_layout)
             shapes = slide.shapes
             title_shape = shapes.title
             body_shape = shapes.placeholders[1]
             title_shape.text = f"{key}"
             tf = body_shape.text_frame
-            for sub_key, sub_value in item.items():
+            for sub_key, sub_value in value.items():
                 print(f"  {sub_key}: {sub_value}")
                 p = tf.add_paragraph()
                 p.text+= f"  {sub_key}: {sub_value} \n\n"
-            #print()  # Line break between items
-    elif isinstance(value, dict):
-        print(f"{key}:")
-        slide = prs.slides.add_slide(bullet_slide_layout)
-        shapes = slide.shapes
-        title_shape = shapes.title
-        body_shape = shapes.placeholders[1]
-        title_shape.text = f"{key}"
-        tf = body_shape.text_frame
-        for sub_key, sub_value in value.items():
-            print(f"  {sub_key}: {sub_value}")
+        else:
+            print(f"{key}: {value}")
+            slide = prs.slides.add_slide(bullet_slide_layout)
+            shapes = slide.shapes
+            title_shape = shapes.title
+            body_shape = shapes.placeholders[1]
+            title_shape.text = f"{key}"
+            tf = body_shape.text_frame
             p = tf.add_paragraph()
-            p.text+= f"  {sub_key}: {sub_value} \n\n"
-    else:
-        print(f"{key}: {value}")
-        slide = prs.slides.add_slide(bullet_slide_layout)
-        shapes = slide.shapes
-        title_shape = shapes.title
-        body_shape = shapes.placeholders[1]
-        title_shape.text = f"{key}"
-        tf = body_shape.text_frame
-        p = tf.add_paragraph()
-        p.text = f"  {key}: {value} \n\n"
+            p.text = f"  {key}: {value} \n\n"
     
     # Save the presentation
     file_path = "generated_presentation.pptx"
