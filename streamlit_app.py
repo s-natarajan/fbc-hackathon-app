@@ -31,7 +31,7 @@ def generate_slide_content(topic, content):
     #st.write(f"{row}")
     
     prompt = f"Generate slide ideas for {topic}:\n\n{df.to_string()}"
-    prompt_txt = f"You are a helpful assistant that generates an executive summary of Franchise performance metrics. For Franchise number: {topic} get the following as Billable metrics: Current and Previous year Billable hours."
+    prompt_txt = f"You are a helpful assistant that generates an executive summary of Franchise performance metrics. For Franchise number: {topic} return summary of details including First Name & Last Name as Franchisee, NetworkPartnerName as FBC, State as DO."
 
     # Use ChatCompletion with the new model and API method
     response = openai.chat.completions.create(
