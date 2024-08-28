@@ -31,7 +31,7 @@ def generate_slide_content(topic, content):
     #st.write(f"{row}")
     
     prompt = f"Generate slide ideas for {topic}:\n\n{df.to_string()}"
-    prompt_txt = f"You are a helpful assistant that generates an executive summary of Franchise performance metrics. For Franchise number: {topic} return only the following details First Name & Last Name as Franchisee, NetworkPartnerName as FBC, State as DO, Weighted Score and Rank. Add a line break. Then return only the current & previous year billable hours, growth hours %. Add a line break. Then return current and previous year total revenue."
+    prompt_txt = f"You are a helpful assistant that generates an executive summary of Franchise's performance metrics. For Franchise number: {topic} first return only the following details First Name & Last Name as Franchisee, NetworkPerformancePartner as FBC, State as DO, Weighted Score and Rank. Then return only the current & previous year billable hours, growth hours %. Then return current and previous year total revenue."
 
     # Use ChatCompletion with the new model and API method
     response = openai.chat.completions.create(
@@ -62,8 +62,8 @@ def create_presentation(topic, slide_content):
     slides = slide_content.split('\n\n')
     for slide in slides:
         lines = slide.split('\n')
-        #slide_title = lines[0].replace('Title: ', '')
-        #slide_content = '\n'.join(lines[1:]).replace('- ', '')
+        slide_title = lines[0].replace('Title: ', '')
+        slide_content = '\n'.join(lines[1:]).replace('- ', '')
 
         # Title slide
         #slide = prs.slides.add_slide(title_slide_layout)
