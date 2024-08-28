@@ -32,8 +32,8 @@ def generate_slide_content(topic, content):
     #for row in median.itertuples():
     #    st.write(f"{row}")
     
-    prompt = f"Generate slide ideas for {topic}:\n\n{df.to_string()}"
-    prompt_txt = f"You are a helpful assistant that generates an executive summary of Franchise's performance metrics. For Franchise number: {topic} first return only the following details First Name & Last Name as Franchisee, NetworkPerformancePartner as FBC, State as DO, Weighted Score, Rank, Current Billable hours, Previous year billable hours, Growth hours %, Current total revenue, Previous year total revenue. Then aggregate the number across all franchises for the owner and return the results calling out key insights."
+    prompt_txt = f"Use this data to generate content for the slides for {topic}:\n\n{df.to_string()}"
+    prompt = f"You are a helpful assistant that generates an executive summary of Franchise's performance metrics. For Franchise number: {topic} first return only the following details First Name & Last Name as Franchisee, NetworkPerformancePartner as FBC, State as DO, Weighted Score, Rank, Current Billable hours, Previous year billable hours, Growth hours %, Current total revenue, Previous year total revenue. Then aggregate the number across all franchises for the owner and return the results calling out key insights."
 
     # Use ChatCompletion with the new model and API method
     response = openai.chat.completions.create(
