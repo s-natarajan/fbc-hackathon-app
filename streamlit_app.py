@@ -25,10 +25,11 @@ def generate_slide_content(topic, content):
     
     df = conn.read("fbc-hackathon-test/growth.csv", input_format="csv", ttl=600)
     st.write("df obtained")
+    median = conn.read("fbc-hackathon-test/Network_Median.csv", input_format="csv", ttl=600)
     #st.table(df)
     # Print results.
-    #for row in df.itertuples():
-    #st.write(f"{row}")
+    for row in df1.itertuples():
+        st.write(f"{row}")
     
     prompt = f"Generate slide ideas for {topic}:\n\n{df.to_string()}"
     prompt_txt = f"You are a helpful assistant that generates an executive summary of Franchise's performance metrics. For Franchise number: {topic} first return only the following details First Name & Last Name as Franchisee, NetworkPerformancePartner as FBC, State as DO, Weighted Score and Rank. Then return only the current & previous year billable hours, growth hours %. Then return current and previous year total revenue."
