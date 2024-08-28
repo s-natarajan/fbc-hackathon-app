@@ -22,7 +22,11 @@ def generate_slide_content(topic, content):
 
     conn = st.connection('s3', type=FilesConnection)
     st.write("conn obtained")
-    df = conn.read("fbc-hackathon-test/Operations ScoreCard - UX.csv", input_format="csv", ttl=600)
+    
+    with connection.open(file_key) as f:
+        df = pd.read_excel(f, engine='openpyxl')
+        st.write(df)
+    df = conn.read("fbc-hackathon-test/Test_sheet.xlsx", input_format="csv", ttl=600)
     #st.write("df obtained")
     #st.table(df)
     # Print results.
@@ -86,8 +90,8 @@ def create_presentation(topic, slide_content):
     return file_path
 
 # Streamlit input fields
-topic = st.text_input("Enter the topic of the slides:")
-content = st.text_area("Enter the content or bullet points for the slides:")
+topic = st.text_input("Enter the Franchise number:")
+content = st.text_area("Enter the themes for the slides:")
 
 # Generate button
 if st.button("Generate Slide Content"):
