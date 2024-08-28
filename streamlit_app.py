@@ -33,7 +33,7 @@ def generate_slide_content(topic, content):
     #    st.write(f"{row}")
     
     prompt_txt = f"Use this data to generate content for the slides for {topic}:\n\n{df.to_string()}"
-    prompt = f"You are a helpful assistant that generates an executive summary of Franchise's performance metrics. For Franchise number: {topic} first return only the following details First Name & Last Name as Franchisee, NetworkPerformancePartner as FBC, State as DO, Weighted Score, Rank, Current Billable hours, Previous year billable hours, Growth hours %, Current total revenue, Previous year total revenue. Then aggregate the number across all franchises for the owner and return the results calling out key insights."
+    prompt = f"You are a helpful assistant that generates an executive summary of Franchise's performance metrics. For each comma separated Franchise number in the list {topic} return output as a Python dictionary with the following keys: First Name & Last Name as Franchisee, NetworkPerformancePartner as FBC, State as DO, Weighted Score, Rank, Current Billable hours, Previous year billable hours, Growth hours %, Current total revenue, Previous year total revenue. Do not return anything else."
 
     # Use ChatCompletion with the new model and API method
     response = openai.chat.completions.create(
@@ -45,6 +45,7 @@ def generate_slide_content(topic, content):
         temperature=0.7,
     )
     generated_text = response.choices[0].message.content
+    st.write(generated_text)
     return generated_text
 
 # Function to create a PowerPoint presentation
