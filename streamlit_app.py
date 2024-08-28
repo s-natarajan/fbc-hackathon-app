@@ -81,7 +81,7 @@ def create_presentation(topic, slide_content):
         slide = prs.slides.add_slide(bullet_slide_layout)
         shapes = slide.shapes
         title_shape = shapes.title
-        body_shape = shapes.placeholders[0]
+        body_shape = shapes.placeholders[1]
         
         title_shape.text = slide_title
         tf = body_shape.text_frame
