@@ -56,7 +56,7 @@ def create_presentation(topic, slide_content):
     prs = Presentation(pptx)
     st.write(prs.slide_layouts)
     title_slide_layout = prs.slide_layouts[0]
-    bullet_slide_layout = prs.slide_layouts.[1]
+    bullet_slide_layout = prs.slide_layouts[1]
 
     # Title slide
     slide = prs.slides.add_slide(title_slide_layout)
