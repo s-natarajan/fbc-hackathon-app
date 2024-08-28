@@ -73,7 +73,7 @@ def create_presentation(topic, slide_content):
     title.text = topic
     subtitle.text = "Generated using OpenAI and Streamlit"
 
-    for key, value in data.items():
+    for key, value in slide_content.items():
         if isinstance(value, list):
             print(f"{key}:")
             for item in value:
