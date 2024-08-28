@@ -59,11 +59,11 @@ def create_presentation(topic, slide_content):
     bullet_slide_layout = prs.slide_layouts.get_by_name('Purple_Circle_Corners')
 
     # Title slide
-    slide = prs.slides.add_slide(title_slide_layout)
-    title = slide.shapes.title
-    subtitle = slide.placeholders[1]
-    title.text = topic
-    subtitle.text = "Generated using OpenAI and Streamlit"
+    #slide = prs.slides.add_slide(title_slide_layout)
+    #title = slide.shapes.title
+    #subtitle = slide.placeholders[1]
+    #title.text = topic
+    #subtitle.text = "Generated using OpenAI and Streamlit"
 
     # Parse the slide content
     slides = slide_content.split('\n\n')
@@ -86,7 +86,7 @@ def create_presentation(topic, slide_content):
         title_shape.text = slide_title
         tf = body_shape.text_frame
         for content_line in slide_content.split('\n'):
-            p = tf.add_paragraph()
+            #p = tf.add_paragraph()
             p.text = content_line
 
     # Save the presentation
