@@ -87,7 +87,7 @@ def create_presentation(topic, slide_content):
         tf = body_shape.text_frame
         for content_line in slide_content.split('\n'):
             #p = tf.add_paragraph()
-            p.text = content_line
+            body_shape.text = content_line
 
     # Save the presentation
     file_path = "generated_presentation.pptx"
