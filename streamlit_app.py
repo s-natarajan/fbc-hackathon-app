@@ -23,10 +23,7 @@ def generate_slide_content(topic, content):
     conn = st.connection('s3', type=FilesConnection)
     st.write("conn obtained")
     
-    with connection.open(file_key) as f:
-        df = pd.read_excel(f, engine='openpyxl')
-        st.write(df)
-    df = conn.read("fbc-hackathon-test/Test_sheet.xlsx", input_format="csv", ttl=600)
+    df = conn.read("fbc-hackathon-test/Test_sheet.xlsx", input_format="excel", ttl=600)
     #st.write("df obtained")
     #st.table(df)
     # Print results.
