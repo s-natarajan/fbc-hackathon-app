@@ -10,7 +10,7 @@ import pandas as pd
 
 # Load environment variables from a .env file if present
 load_dotenv()
-
+path = os.path.dirname(__file__)
 # Set your OpenAI API key
 openai.api_key = st.text_input("OpenAI API Key", type="password")
 
@@ -49,7 +49,8 @@ def generate_slide_content(topic, content):
 
 # Function to create a PowerPoint presentation
 def create_presentation(topic, slide_content):
-    prs = Presentation()
+    pptx = path + '//' + 'template.pptx'
+    prs = Presentation(pptx)
     title_slide_layout = prs.slide_layouts[0]
     bullet_slide_layout = prs.slide_layouts.get_by_name('Purple_Circle_Corners')
 
