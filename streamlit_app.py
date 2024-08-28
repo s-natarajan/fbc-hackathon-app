@@ -62,8 +62,8 @@ def create_presentation(topic, slide_content):
     slides = slide_content.split('\n\n')
     for slide in slides:
         lines = slide.split('\n')
-        slide_title = lines[0].replace('Title: ', '')
-        slide_content = '\n'.join(lines[1:]).replace('- ', '')
+        #slide_title = lines[0].replace('Title: ', '')
+        #slide_content = '\n'.join(lines[1:]).replace('- ', '')
 
         # Title slide
         #slide = prs.slides.add_slide(title_slide_layout)
