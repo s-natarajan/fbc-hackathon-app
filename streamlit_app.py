@@ -81,12 +81,12 @@ def create_presentation(topic, slide_content):
         slide = prs.slides.add_slide(bullet_slide_layout)
         shapes = slide.shapes
         title_shape = shapes.title
-        body_shape = shapes.placeholders[1]
+        body_shape = shapes.placeholders[0]
         
         title_shape.text = slide_title
         tf = body_shape.text_frame
         for content_line in slide_content.split('\n'):
-            #p = tf.add_paragraph()
+            p = tf.add_paragraph()
             body_shape.text = content_line
 
     # Save the presentation
