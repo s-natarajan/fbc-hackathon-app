@@ -88,7 +88,7 @@ def create_presentation(topic, slide_content):
     for shape in summary_slide.shapes:
         shapes_1.append(shape)
 
-     replaces_1 = {
+    replaces_1 = {
                 '{firstname}': 'Testing',
                 '{lastname}': 'Last Name'}
 
