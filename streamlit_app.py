@@ -28,7 +28,7 @@ def generate_slide_content(topic, content):
     median = conn.read("fbc-hackathon-test/Network_Median.csv", input_format="csv", ttl=600)
     #st.table(df)
     # Print results.
-    for row in df1.itertuples():
+    for row in median.itertuples():
         st.write(f"{row}")
     
     prompt = f"Generate slide ideas for {topic}:\n\n{df.to_string()}"
