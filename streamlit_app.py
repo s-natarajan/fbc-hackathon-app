@@ -35,7 +35,8 @@ def generate_slide_content(topic, content):
     #    st.write(f"{row}")
     
     prompt_txt = f"Wait for user input to return a response. Use this data to generate the output:\n\n{df.to_string()}"
-    prompt = f"You are a helpful assistant that generates an executive summary of Franchise's performance metrics. For each comma separated Franchise number in the list {topic} return output as a Python dictionary with the following keys: First Name & Last Name as Franchisee, NetworkPerformancePartner as FBC, State as DO, Weighted Score, Rank, Current Billable hours, Previous year billable hours, Growth hours %, Current total revenue, Previous year total revenue. Do not return anything else."
+    prompt = f"You are a helpful assistant that generates an executive summary of Franchise's performance metrics. For each comma separated Franchise number in the list {topic} return output as a Python dictionary with the following keys: First Name & Last Name as Franchisee, NetworkPerformancePartner as FBC, State as DO, Weighted Score, Rank, Current Billable hours, Previous year billable hours, Growth hours %, Current total revenue, Previous year total revenue. Then calculate aggregate
+    metrics for all Franchises and return out as a python dictionary. Do not return anything else."
 
     # Use ChatCompletion with the new model and API method
     response = openai.chat.completions.create(
@@ -57,16 +58,6 @@ def generate_slide_content(topic, content):
             # Not a dictionary
             return None
     st.write(dictionary)
-
-    response = openai.chat.completions.create(
-        model="gpt-3.5-turbo",  # Specify the model
-        messages=[
-            {"role": "system", "content": dictionary},
-            {"role": "user", "content": "You are a helpful assistant that generates an executive summary of Franchise's performance metrics. Create a summary of all Franchise metrics based on the dictionary data. Include an aggregate of all franchises and summarize metrics insights."}
-        ],
-        temperature=0.7,
-    )
-    generated_text = response.choices[0].message.content
     return generated_text
 
 # Function to create a PowerPoint presentation
