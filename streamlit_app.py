@@ -35,7 +35,7 @@ def generate_slide_content(topic, content):
     # Use ChatCompletion with the new model and API method
     response = openai.chat.completions.create(
         model="gpt-3.5-turbo",  # Specify the model
-        prompt_txt = "You are a helpful assistant that generates an executive summary of Franchise performance metrics. For Franchise number: " + topic + " get the following as Billable metrics: Current Billable hours and Previous Billable hours."
+        prompt_txt = f"You are a helpful assistant that generates an executive summary of Franchise performance metrics. For Franchise number: {topic} get the following as Billable metrics: Current Billable hours and Previous Billable hours."
         messages=[
             {"role": "system", "content": prompt_txt},
             {"role": "user", "content": prompt}
