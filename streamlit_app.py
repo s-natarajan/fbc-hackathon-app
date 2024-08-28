@@ -35,7 +35,7 @@ def generate_slide_content(topic, content):
         st.write(f"{row}")
     
     prompt = f"Generate slide ideas for {topic}:\n\n{df.to_string()}"
-    prompt_txt = f"You are a helpful assistant that generates an executive summary of Franchise's performance metrics. For Franchise number: {topic} return the data row as a json object."
+    prompt_txt = f"You are a helpful assistant that generates an executive summary of Franchise's performance metrics. For Franchise number: {topic} return the following details Franchisee First Name and Last Name, Network Performance Partner as FBC, State & Region as DO, Current & Previous year billable hours, Current & Previous year revenue, score and Network rank."
 
     # Use ChatCompletion with the new model and API method
     response = openai.chat.completions.create(
@@ -81,18 +81,6 @@ def create_presentation(topic, slide_content):
     subtitle = slide.placeholders[1]
     title.text = topic
     subtitle.text = "Generated using OpenAI and Streamlit"
-
-    summary_slide = prs.slides[2]
-    shapes_1 = []
-     # create lists with shape objects
-    for shape in summary_slide.shapes:
-        shapes_1.append(shape)
-
-    replaces_1 = {
-                '{firstname}': 'Testing',
-                '{lastname}': 'Last Name'}
-
-    replace_text(replaces_1, shapes_1)
 
     # Parse the slide content
     slides = slide_content.split('\n\n')
