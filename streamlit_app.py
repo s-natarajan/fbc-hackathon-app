@@ -72,31 +72,21 @@ def create_presentation(topic, slide_content):
     subtitle = slide.placeholders[1]
     title.text = topic
     subtitle.text = "Generated using OpenAI and Streamlit"
-
-    # Parse the slide content
-    slides = slide_content.split('\n\n')
-    for slide in slides:
-        lines = slide.split('\n')
-        slide_title = lines[0].replace('Title: ', '')
-        slide_content = '\n'.join(lines[1:]).replace('- ', '')
-
-        # Title slide
-        #slide = prs.slides.add_slide(title_slide_layout)
-        #title = slide.shapes.title
-        #title.text = slide_title
-
-        # Content slide
+    
+    for v in slide_content.values():
+        st.write(v)
         slide = prs.slides.add_slide(bullet_slide_layout)
         shapes = slide.shapes
         title_shape = shapes.title
         body_shape = shapes.placeholders[1]
         
-        title_shape.text = slide_title
+        title_shape.text = "Dummy Title"
         tf = body_shape.text_frame
-        for content_line in slide_content.split('\n'):
-            p = tf.add_paragraph()
-            p.text = content_line
+        #for content_line in slide_content.split('\n'):
+        p = tf.add_paragraph()
+        p.text = v
 
+    
     # Save the presentation
     file_path = "generated_presentation.pptx"
     prs.save(file_path)
