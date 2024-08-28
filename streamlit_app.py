@@ -49,7 +49,25 @@ def generate_slide_content(topic, content):
     generated_text = response.choices[0].message.content
     st.write(f"generated text: {generated_text}")
     return generated_text
-
+    
+# function to replace text in pptx first slide with selected filters
+def replace_text(replacements, shapes):
+    """function to replace text on a PowerPoint slide. Takes dict of {match: replacement, ... } and replaces all matches"""
+    for shape in shapes:
+        for match, replacement in replacements.items():
+            if shape.has_text_frame:
+                if (shape.text.find(match)) != -1:
+                    text_frame = shape.text_frame
+                    for paragraph in text_frame.paragraphs:
+                        whole_text = "".join(run.text for run in paragraph.runs)
+                        whole_text = whole_text.replace(str(match), str(replacement))
+                        for idx, run in enumerate(paragraph.runs):
+                            if idx != 0:
+                                p = paragraph._p
+                                p.remove(run._r)
+                        if bool(paragraph.runs):
+                            paragraph.runs[0].text = whole_text
+                            
 # Function to create a PowerPoint presentation
 def create_presentation(topic, slide_content):
    # st.write(slide_content)
@@ -63,6 +81,18 @@ def create_presentation(topic, slide_content):
     subtitle = slide.placeholders[1]
     title.text = topic
     subtitle.text = "Generated using OpenAI and Streamlit"
+
+    summary_slide = prs.slides[2]
+    shapes_1 = []
+     # create lists with shape objects
+    for shape in summary_slide.shapes:
+        shapes_1.append(shape)
+
+     replaces_1 = {
+                '{firstname}': 'Testing',
+                '{lastname}': 'Last Name'}
+
+    replace_text(replaces_1, shapes_1)
 
     # Parse the slide content
     slides = slide_content.split('\n\n')
@@ -102,7 +132,7 @@ if st.button("Generate Slide Content"):
     if topic and content:
         generated_content = generate_slide_content(topic, content)
         st.subheader("Generated Slide Content:")
-        st.write(generated_content)
+        #st.write(generated_content)
         
         # Create and offer download of the PowerPoint presentation
         file_path = create_presentation(topic, generated_content)
