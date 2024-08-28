@@ -57,6 +57,16 @@ def generate_slide_content(topic, content):
             # Not a dictionary
             return None
     st.write(dictionary)
+
+    response = openai.chat.completions.create(
+        model="gpt-3.5-turbo",  # Specify the model
+        messages=[
+            {"role": "system", "content": dictionary},
+            {"role": "user", "content": "You are a helpful assistant that generates an executive summary of Franchise's performance metrics. Create a summary of all Franchise metrics based on the dictionary data. Include an aggregate of all franchises and summarize metrics insights."}
+        ],
+        temperature=0.7,
+    )
+    generated_text = response.choices[0].message.content
     return generated_text
 
 # Function to create a PowerPoint presentation
