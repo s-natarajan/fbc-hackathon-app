@@ -57,7 +57,7 @@ def generate_slide_content(topic, content):
             # Not a dictionary
             return None
     st.write(dictionary)
-    return generated_text
+    return dictionary
 
 # Function to create a PowerPoint presentation
 def create_presentation(topic, slide_content):
