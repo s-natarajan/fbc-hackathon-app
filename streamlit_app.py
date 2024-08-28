@@ -48,17 +48,7 @@ def generate_slide_content(topic, content):
     )
     generated_text = response.choices[0].message.content
     st.write(f"Response: {generated_text}")
-    match = re.search(r'\\{.*?\\}', generated_text, re.DOTALL)
-    dictionary = None
-    if match:
-        try:
-            # Try to convert substring to dict
-            dictionary = ast.literal_eval(match.group())
-        except (ValueError, SyntaxError):
-            # Not a dictionary
-            return None
-    st.write(f"is dict? {dictionary}")
-    return dictionary
+    return generated_text
 
 # Function to create a PowerPoint presentation
 def create_presentation(topic, slide_content):
