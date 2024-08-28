@@ -35,8 +35,7 @@ def generate_slide_content(topic, content):
     #    st.write(f"{row}")
     
     prompt_txt = f"Wait for user input to return a response. Use this data to generate the output:\n\n{df.to_string()}"
-    prompt = f"You are a helpful assistant that generates an executive summary of Franchise's performance metrics. For each comma separated Franchise number in the list {topic} return output as a Python dictionary with the following keys: First Name & Last Name as Franchisee, NetworkPerformancePartner as FBC, State as DO, Weighted Score, Rank, Current Billable hours, Previous year billable hours, Growth hours %, Current total revenue, Previous year total revenue. Then calculate aggregate
-    metrics for all Franchises and return out as a python dictionary. Do not return anything else."
+    prompt = f"You are a helpful assistant that generates an executive summary of Franchise's performance metrics. For each comma separated Franchise number in the list {topic} return output as a Python dictionary with the following keys: First Name & Last Name as Franchisee, NetworkPerformancePartner as FBC, State as DO, Weighted Score, Rank, Current Billable hours, Previous year billable hours, Growth hours %, Current total revenue, Previous year total revenue. Then calculate aggregate metrics for all Franchises and return out as a python dictionary. Do not return anything else."
 
     # Use ChatCompletion with the new model and API method
     response = openai.chat.completions.create(
