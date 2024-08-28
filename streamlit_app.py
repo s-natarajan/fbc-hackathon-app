@@ -53,7 +53,7 @@ def generate_slide_content(topic, content):
 # Function to create a PowerPoint presentation
 def create_presentation(topic, slide_content):
    # st.write(slide_content)
-    prs = Presentation(pptx)
+    prs = Presentation()
     title_slide_layout = prs.slide_layouts[0]
     bullet_slide_layout = prs.slide_layouts[1]
 
