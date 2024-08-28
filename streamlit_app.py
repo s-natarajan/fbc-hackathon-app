@@ -28,7 +28,7 @@ def generate_slide_content(topic, content):
     median = conn.read("fbc-hackathon-test/Network_Median.csv", input_format="csv", ttl=600)
     #st.table(df)
     # Print results.
-    st.write(row[1][_1])
+    st.write(median[1])
     for row in median.itertuples():
         st.write(f"{row}")
     
