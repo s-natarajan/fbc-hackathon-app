@@ -23,7 +23,7 @@ def generate_slide_content(topic, content):
     conn = st.connection('s3', type=FilesConnection)
     st.write("conn obtained")
     
-    df = conn.read("fbc-hackathon-test/Test_sheet.xlsx", input_format="excel", ttl=600)
+    df = conn.read("fbc-hackathon-test/Operations ScoreCard - UX.csv", input_format="csv", ttl=600)
     #st.write("df obtained")
     #st.table(df)
     # Print results.
@@ -36,7 +36,7 @@ def generate_slide_content(topic, content):
     response = openai.chat.completions.create(
         model="gpt-3.5-turbo",  # Specify the model
         messages=[
-            {"role": "system", "content": "You are a helpful assistant. Use the data from CSV file to summarize Franchise summary details, Billable, RPN & Growth metrics separately for a Franchise."},
+            {"role": "system", "content": "You are a helpful assistant. Use the data from CSV file to return details of the Franchise like Franchise number, Franchisee, DO, FBC, Total score and Network Ranking. Then add some line breaks and include Billable metrics."},
             {"role": "user", "content": prompt}
         ],
         temperature=0.7,
