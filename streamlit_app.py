@@ -24,7 +24,7 @@ def generate_slide_content(topic, content):
     st.write("conn obtained")
     
     df = conn.read("fbc-hackathon-test/growth.csv", input_format="csv", ttl=600)
-    #st.write("df obtained")
+    st.write("df obtained")
     #st.table(df)
     # Print results.
     #for row in df.itertuples():
@@ -36,7 +36,7 @@ def generate_slide_content(topic, content):
     response = openai.chat.completions.create(
         model="gpt-3.5-turbo",  # Specify the model
         messages=[
-            {"role": "system", "content": "You are a helpful assistant that generates an executive summary of Franchise performance metrics. Use the data from CSV file to return details of the Franchise like Franchise number, Franchisee, DO, FBC, Total score, Network Ranking, Network's total score and Network Performance Standing. Then return a summary for current and previous year Billable, Growth, RPN metrics and CPs completed metrics. Lastly, compare Franchise performance between current and previous year to make recommendations on areas for improvement. "},
+            {"role": "system", "content": "You are a helpful assistant that generates an executive summary of Franchise performance metrics."},
             {"role": "user", "content": prompt}
         ],
         temperature=0.7,
