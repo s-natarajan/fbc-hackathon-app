@@ -27,20 +27,7 @@ def generate_slide_content(topic, content):
     conn = st.connection('s3', type=FilesConnection)
     #st.write("conn obtained")
     
-    df = conn.read("fbc-hackathon-test/growth.csv", input_format="csv", ttl=600)
-    csv_file = io.StringIO(df.to_string())
-
-    # Read the CSV data into a list of dictionaries
-    reader = csv.DictReader(csv_file)
-    dict_list = [row for row in reader]
-
-    # Now, dict_list contains the CSV content as a list of dictionaries
-    #for item in dict_list:
-    first_key_value_pair = next(iter(dict_list[0].items()))
-
-    # Now, first_key_value_pair contains the first key-value pair of the first row
-    st.write(first_key_value_pair)
-        
+    df = conn.read("fbc-hackathon-test/growth.csv", input_format="csv", ttl=600)        
     #st.write("df obtained")
     median = conn.read("fbc-hackathon-test/Network_Median.csv", input_format="csv", ttl=600)
     #st.table(df)
@@ -63,7 +50,7 @@ def generate_slide_content(topic, content):
         temperature=0.7,
     )
     generated_text = response.choices[0].message.content
-    st.write(f"Response: {generated_text}")
+    #st.write(f"Response: {generated_text}")
     return generated_text
 
 # function to replace text in pptx first slide with selected filters
@@ -99,7 +86,7 @@ def create_presentation(topic, slide_content):
     #subtitle.text = "Generated using OpenAI and Streamlit"
     
     slide_content = ast.literal_eval(slide_content)
-    st.write(isinstance(slide_content, dict))
+    #st.write(isinstance(slide_content, dict))
 
     details_dict = {
     'Franchisee': 'Franchisee',
@@ -113,6 +100,14 @@ def create_presentation(topic, slide_content):
     }
 
     owner = []
+    franchise_data = slide_content['franchise_data']
+    if 'aggregate_metrics' in slide_content
+        aggregate_metrics = slide_content['aggregate_metrics']
+    if 'key_insights' in slide_content
+        key_insights = slide_content['key_insights']
+    st.write(franchise_date)
+    st.write(key_insights)
+    st.write(aggregate_metrics)
     for key, value in slide_content.items():
         if isinstance(value, list):
             #print(f"{key}:")
@@ -140,7 +135,7 @@ def create_presentation(topic, slide_content):
                 #print()  # Line break between items
         elif isinstance(value, dict):
             if key == 'AggregateMetrics' or key == 'aggregate_metrics':
-                st.write(f"If block - {key} {value}")
+                #st.write(f"If block - {key} {value}")
                 slide = prs.slides.add_slide(bullet_slide_layout)
                 shapes = slide.shapes
                 title_shape = shapes.title
@@ -151,7 +146,7 @@ def create_presentation(topic, slide_content):
                     p = tf.add_paragraph()
                     p.text+= f"{details_dict[sub_key]}: {sub_value}\n"
             elif key == 'key_insights' or key == 'KeyInsights':
-                st.write(f"Else block - {key} {value}")
+                #st.write(f"Else block - {key} {value}")
                 slide = prs.slides.add_slide(bullet_slide_layout)
                 shapes = slide.shapes
                 title_shape = shapes.title
