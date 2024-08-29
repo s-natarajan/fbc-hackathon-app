@@ -138,7 +138,7 @@ def create_presentation(franchise_data, slide_content):
         owner_name = f"Franchise {franchise} - {ind_fran['FirstName']} {ind_fran['LastName']}"
         st.write(owner_name)
         owner.append(owner_name)
-        title_shape.text = f"Franchise {number} - {first_name} {last_name}"
+        title_shape.text = owner_name
         for k in ind_fran:
             if k in details_dict:
                 p = tf.add_paragraph()
