@@ -58,7 +58,7 @@ def generate_slide_content(content):
         temperature=0.7,
     )
     generated_text = response.choices[0].message.content
-    st.write(f"Response: {generated_text}")
+    #st.write(f"Response: {generated_text}")
     return generated_text
 
 # function to replace text in pptx first slide with selected filters
@@ -182,10 +182,10 @@ if st.button("Generate Slide Content"):
         #st.write(franchise_data)
         generated_content = generate_slide_content(franchise_data)
         st.subheader("Generated Slide Content:")
-        #st.write(generated_content)
+        st.write(generated_content.to_dict())
         
         # Create and offer download of the PowerPoint presentation
-        file_path = create_presentation(franchise_data, generated_content)
+        file_path = create_presentation(franchise_data, generated_content.to_dict())
         with open(file_path, "rb") as file:
             btn = st.download_button(
                 label="Download PowerPoint Presentation",
