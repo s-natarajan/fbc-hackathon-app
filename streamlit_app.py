@@ -38,7 +38,7 @@ def get_franchise_data(topic):
     for data in df:
         st.write(data)
         if str(data) in keys_to_keep:
-            st.write(should come here multiple times)
+            st.write("should come here multiple times")
             #st.write(data)
             #st.write(df.get(data))
             #st.write(df[data])
