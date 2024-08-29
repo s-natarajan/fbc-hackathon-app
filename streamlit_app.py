@@ -141,11 +141,11 @@ def create_presentation(franchise_data, slide_content):
         for k in ind_fran:
             st.write(k)
             if k == 'Number':
-                number = ind[k]
+                number = ind_fran[k]
             elif k == 'FirstName':
-                first_name = ind[k]
+                first_name = ind_fran[k]
             elif k == 'LastName':
-                last_name = ind[k]
+                last_name = ind_fran[k]
             if k in details_dict:
                 p = tf.add_paragraph()
                 p.text+= f"  {details_dict[k]}: {ind_fran[k]}\n"
