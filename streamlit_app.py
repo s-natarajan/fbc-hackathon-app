@@ -112,7 +112,7 @@ def create_presentation(topic, slide_content):
                         p.text+= f"  {details_dict[sub_key]}: {sub_value}\n"
                 #print()  # Line break between items
         elif isinstance(value, dict):
-            #print(f"{key}:")
+            st.write(f" when does it come here - {key}")
             slide = prs.slides.add_slide(bullet_slide_layout)
             shapes = slide.shapes
             title_shape = shapes.title
