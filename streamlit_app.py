@@ -9,6 +9,8 @@ from st_files_connection import FilesConnection
 import pandas as pd
 import re
 import ast
+import io
+import csv
 
 # Load environment variables from a .env file if present
 load_dotenv()
