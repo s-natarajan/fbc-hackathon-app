@@ -118,15 +118,23 @@ def create_presentation(topic, slide_content):
                 slide = prs.slides.add_slide(bullet_slide_layout)
                 shapes = slide.shapes
                 title_shape = shapes.title
-                st.write(item.items())
-                title_shape.text = f"Franchise {item.items()['Number']} - {item.items()['FirstName']} {item.items()['LastName']}"
-                owner.append(f"{item['FirstName']} {item['LastName']}")
+                number = ''
+                first_name = ''
+                last_name = ''
                 body_shape = shapes.placeholders[1]
                 tf = body_shape.text_frame
                 for sub_key, sub_value in item.items():
+                    if sub_key == 'Number':
+                        number = sub_value
+                    elif sub_key == 'FirstName':
+                        first_name = sub_value
+                    elif sub_key == 'LastName':
+                        last_name = sub_value
                     if sub_key in details_dict:
                         p = tf.add_paragraph()
                         p.text+= f"  {details_dict[sub_key]}: {sub_value}\n"
+                title_shape.text = f"Franchise {number} - {first_name} {last_name}"
+                owner.append(f"{first_name} {last_name}")
                 #print()  # Line break between items
         elif isinstance(value, dict):
             st.write(f" when does it come here - {key}")
