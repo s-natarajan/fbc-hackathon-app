@@ -111,6 +111,7 @@ def create_presentation(franchise_data, slide_content):
     aggregate_metrics = {}
     key_insights = {}
     st.write(f"so far so good")
+    st.write(isinstance(slide_content, dict))
     for item in slide_content:
         st.write(item)
     if 'aggregate_metrics' in slide_content:
