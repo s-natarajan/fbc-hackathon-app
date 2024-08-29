@@ -107,7 +107,9 @@ def create_presentation(topic, slide_content):
     'Region': 'DO',
     'WeightedScore': 'Your Total Score',
     'aggregate_metrics': 'Aggregate Metrics',    
-    'key_insights': 'Key Insights'
+    'key_insights': 'Key Insights',
+    'AggregateMetrics': 'Aggregate Metrics',    
+    'KeyInsights': 'Key Insights'
     }
 
     owner = []
