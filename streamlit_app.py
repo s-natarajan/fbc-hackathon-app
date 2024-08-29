@@ -72,15 +72,16 @@ def replace_text(replacements, shapes):
 def create_presentation(topic, slide_content):
     pptx = path + '//' + 'template.pptx'
     prs = Presentation(pptx)
-    title_slide_layout = prs.slide_layouts[0]
-    bullet_slide_layout = prs.slide_layouts[1]
+    #title_slide_layout = prs.slide_layouts[0]
+    bullet_slide_layout = prs.slide_layouts.get_by_name('Purple_Circle_Corners')
 
     # Title slide
-    slide = prs.slides.add_slide(title_slide_layout)
-    title = slide.shapes.title
-    subtitle = slide.placeholders[1]
-    title.text = topic
-    subtitle.text = "Generated using OpenAI and Streamlit"
+    #slide = prs.slides.add_slide(title_slide_layout)
+    #title = slide.shapes.title
+    #subtitle = slide.placeholders[1]
+    #title.text = topic
+    #subtitle.text = "Generated using OpenAI and Streamlit"
+    
     slide_content = ast.literal_eval(slide_content)
     st.write(isinstance(slide_content, dict))
 
