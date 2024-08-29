@@ -94,10 +94,10 @@ def create_presentation(topic, slide_content):
                 shapes = slide.shapes
                 title_shape = shapes.title
                 body_shape = shapes.placeholders[1]
-                title_shape.text = f"{key}"
                 tf = body_shape.text_frame
                 for sub_key, sub_value in item.items():
                     if(sub_key == 'Franchisee'):
+                        title_shape.text = f"{key} - {sub_value}"
                         owner.append(sub_value)
                     #st.write(f"  {sub_key}: {sub_value}")
                     p = tf.add_paragraph()
@@ -109,10 +109,10 @@ def create_presentation(topic, slide_content):
             shapes = slide.shapes
             title_shape = shapes.title
             body_shape = shapes.placeholders[1]
-            title_shape.text = f"{key}"
             tf = body_shape.text_frame
             for sub_key, sub_value in value.items():
                 if(sub_key == 'Franchisee'):
+                    title_shape.text = f"{key} - {sub_value}"
                     owner.append(sub_value)
                 #print(f"  {sub_key}: {sub_value}")
                 p = tf.add_paragraph()
@@ -123,11 +123,11 @@ def create_presentation(topic, slide_content):
             shapes = slide.shapes
             title_shape = shapes.title
             body_shape = shapes.placeholders[1]
-            title_shape.text = f"{key}"
             tf = body_shape.text_frame
             p = tf.add_paragraph()
             p.text = f"  {key}: {value} \n\n"
             if(key == 'Franchisee'):
+                title_shape.text = f"{key} - {value}"
                 owner.append(value)
     owner = list(set(owner))
     #st.write(owner)
