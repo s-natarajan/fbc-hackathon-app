@@ -98,7 +98,7 @@ def create_presentation(topic, slide_content):
                 for sub_key, sub_value in item.items():
                     if(sub_key == 'Franchisee'):
                         owner.append(sub_value)
-                    print(f"  {sub_key}: {sub_value}")
+                    st.write(f"  {sub_key}: {sub_value}")
                     p = tf.add_paragraph()
                     p.text+= f"  {sub_key}: {sub_value} \n\n"
                 #print()  # Line break between items
