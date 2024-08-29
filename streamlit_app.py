@@ -149,6 +149,8 @@ def create_presentation(franchise_data, slide_content):
                 p = tf.add_paragraph()
                 p.text+= f"  {details_dict[k]}: {ind_fran[k]}\n"
             title_shape.text = f"Franchise {number} - {first_name} {last_name}"
+            st.write(first_name)
+            st.write(last_name)
             owner.append(first_name + " " + last_name)
             
     owner = list(set(owner))
@@ -176,6 +178,8 @@ def create_presentation(franchise_data, slide_content):
     replaces_1 = {
         '{o}': comma_separated_string}
     replace_text(replaces_1, shapes_1)
+
+    st.write(key_insights)
     
     # Save the presentation
     file_path = "generated_presentation.pptx"
