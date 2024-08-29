@@ -94,9 +94,9 @@ def create_presentation(franchise_data, slide_content):
     #title.text = topic
     #subtitle.text = "Generated using OpenAI and Streamlit"
     
-    slide_content = ast.literal_eval(slide_content)
+    #slide_content = ast.literal_eval(slide_content)
     #st.write(isinstance(slide_content, dict))
-
+    st.write(slide_content)
     details_dict = {
     'Franchisee': 'Franchisee',
     'NetworkPerformancePartner': 'FBC',
