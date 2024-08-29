@@ -47,7 +47,7 @@ def generate_slide_content(topic, content):
 
     # Use ChatCompletion with the new model and API method
     response = openai.chat.completions.create(
-        model="gpt-3.5-turbo",  # Specify the model
+        model="gpt-4o-2024-08-06",  # Specify the model
         messages=[
             {"role": "system", "content": prompt_txt},
             {"role": "user", "content": prompt}
