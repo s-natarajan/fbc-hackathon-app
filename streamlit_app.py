@@ -97,7 +97,7 @@ def create_presentation(topic, slide_content):
                 tf = body_shape.text_frame
                 for sub_key, sub_value in item.items():
                     if(sub_key == 'Franchisee'):
-                        owner.append{sub_value}
+                        owner.append(sub_value)
                     print(f"  {sub_key}: {sub_value}")
                     p = tf.add_paragraph()
                     p.text+= f"  {sub_key}: {sub_value} \n\n"
