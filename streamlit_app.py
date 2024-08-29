@@ -36,7 +36,7 @@ def generate_slide_content(topic, content):
 
     # Now, dict_list contains the CSV content as a list of dictionaries
     #for item in dict_list:
-    st.write(dict_list[0])
+    st.write(dict_list[0]['Number'])
         
     #st.write("df obtained")
     median = conn.read("fbc-hackathon-test/Network_Median.csv", input_format="csv", ttl=600)
