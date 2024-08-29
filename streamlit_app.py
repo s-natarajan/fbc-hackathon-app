@@ -118,7 +118,8 @@ def create_presentation(topic, slide_content):
                 slide = prs.slides.add_slide(bullet_slide_layout)
                 shapes = slide.shapes
                 title_shape = shapes.title
-                title_shape.text = f"Franchise {item['Number']} - {item['FirstName']} {item['LastName']}"
+                st.write(item.items())
+                title_shape.text = f"Franchise {item[.items()['Number']} - {item.items()['FirstName']} {item.items()['LastName']}"
                 owner.append(f"{item['FirstName']} {item['LastName']}")
                 body_shape = shapes.placeholders[1]
                 tf = body_shape.text_frame
@@ -134,7 +135,7 @@ def create_presentation(topic, slide_content):
             title_shape = shapes.title
             body_shape = shapes.placeholders[1]
             tf = body_shape.text_frame
-            title_shape.text = f"{key}"
+            title_shape.text = f"{details_dict[key]}"
             for sub_key, sub_value in value.items():
                 if sub_key in details_dict:
                     p = tf.add_paragraph()
