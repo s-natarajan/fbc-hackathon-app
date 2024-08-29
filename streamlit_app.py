@@ -25,7 +25,12 @@ def get_raw_data_as_dict():
     #st.write("conn obtained")
     
     df = conn.read("fbc-hackathon-test/growth.csv", input_format="csv", ttl=600)
-    reader = csv.DictReader(df)
+    # Convert the CSV content to a string
+    csv_string = df.decode('utf-8')
+
+    # Use io.StringIO to create a file-like object from the string
+    csv_file = io.StringIO(csv_string)
+    reader = csv.DictReader(csv_file)
     # Convert the CSV data to a list of dictionaries
     df_dict = [row for row in reader]
     #st.write("df obtained")
