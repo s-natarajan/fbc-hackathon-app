@@ -159,17 +159,13 @@ def create_presentation(franchise_data, slide_content):
     #st.write(f"comma separated unique list: {comma_separated_string}")
     first_slide = prs.slides[0]
     shapes_1 = []
-    st.write(isinstance(aggregate_metrics, dict))
+    slide = prs.slides.add_slide(bullet_slide_layout)
+    shapes = slide.shapes
+    title_shape = shapes.title
+    title_shape.text = f"The Enterprise Journey of {owner}"
+    body_shape = shapes.placeholders[1]
+    tf = body_shape.text_frame
     for k in aggregate_metrics:
-        st.write("aggregate_metrics")
-        st.write(k)
-        st.write(aggregate_metrics[k])
-        slide = prs.slides.add_slide(bullet_slide_layout)
-        shapes = slide.shapes
-        title_shape = shapes.title
-        title_shape.text = f"The Enterprise Journey of {owner}"
-        body_shape = shapes.placeholders[1]
-        tf = body_shape.text_frame
         p = tf.add_paragraph()
         p.text+= f"  {k}: {aggregate_metrics[k]}\n"
         
