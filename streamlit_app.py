@@ -36,13 +36,14 @@ def get_franchise_data(topic):
     filtered_dict = {}
     #st.write(df.items())
     for data in df:
+        st.write(data)
         if str(data) in keys_to_keep:
+            st.write(should come here multiple times)
             #st.write(data)
             #st.write(df.get(data))
             #st.write(df[data])
             filtered_dict[str(data)] = df[data]
     st.write("filtered dict")
-    st.write(filtered_dict)
     return filtered_dict
     
 # Function to generate slide content
