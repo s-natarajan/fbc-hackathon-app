@@ -123,7 +123,7 @@ def create_presentation(topic, slide_content):
                     title_shape.text = f"{key} - {sub_value}"
                     owner.append(sub_value)
                 #print(f"  {sub_key}: {sub_value}")
-               if sub_key in details_dict:
+                if sub_key in details_dict:
                     p = tf.add_paragraph()
                     p.text+= f"  {details_dict[sub_key]}: {sub_value}\n"
         else:
