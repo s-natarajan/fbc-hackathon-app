@@ -115,65 +115,29 @@ def create_presentation(topic, slide_content):
     st.write(franchise_data)
     st.write(key_insights)
     st.write(aggregate_metrics)
-    for key, value in slide_content.items():
-        if isinstance(value, list):
-            #print(f"{key}:")
-            for item in value:
-                slide = prs.slides.add_slide(bullet_slide_layout)
-                shapes = slide.shapes
-                title_shape = shapes.title
-                number = ''
-                first_name = ''
-                last_name = ''
-                body_shape = shapes.placeholders[1]
-                tf = body_shape.text_frame
-                for sub_key, sub_value in item.items():
-                    if sub_key == 'Number':
-                        number = sub_value
-                    elif sub_key == 'FirstName':
-                        first_name = sub_value
-                    elif sub_key == 'LastName':
-                        last_name = sub_value
-                    if sub_key in details_dict:
-                        p = tf.add_paragraph()
-                        p.text+= f"  {details_dict[sub_key]}: {sub_value}\n"
-                title_shape.text = f"Franchise {number} - {first_name} {last_name}"
-                owner.append(f"{first_name} {last_name}")
-                #print()  # Line break between items
-        elif isinstance(value, dict):
-            if key == 'AggregateMetrics' or key == 'aggregate_metrics':
-                #st.write(f"If block - {key} {value}")
-                slide = prs.slides.add_slide(bullet_slide_layout)
-                shapes = slide.shapes
-                title_shape = shapes.title
-                body_shape = shapes.placeholders[1]
-                tf = body_shape.text_frame
-                title_shape.text = f"{details_dict[key]}"
-                for sub_key, sub_value in value.items():
-                    p = tf.add_paragraph()
-                    p.text+= f"{details_dict[sub_key]}: {sub_value}\n"
-            elif key == 'key_insights' or key == 'KeyInsights':
-                #st.write(f"Else block - {key} {value}")
-                slide = prs.slides.add_slide(bullet_slide_layout)
-                shapes = slide.shapes
-                title_shape = shapes.title
-                body_shape = shapes.placeholders[1]
-                tf = body_shape.text_frame
-                title_shape.text = f"{details_dict[key]}"
+
+    for franchise in franchise_data.items():
+        slide = prs.slides.add_slide(bullet_slide_layout)
+        shapes = slide.shapes
+        title_shape = shapes.title
+        number = ''
+        first_name = ''
+        last_name = ''
+        body_shape = shapes.placeholders[1]
+        tf = body_shape.text_frame
+        for sub_key, sub_value in franchise.items():
+            if sub_key == 'Number':
+                number = sub_value
+            elif sub_key == 'FirstName':
+                first_name = sub_value
+            elif sub_key == 'LastName':
+                last_name = sub_value
+            if sub_key in details_dict:
                 p = tf.add_paragraph()
-                p.text+= f"{sub_value}"
+                p.text+= f"  {details_dict[sub_key]}: {sub_value}\n"
+            title_shape.text = f"Franchise {number} - {first_name} {last_name}"
+            owner.append(f"{first_name} {last_name}")
             
-        else:
-            #print(f"{key}: {value}")
-            slide = prs.slides.add_slide(bullet_slide_layout)
-            shapes = slide.shapes
-            title_shape = shapes.title
-            title_shape.text = f"{key} - {value}"
-            body_shape = shapes.placeholders[1]
-            tf = body_shape.text_frame
-            if key in details_dict:
-                p = tf.add_paragraph()
-                p.text+= f"  {details_dict[key]}: {value}\n"
     owner = list(set(owner))
     #st.write(owner)
     # Convert the array to a comma-separated string
