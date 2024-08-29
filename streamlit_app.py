@@ -126,10 +126,9 @@ def create_presentation(franchise_data, slide_content):
     st.write(key_insights)
     st.write(aggregate_metrics)
 
-    for franchise, data in franchise_data:
+    for franchise in franchise_data:
         st.write("for loop")
         st.write(franchise)
-        st.write(data)
         slide = prs.slides.add_slide(bullet_slide_layout)
         shapes = slide.shapes
         title_shape = shapes.title
