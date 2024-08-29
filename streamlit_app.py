@@ -137,7 +137,7 @@ def create_presentation(franchise_data, slide_content):
         last_name = ''
         body_shape = shapes.placeholders[1]
         tf = body_shape.text_frame
-        for sub_key, sub_value in franchise.items():
+        for sub_key, sub_value in franchise_data[str(franchise)]:
             if sub_key == 'Number':
                 number = sub_value
             elif sub_key == 'FirstName':
