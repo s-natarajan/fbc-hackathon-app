@@ -137,16 +137,18 @@ def create_presentation(franchise_data, slide_content):
         last_name = ''
         body_shape = shapes.placeholders[1]
         tf = body_shape.text_frame
-        for sub_key, sub_value in franchise_data[str(franchise)]:
-            if sub_key == 'Number':
-                number = sub_value
-            elif sub_key == 'FirstName':
-                first_name = sub_value
-            elif sub_key == 'LastName':
-                last_name = sub_value
+        ind_fran = franchise_data[str(franchise)]
+        for k in ind_fran:
+            st.write(k)
+            if k == 'Number':
+                number = ind[k]
+            elif k == 'FirstName':
+                first_name = ind[k]
+            elif k == 'LastName':
+                last_name = ind[k]
             if sub_key in details_dict:
                 p = tf.add_paragraph()
-                p.text+= f"  {details_dict[sub_key]}: {sub_value}\n"
+                p.text+= f"  {details_dict[k]}: {ind_fran[k]}\n"
             title_shape.text = f"Franchise {number} - {first_name} {last_name}"
             owner.append(f"{first_name} {last_name}")
             
