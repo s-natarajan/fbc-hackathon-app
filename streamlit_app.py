@@ -26,7 +26,7 @@ def get_raw_data_as_dict():
     
     df = conn.read("fbc-hackathon-test/growth.csv", input_format="csv", ttl=600)
     # Convert the CSV content to a string
-    csv_string = df.decode('utf-8')
+    csv_string = df.to_string()
 
     # Use io.StringIO to create a file-like object from the string
     csv_file = io.StringIO(csv_string)
