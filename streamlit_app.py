@@ -28,6 +28,9 @@ def generate_slide_content(topic, content):
     #st.write("conn obtained")
     
     df = conn.read("fbc-hackathon-test/growth.csv", input_format="csv", ttl=600) 
+    df = df.transpose()
+    df.columns = df.iloc[0]  # Use the first row as the header
+    df = df.drop(df.index[0])  # Drop the first row since it is now the header
     st.write(df.to_dict())
         
     #st.write("df obtained")
