@@ -127,18 +127,15 @@ def create_presentation(franchise_data, slide_content):
     st.write(aggregate_metrics)
 
     for franchise in franchise_data:
-        #st.write("for loop")
-        #st.write(franchise_data[str(franchise)])
         slide = prs.slides.add_slide(bullet_slide_layout)
         shapes = slide.shapes
         title_shape = shapes.title
-        number = ''
-        first_name = ''
-        last_name = ''
         body_shape = shapes.placeholders[1]
         tf = body_shape.text_frame
         ind_fran = franchise_data[str(franchise)]
-        owner_name = f"Franchise {ind_fran['Number']} - {ind_fran[FirstName]} {ind_fran['LastName']}"
+        st.write(franchise)
+        st.write(ind_fran['FirstName'])
+        owner_name = f"Franchise {franchise} - {ind_fran['FirstName']} {ind_fran['LastName']}"
         st.write(owner_name)
         owner.append(owner_name)
         title_shape.text = f"Franchise {number} - {first_name} {last_name}"
