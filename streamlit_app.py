@@ -31,6 +31,7 @@ def get_franchise_data(topic):
     df = df.to_dict()
     #st.write(df)
     keys_to_keep = topic.split(',')
+    keys_to_keep = [key.strip() for key in topic.split(',')]
     st.write(keys_to_keep)
     filtered_dict = {}
     #st.write(df.items())
