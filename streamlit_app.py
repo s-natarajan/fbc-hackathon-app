@@ -8,9 +8,9 @@ import os
 from st_files_connection import FilesConnection
 import pandas as pd
 import re
-import ast
 import io
 import csv
+import json
 
 # Load environment variables from a .env file if present
 load_dotenv()
@@ -61,7 +61,7 @@ def generate_slide_content(content):
     generated_text = generated_text.removeprefix('```python')
     st.write(isinstance(generated_text, str))
     st.write(f"Response: {generated_text}")
-    return generated_text
+    return json_loads(generated_text)
 
 # function to replace text in pptx first slide with selected filters
 def replace_text(replacements, shapes):
