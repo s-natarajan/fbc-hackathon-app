@@ -149,7 +149,8 @@ def create_presentation(franchise_data, slide_content):
                 p = tf.add_paragraph()
                 p.text+= f"  {details_dict[k]}: {ind_fran[k]}\n"
             title_shape.text = f"Franchise {number} - {first_name} {last_name}"
-            owner.append(f"{first_name} {last_name}")
+            owner_name = first
+            owner.append(first_name + " " + last_name)
             
     owner = list(set(owner))
     st.write(owner)
