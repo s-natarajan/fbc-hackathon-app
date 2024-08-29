@@ -178,7 +178,7 @@ if st.button("Generate Slide Content"):
     if topic:
         franchise_data = get_franchise_data(topic)
         st.write(franchise_data)
-        generated_content = generate_slide_content(topic, content)
+        generated_content = generate_slide_content(topic, franchise_data)
         st.subheader("Generated Slide Content:")
         #st.write(generated_content)
         
