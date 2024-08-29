@@ -138,20 +138,14 @@ def create_presentation(franchise_data, slide_content):
         body_shape = shapes.placeholders[1]
         tf = body_shape.text_frame
         ind_fran = franchise_data[str(franchise)]
+        owner_name = f"Franchise {ind_fran['Number']} - {ind_fran[FirstName]} {ind_fran['LastName']}"
+        st.write(owner_name)
+        owner.append(owner_name)
+        title_shape.text = f"Franchise {number} - {first_name} {last_name}"
         for k in ind_fran:
-            if k == 'Number':
-                number = ind_fran[k]
-            elif k == 'FirstName':
-                first_name = ind_fran[k]
-            elif k == 'LastName':
-                last_name = ind_fran[k]
             if k in details_dict:
                 p = tf.add_paragraph()
                 p.text+= f"  {details_dict[k]}: {ind_fran[k]}\n"
-            title_shape.text = f"Franchise {number} - {first_name} {last_name}"
-            st.write(first_name)
-            st.write(last_name)
-            owner.append(first_name + " " + last_name)
             
     owner = list(set(owner))
     st.write(owner)
@@ -160,6 +154,8 @@ def create_presentation(franchise_data, slide_content):
     st.write(f"comma separated unique list: {comma_separated_string}")
     first_slide = prs.slides[0]
     shapes_1 = []
+
+    #Aggregate Metrics
     slide = prs.slides.add_slide(bullet_slide_layout)
     shapes = slide.shapes
     title_shape = shapes.title
@@ -169,6 +165,17 @@ def create_presentation(franchise_data, slide_content):
     for k in aggregate_metrics:
         p = tf.add_paragraph()
         p.text+= f"  {k}: {aggregate_metrics[k]}\n"
+
+    #Key Insights
+    slide = prs.slides.add_slide(bullet_slide_layout)
+    shapes = slide.shapes
+    title_shape = shapes.title
+    title_shape.text = f"Key Insights"
+    body_shape = shapes.placeholders[1]
+    tf = body_shape.text_frame
+    for k in key_insights:
+        p = tf.add_paragraph()
+        p.text+= f"  {k}: {key_insights[k]}\n"
         
     # create lists with shape objects
     for shape in first_slide.shapes:
