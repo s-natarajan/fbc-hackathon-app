@@ -34,7 +34,7 @@ def generate_slide_content(topic, content):
     df = df.to_dict()
     st.write(df)
     for data in df:
-        if data.to_string() in keys_to_keep:
+        if data in keys_to_keep:
             st.write(data)
             st.write(df.get(data))
             st.write(df[data])
