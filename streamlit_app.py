@@ -58,6 +58,7 @@ def generate_slide_content(content):
         temperature=0.7,
     )
     generated_text = response.choices[0].message.content
+    generated_text = generated_text.removeprefix("```python")
     st.write(f"Response: {generated_text}")
     return ast.literal_eval(generated_text)
 
