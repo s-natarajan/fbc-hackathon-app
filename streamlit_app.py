@@ -59,7 +59,7 @@ def generate_slide_content(content):
     )
     generated_text = response.choices[0].message.content
     #st.write(f"Response: {generated_text}")
-    return generated_text
+    return ast.literal_eval(generated_text)
 
 # function to replace text in pptx first slide with selected filters
 def replace_text(replacements, shapes):
@@ -111,7 +111,7 @@ def create_presentation(franchise_data, slide_content):
     aggregate_metrics = {}
     key_insights = {}
     st.write(f"so far so good")
-    st.write(isinstance(slide_content, list))
+    st.write(isinstance(slide_content, dict))
     for item in slide_content:
         st.write(item)
     if 'aggregate_metrics' in slide_content:
