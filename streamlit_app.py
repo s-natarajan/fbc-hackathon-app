@@ -129,7 +129,7 @@ def create_presentation(topic, slide_content):
     st.write(owner)
     # Convert the array to a comma-separated string
     comma_separated_string = ", ".join(owner)
-    st.write(f"comma separated unique list: {comma_separated_string}"
+    st.write(f"comma separated unique list: {comma_separated_string}")
     first_slide = prs.slides[0]
     shapes_1 = []
 
