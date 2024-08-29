@@ -114,7 +114,7 @@ def create_presentation(topic, slide_content):
             title_shape = shapes.title
             body_shape = shapes.placeholders[1]
             tf = body_shape.text_frame
-            title_shape.text = f"Franchise {value['Number']} - {value['FirstName]'} {value['LastName]'}"
+            title_shape.text = f"Franchise {value['Number']} - {value['FirstName]'} {value['LastName']}"
             owner.append(f"{value['FirstName]'} {value['LastName]'}")
             for sub_key, sub_value in value.items():
                 if(sub_key == 'Franchisee'):
