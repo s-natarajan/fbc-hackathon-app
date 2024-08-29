@@ -33,7 +33,8 @@ def generate_slide_content(topic, content):
     #st.write(median.to_dict())
     #for row in median.itertuples():
     #    st.write(f"{row}")
-    
+    st.write(f"Raw CSV: {df.to_dtring()}")
+    st.write(f"Raw dict: {df.to_dict()}")
     prompt_txt = f"Wait for user input to return a response. Use this data to generate the output as a single python dictionary:\n\n{df.to_string()}"
     prompt = f"You are a helpful assistant that generates an executive summary of Franchise's performance metrics. For each comma separated Franchise number in the list {topic} return all the data as a list of Python dict object. Then calculate aggregate metrics for all Franchises and return output as a python dict. Lastly summarizekey insights on Franchise metrics. Return all output as a single python dict object. Do not return anything else."
 
@@ -165,7 +166,7 @@ if st.button("Generate Slide Content"):
     if topic and content:
         generated_content = generate_slide_content(topic, content)
         st.subheader("Generated Slide Content:")
-        st.write(generated_content)
+        #st.write(generated_content)
         
         # Create and offer download of the PowerPoint presentation
         file_path = create_presentation(topic, generated_content)
