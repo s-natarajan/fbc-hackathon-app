@@ -33,8 +33,9 @@ def generate_slide_content(topic, content):
     df = df.drop(df.index[0])  # Drop the first row since it is now the header
     df = df.to_dict()
     st.write(df)
-    for data in df:
+    for data, value in df:
         st.write(data)
+        st.write(value)
     keys_to_keep = topic.split(',')
     st.write(keys_to_keep)
     filtered_dict = []
