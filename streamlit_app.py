@@ -139,7 +139,6 @@ def create_presentation(franchise_data, slide_content):
         tf = body_shape.text_frame
         ind_fran = franchise_data[str(franchise)]
         for k in ind_fran:
-            st.write(k)
             if k == 'Number':
                 number = ind_fran[k]
             elif k == 'FirstName':
@@ -153,10 +152,10 @@ def create_presentation(franchise_data, slide_content):
             owner.append(f"{first_name} {last_name}")
             
     owner = list(set(owner))
-    #st.write(owner)
+    st.write(owner)
     # Convert the array to a comma-separated string
     comma_separated_string = ", ".join(owner)
-    #st.write(f"comma separated unique list: {comma_separated_string}")
+    st.write(f"comma separated unique list: {comma_separated_string}")
     first_slide = prs.slides[0]
     shapes_1 = []
     slide = prs.slides.add_slide(bullet_slide_layout)
