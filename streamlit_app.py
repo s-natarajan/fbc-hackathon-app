@@ -122,13 +122,13 @@ def create_presentation(franchise_data, slide_content):
         key_insights = slide_content['key_insights']
     if 'KeyInsights' in slide_content:
         key_insights = slide_content['KeyInsights']
-    st.write(franchise_data)
-    st.write(key_insights)
-    st.write(aggregate_metrics)
+    #st.write(franchise_data)
+    #st.write(key_insights)
+    #st.write(aggregate_metrics)
 
     for franchise in franchise_data:
-        st.write("for loop")
-        st.write(franchise_data[str(franchise)])
+        #st.write("for loop")
+        #st.write(franchise_data[str(franchise)])
         slide = prs.slides.add_slide(bullet_slide_layout)
         shapes = slide.shapes
         title_shape = shapes.title
@@ -146,7 +146,7 @@ def create_presentation(franchise_data, slide_content):
                 first_name = ind[k]
             elif k == 'LastName':
                 last_name = ind[k]
-            if sub_key in details_dict:
+            if k in details_dict:
                 p = tf.add_paragraph()
                 p.text+= f"  {details_dict[k]}: {ind_fran[k]}\n"
             title_shape.text = f"Franchise {number} - {first_name} {last_name}"
