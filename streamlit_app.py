@@ -62,7 +62,7 @@ def generate_slide_content(content):
     st.write(isinstance(generated_text, str))
     st.write(f"Response: {generated_text}")
     if isinstance(generated_text, str):
-        generated_text = json.loads(generated_text)
+        generated_text = json_loads(generated_text)
     return generated_text
 
 # function to replace text in pptx first slide with selected filters
