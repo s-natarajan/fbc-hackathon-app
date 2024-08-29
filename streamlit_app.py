@@ -96,7 +96,7 @@ def create_presentation(topic, slide_content):
                 title_shape.text = f"{key}"
                 tf = body_shape.text_frame
                 for sub_key, sub_value in item.items():
-                    if(sub_key == 'Franchisee')
+                    if(sub_key == 'Franchisee'):
                         owner+= f"{sub_value}, "
                     print(f"  {sub_key}: {sub_value}")
                     p = tf.add_paragraph()
@@ -125,7 +125,7 @@ def create_presentation(topic, slide_content):
             p = tf.add_paragraph()
             p.text = f"  {key}: {value} \n\n"
     st.write(f"Owners: {owner}")
-    
+    owner = owner[:-1]
     first_slide = prs.slides[0]
     shapes_1 = []
 
