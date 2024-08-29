@@ -45,7 +45,7 @@ def get_franchise_data(topic):
     
 # Function to generate slide content
 def generate_slide_content(content):
-    prompt_txt = f"Wait for user input to return a response. Use this data to generate the output as a single python dictionary:\n\n{str(content)}"
+    prompt_txt = f"Wait for user input to return a response. Use this data to generate the output:\n\n{str(content)}"
     prompt = f"You are a helpful assistant that generates an executive summary of Franchise's performance metrics. Calculate aggregate metrics for given Franchises and return output as a python dict with key as aggregate_metrics. Then summarize 3 Key insights comparing metrics between previous and current year as a python dict object with key as key_insights. Return all output as a single python dict object. Do not return anything else."
 
     # Use ChatCompletion with the new model and API method
@@ -142,7 +142,7 @@ def create_presentation(franchise_data, slide_content):
         for k in ind_fran:
             if k in details_dict:
                 p = tf.add_paragraph()
-                p.text+= f"  {details_dict[k]}: {ind_fran[k]}\n"
+                p.text+= f"  {details_dict[k]}: {ind_fran[k]}\n\n"
             
     owner = list(set(owner))
     st.write(owner)
@@ -161,7 +161,7 @@ def create_presentation(franchise_data, slide_content):
     tf = body_shape.text_frame
     for k in aggregate_metrics:
         p = tf.add_paragraph()
-        p.text+= f"  {k}: {aggregate_metrics[k]}\n"
+        p.text+= f"  {k}: {aggregate_metrics[k]}\n\n"
 
     #Key Insights
     slide = prs.slides.add_slide(bullet_slide_layout)
@@ -172,7 +172,7 @@ def create_presentation(franchise_data, slide_content):
     tf = body_shape.text_frame
     for k in key_insights:
         p = tf.add_paragraph()
-        p.text+= f"  {k}: {key_insights[k]}\n"
+        p.text+= f"  {k}: {key_insights[k]}\n\n\n"
         
     # create lists with shape objects
     for shape in first_slide.shapes:
