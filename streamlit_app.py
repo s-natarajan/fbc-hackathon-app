@@ -26,6 +26,16 @@ def generate_slide_content(topic, content):
     #st.write("conn obtained")
     
     df = conn.read("fbc-hackathon-test/growth.csv", input_format="csv", ttl=600)
+    csv_file = io.StringIO(df.tostring())
+
+    # Read the CSV data into a list of dictionaries
+    reader = csv.DictReader(csv_file)
+    dict_list = [row for row in reader]
+
+    # Now, dict_list contains the CSV content as a list of dictionaries
+    for item in dict_list:
+        st.write(item)
+        
     #st.write("df obtained")
     median = conn.read("fbc-hackathon-test/Network_Median.csv", input_format="csv", ttl=600)
     #st.table(df)
@@ -91,8 +101,8 @@ def create_presentation(topic, slide_content):
     'NetworkPerformancePartner': 'FBC',
     'Region': 'DO',
     'WeightedScore': 'Your Total Score',
-    'AggregateMetrics': 'Aggregate Metrics',    
-    'KeyInsights': 'Key Insights'
+    'aggregate_metrics': 'Aggregate Metrics',    
+    'key_insights': 'Key Insights'
     }
 
     owner = []
