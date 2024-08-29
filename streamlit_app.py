@@ -58,7 +58,7 @@ def generate_slide_content(content):
         temperature=0.7,
     )
     generated_text = response.choices[0].message.content
-    #st.write(f"Response: {generated_text}")
+    st.write(f"Response: {generated_text}")
     return ast.literal_eval(generated_text)
 
 # function to replace text in pptx first slide with selected filters
