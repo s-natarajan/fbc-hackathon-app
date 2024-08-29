@@ -123,7 +123,6 @@ def create_presentation(topic, slide_content):
                 if sub_key in details_dict:
                     p = tf.add_paragraph()
                     p.text+= f"  {details_dict[sub_key]}: {sub_value}\n"
-            st.write(f"{title_text}")
         else:
             #print(f"{key}: {value}")
             slide = prs.slides.add_slide(bullet_slide_layout)
