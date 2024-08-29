@@ -23,7 +23,7 @@ st.title('Slide Content Generator')
 def generate_slide_content(topic, content):
 
     conn = st.connection('s3', type=FilesConnection)
-    st.write("conn obtained")
+    #st.write("conn obtained")
     
     df = conn.read("fbc-hackathon-test/growth.csv", input_format="csv", ttl=600)
     #st.write("df obtained")
@@ -47,7 +47,7 @@ def generate_slide_content(topic, content):
         temperature=0.7,
     )
     generated_text = response.choices[0].message.content
-    st.write(f"Response: {generated_text}")
+    #st.write(f"Response: {generated_text}")
     return generated_text
 
 # function to replace text in pptx first slide with selected filters
@@ -88,7 +88,7 @@ def create_presentation(topic, slide_content):
     owner = []
     for key, value in slide_content.items():
         if isinstance(value, list):
-            print(f"{key}:")
+            #print(f"{key}:")
             for item in value:
                 slide = prs.slides.add_slide(bullet_slide_layout)
                 shapes = slide.shapes
@@ -99,12 +99,12 @@ def create_presentation(topic, slide_content):
                 for sub_key, sub_value in item.items():
                     if(sub_key == 'Franchisee'):
                         owner.append(sub_value)
-                    st.write(f"  {sub_key}: {sub_value}")
+                    #st.write(f"  {sub_key}: {sub_value}")
                     p = tf.add_paragraph()
                     p.text+= f"  {sub_key}: {sub_value} \n\n"
                 #print()  # Line break between items
         elif isinstance(value, dict):
-            print(f"{key}:")
+            #print(f"{key}:")
             slide = prs.slides.add_slide(bullet_slide_layout)
             shapes = slide.shapes
             title_shape = shapes.title
@@ -114,11 +114,11 @@ def create_presentation(topic, slide_content):
             for sub_key, sub_value in value.items():
                 if(sub_key == 'Franchisee'):
                     owner.append(sub_value)
-                print(f"  {sub_key}: {sub_value}")
+                #print(f"  {sub_key}: {sub_value}")
                 p = tf.add_paragraph()
                 p.text+= f"  {sub_key}: {sub_value} \n\n"
         else:
-            print(f"{key}: {value}")
+            #print(f"{key}: {value}")
             slide = prs.slides.add_slide(bullet_slide_layout)
             shapes = slide.shapes
             title_shape = shapes.title
@@ -130,10 +130,10 @@ def create_presentation(topic, slide_content):
             if(key == 'Franchisee'):
                 owner.append(value)
     owner = list(set(owner))
-    st.write(owner)
+    #st.write(owner)
     # Convert the array to a comma-separated string
     comma_separated_string = ", ".join(owner)
-    st.write(f"comma separated unique list: {comma_separated_string}")
+    #st.write(f"comma separated unique list: {comma_separated_string}")
     first_slide = prs.slides[0]
     shapes_1 = []
 
