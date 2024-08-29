@@ -160,10 +160,10 @@ def create_presentation(franchise_data, slide_content):
     first_slide = prs.slides[0]
     shapes_1 = []
     st.write(isinstance(aggregate_metrics, dict))
-    for k, v in aggregate_metrics:
+    for k in aggregate_metrics:
         st.write("aggregate_metrics")
         st.write(k)
-        st.write(v)
+        st.write(aggregate_metrics[k])
         slide = prs.slides.add_slide(bullet_slide_layout)
         shapes = slide.shapes
         title_shape = shapes.title
