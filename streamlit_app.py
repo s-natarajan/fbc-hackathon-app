@@ -119,7 +119,7 @@ def create_presentation(topic, slide_content):
                 shapes = slide.shapes
                 title_shape = shapes.title
                 st.write(item.items())
-                title_shape.text = f"Franchise {item[.items()['Number']} - {item.items()['FirstName']} {item.items()['LastName']}"
+                title_shape.text = f"Franchise {item.items()['Number']} - {item.items()['FirstName']} {item.items()['LastName']}"
                 owner.append(f"{item['FirstName']} {item['LastName']}")
                 body_shape = shapes.placeholders[1]
                 tf = body_shape.text_frame
