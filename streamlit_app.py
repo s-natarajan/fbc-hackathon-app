@@ -32,7 +32,7 @@ def get_franchise_data(topic):
     df = df.to_dict()
     #st.write(df)
     keys_to_keep = topic.split(',')
-    st.write(keys_to_keep)
+    #st.write(keys_to_keep)
     filtered_dict = {}
     #st.write(df.items())
     for data in df:
@@ -41,12 +41,13 @@ def get_franchise_data(topic):
             #st.write(df.get(data))
             #st.write(df[data])
             filtered_dict[str(data)] = df[data]
-    #st.write(filtered_dict)
+    st.write("filtered dict")
+    st.write(filtered_dict)
     return filtered_dict
     
 # Function to generate slide content
-def generate_slide_content(topic, content):
-    prompt_txt = f"Wait for user input to return a response. Use this data to generate the output as a single python dictionary:\n\n{content}"
+def generate_slide_content(content):
+    prompt_txt = f"Wait for user input to return a response. Use this data to generate the output as a single python dictionary:\n\n{str(content)}"
     prompt = f"You are a helpful assistant that generates an executive summary of Franchise's performance metrics. Calculate aggregate metrics for given Franchises and return output as a python dict with key as aggregate_metrics. Then summarize 3 Key insights comparing metrics between previous and current year as a python dict object with key as key_insights. Return all output as a single python dict object. Do not return anything else."
 
     # Use ChatCompletion with the new model and API method
@@ -177,8 +178,8 @@ content = st.text_area("Enter the themes for the slides:")
 if st.button("Generate Slide Content"):
     if topic:
         franchise_data = get_franchise_data(topic)
-        st.write(franchise_data)
-        generated_content = generate_slide_content(topic, franchise_data)
+        #st.write(franchise_data)
+        generated_content = generate_slide_content(franchise_data)
         st.subheader("Generated Slide Content:")
         #st.write(generated_content)
         
