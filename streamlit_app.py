@@ -34,7 +34,7 @@ def generate_slide_content(topic, content):
     
     keys_to_keep = topic.split(',')
     filtered_dict = {key: value for key, value in df.items() if key in keys_to_keep}    
-    st.write(filtered_dict.to_dict())
+    st.write(filtered_dict)
     #st.write("df obtained")
     median = conn.read("fbc-hackathon-test/Network_Median.csv", input_format="csv", ttl=600)
     #st.table(df)
