@@ -32,16 +32,16 @@ def generate_slide_content(topic, content):
     df.columns = df.iloc[0]  # Use the first row as the header
     df = df.drop(df.index[0])  # Drop the first row since it is now the header
     df = df.to_dict()
-    st.write(df)
+    #st.write(df)
+    keys_to_keep = topic.split(',')
+    st.write(keys_to_keep)
+    filtered_dict = []
+    #st.write(df.items())
     for data in df:
         if data in keys_to_keep:
             st.write(data)
             st.write(df.get(data))
             st.write(df[data])
-    keys_to_keep = topic.split(',')
-    st.write(keys_to_keep)
-    filtered_dict = []
-    st.write(df.items())
     #first_items = {key: value[0] for key, value in df.items()}
     #st.write(first_tems)
     for key in keys_to_keep:
