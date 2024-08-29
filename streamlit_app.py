@@ -34,9 +34,10 @@ def generate_slide_content(topic, content):
     df = df.to_dict()
     st.write(df)
     for data in df:
-        st.write(data)
-        st.write(df.get(data))
-        st.write(df[data])
+        if data.to_string() in keys_to_keep:
+            st.write(data)
+            st.write(df.get(data))
+            st.write(df[data])
     keys_to_keep = topic.split(',')
     st.write(keys_to_keep)
     filtered_dict = []
