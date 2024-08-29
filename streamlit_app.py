@@ -89,7 +89,9 @@ def create_presentation(topic, slide_content):
     'Franchisee': 'Franchisee',
     'NetworkPerformancePartner': 'FBC',
     'Region': 'DO',
-    'WeightedScore': 'Your Total Score' 
+    'WeightedScore': 'Your Total Score',
+    'AggregateMetrics': 'Aggregate Metrics',    
+    'KeyInsights': 'Key Insights'
     }
 
     owner = []
@@ -100,6 +102,8 @@ def create_presentation(topic, slide_content):
                 slide = prs.slides.add_slide(bullet_slide_layout)
                 shapes = slide.shapes
                 title_shape = shapes.title
+                title_shape.text = f"Franchise {value['Number']} - {value['FirstName']} {value['LastName']}"
+                owner.append(f"{value['FirstName']} {value['LastName']}")
                 body_shape = shapes.placeholders[1]
                 tf = body_shape.text_frame
                 for sub_key, sub_value in item.items():
@@ -114,19 +118,12 @@ def create_presentation(topic, slide_content):
             title_shape = shapes.title
             body_shape = shapes.placeholders[1]
             tf = body_shape.text_frame
-            title_shape.text = f"Franchise {value['Number']} - {value['FirstName']} {value['LastName']}"
-            owner.append(f"{value['FirstName']} {value['LastName']}")
+            title_shape.text = f"{details_dict[key]}"
             for sub_key, sub_value in value.items():
-                if(sub_key == 'Franchisee'):
-                    st.write('definitely should work')
-                    title_text = f"{sub_key} - {sub_value}"
-                    owner.append(sub_value)
-                #print(f"  {sub_key}: {sub_value}")
                 if sub_key in details_dict:
                     p = tf.add_paragraph()
                     p.text+= f"  {details_dict[sub_key]}: {sub_value}\n"
             st.write(f"{title_text}")
-            
         else:
             #print(f"{key}: {value}")
             slide = prs.slides.add_slide(bullet_slide_layout)
