@@ -64,10 +64,10 @@ def generate_slide_content(content):
     if isinstance(generated_text, str):
         #generated_text = generated_text.encode('utf-8')
         try:
-            data = json.loads(generated_text)
-        except json.JSONDecodeError as e:
+            generated_text = ast.literal_eval(generated_text)
+            return result
+        except (SyntaxError, ValueError, TypeError) as e:
             st.write(f"Error: {e}")
-        generated_text = json.loads(generated_text)
     return generated_text
 
 # function to replace text in pptx first slide with selected filters
