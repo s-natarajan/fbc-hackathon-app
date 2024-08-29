@@ -117,6 +117,7 @@ def create_presentation(topic, slide_content):
     st.write(aggregate_metrics)
 
     for franchise in franchise_data.items():
+        st.write(franchise)
         slide = prs.slides.add_slide(bullet_slide_layout)
         shapes = slide.shapes
         title_shape = shapes.title
