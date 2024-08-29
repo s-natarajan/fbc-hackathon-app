@@ -35,7 +35,7 @@ def generate_slide_content(topic, content):
     #st.write(median.to_dict())
     #for row in median.itertuples():
     #    st.write(f"{row}")
-    st.write(f"Raw CSV: {df.to_string()}")
+    #st.write(f"Raw CSV: {df.to_string()}")
     #st.write(f"Raw dict: {df.to_dict()}")
     prompt_txt = f"Wait for user input to return a response. Use this data to generate the output as a single python dictionary:\n\n{df.to_string()}"
     prompt = f"You are a helpful assistant that generates an executive summary of Franchise's performance metrics. For each comma separated Franchise number in the list {topic} return all the data as a list of Python dict object. Then calculate aggregate metrics for all Franchises and return output as a python dict. Lastly summarizekey insights on Franchise metrics. Return all output as a single python dict object. Do not return anything else."
@@ -101,11 +101,17 @@ def create_presentation(topic, slide_content):
 
     owner = []
     franchise_data = slide_content['franchise_data']
+    aggregate_metrics = {}
+    key_insights = {}
     if 'aggregate_metrics' in slide_content:
         aggregate_metrics = slide_content['aggregate_metrics']
+    elif 'AggregateMetrics' in slide_content:
+        aggregate_metrics = slide_content['AggregateMetrics']
     if 'key_insights' in slide_content:
         key_insights = slide_content['key_insights']
-    st.write(franchise_date)
+    elif 'KeyInsights' in slide_content:
+        key_insights = slide_content['KeyInsights']
+    st.write(franchise_data)
     st.write(key_insights)
     st.write(aggregate_metrics)
     for key, value in slide_content.items():
