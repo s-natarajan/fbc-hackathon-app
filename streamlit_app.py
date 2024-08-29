@@ -111,7 +111,7 @@ def create_presentation(franchise_data, slide_content):
     aggregate_metrics = {}
     key_insights = {}
     st.write(f"so far so good")
-    st.write(isinstance(slide_content, dict))
+    st.write(isinstance(slide_content, list))
     for item in slide_content:
         st.write(item)
     if 'aggregate_metrics' in slide_content:
@@ -182,10 +182,9 @@ if st.button("Generate Slide Content"):
         #st.write(franchise_data)
         generated_content = generate_slide_content(franchise_data)
         st.subheader("Generated Slide Content:")
-        st.write(generated_content.to_dict())
         
         # Create and offer download of the PowerPoint presentation
-        file_path = create_presentation(franchise_data, generated_content.to_dict())
+        file_path = create_presentation(franchise_data, generated_content)
         with open(file_path, "rb") as file:
             btn = st.download_button(
                 label="Download PowerPoint Presentation",
