@@ -103,13 +103,14 @@ def create_presentation(topic, slide_content):
     franchise_data = slide_content['franchise_data']
     aggregate_metrics = {}
     key_insights = {}
+    st.write(f"so far so good")
     if 'aggregate_metrics' in slide_content:
         aggregate_metrics = slide_content['aggregate_metrics']
-    elif 'AggregateMetrics' in slide_content:
+    if 'AggregateMetrics' in slide_content:
         aggregate_metrics = slide_content['AggregateMetrics']
     if 'key_insights' in slide_content:
         key_insights = slide_content['key_insights']
-    elif 'KeyInsights' in slide_content:
+    if 'KeyInsights' in slide_content:
         key_insights = slide_content['KeyInsights']
     st.write(franchise_data)
     st.write(key_insights)
