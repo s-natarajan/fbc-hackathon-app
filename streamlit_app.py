@@ -101,9 +101,9 @@ def create_presentation(topic, slide_content):
 
     owner = []
     franchise_data = slide_content['franchise_data']
-    if 'aggregate_metrics' in slide_content
+    if 'aggregate_metrics' in slide_content:
         aggregate_metrics = slide_content['aggregate_metrics']
-    if 'key_insights' in slide_content
+    if 'key_insights' in slide_content:
         key_insights = slide_content['key_insights']
     st.write(franchise_date)
     st.write(key_insights)
