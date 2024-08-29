@@ -93,7 +93,7 @@ def create_presentation(topic, slide_content):
                 slide = prs.slides.add_slide(bullet_slide_layout)
                 shapes = slide.shapes
                 title_shape = shapes.title
-                body_shape = shapes.placeholders[0]
+                body_shape = shapes.placeholders[1]
                 title_shape.text = f"{key}"
                 tf = body_shape.text_frame
                 for sub_key, sub_value in item.items():
@@ -108,7 +108,7 @@ def create_presentation(topic, slide_content):
             slide = prs.slides.add_slide(bullet_slide_layout)
             shapes = slide.shapes
             title_shape = shapes.title
-            body_shape = shapes.placeholders[0]
+            body_shape = shapes.placeholders[1]
             title_shape.text = f"{key}"
             tf = body_shape.text_frame
             for sub_key, sub_value in value.items():
@@ -122,7 +122,7 @@ def create_presentation(topic, slide_content):
             slide = prs.slides.add_slide(bullet_slide_layout)
             shapes = slide.shapes
             title_shape = shapes.title
-            body_shape = shapes.placeholders[0]
+            body_shape = shapes.placeholders[1]
             title_shape.text = f"{key}"
             tf = body_shape.text_frame
             p = tf.add_paragraph()
