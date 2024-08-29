@@ -36,7 +36,7 @@ def get_franchise_data(topic):
     filtered_dict = {}
     for data in df:
         if str(data) in keys_to_keep:
-            st.write("should come here multiple times")
+            #st.write("should come here multiple times")
             #st.write(data)
             #st.write(df.get(data))
             #st.write(df[data])
@@ -159,7 +159,7 @@ def create_presentation(franchise_data, slide_content):
     #st.write(f"comma separated unique list: {comma_separated_string}")
     first_slide = prs.slides[0]
     shapes_1 = []
-    st.write(isinstance(aggregate_metrics), dict)
+    st.write(isinstance(aggregate_metrics, dict))
     for k, v in aggregate_metrics:
         st.write("aggregate_metrics")
         st.write(k)
