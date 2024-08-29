@@ -62,7 +62,11 @@ def generate_slide_content(content):
     st.write(isinstance(generated_text, str))
     st.write(f"Response: {generated_text}")
     if isinstance(generated_text, str):
-        generated_text = generated_text.encode('utf-8')
+        #generated_text = generated_text.encode('utf-8')
+        try:
+            data = json.loads(generated_text)
+        except json.JSONDecodeError as e:
+            st.write(f"Error: {e}")
         generated_text = json.loads(generated_text)
     return generated_text
 
