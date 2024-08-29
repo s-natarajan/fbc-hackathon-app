@@ -28,7 +28,7 @@ def generate_slide_content(topic, content):
     #st.write("conn obtained")
     
     df = conn.read("fbc-hackathon-test/growth.csv", input_format="csv", ttl=600)
-    csv_file = io.StringIO(df.tostring())
+    csv_file = io.StringIO(df.to_string())
 
     # Read the CSV data into a list of dictionaries
     reader = csv.DictReader(csv_file)
