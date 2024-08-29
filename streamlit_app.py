@@ -32,7 +32,7 @@ def get_franchise_data(topic):
     #st.write(df)
     keys_to_keep = topic.split(',')
     keys_to_keep = [key.strip() for key in topic.split(',')]
-    st.write(keys_to_keep)
+    #st.write(keys_to_keep)
     filtered_dict = {}
     for data in df:
         if str(data) in keys_to_keep:
@@ -95,7 +95,7 @@ def create_presentation(franchise_data, slide_content):
     
     #slide_content = ast.literal_eval(slide_content)
     #st.write(isinstance(slide_content, dict))
-    st.write(slide_content)
+    #st.write(slide_content)
     details_dict = {
     'Franchisee': 'Franchisee',
     'NetworkPerformancePartner': 'FBC',
@@ -169,6 +169,8 @@ def create_presentation(franchise_data, slide_content):
         body_shape = shapes.placeholders[1]
         tf = body_shape.text_frame
         agg_data = aggregate_metrics[str(agg)]
+        st.write("agg_data")
+        st.write(agg_data)
         for k in agg_data:
             st.write(k)
             #if k in details_dict:
