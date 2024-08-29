@@ -50,10 +50,28 @@ def generate_slide_content(topic, content):
     st.write(f"Response: {generated_text}")
     return generated_text
 
+# function to replace text in pptx first slide with selected filters
+def replace_text(replacements, shapes):
+    """function to replace text on a PowerPoint slide. Takes dict of {match: replacement, ... } and replaces all matches"""
+    for shape in shapes:
+        for match, replacement in replacements.items():
+            if shape.has_text_frame:
+                if (shape.text.find(match)) != -1:
+                    text_frame = shape.text_frame
+                    for paragraph in text_frame.paragraphs:
+                        whole_text = "".join(run.text for run in paragraph.runs)
+                        whole_text = whole_text.replace(str(match), str(replacement))
+                        for idx, run in enumerate(paragraph.runs):
+                            if idx != 0:
+                                p = paragraph._p
+                                p.remove(run._r)
+                        if bool(paragraph.runs):
+                            paragraph.runs[0].text = whole_text
+
 # Function to create a PowerPoint presentation
 def create_presentation(topic, slide_content):
-    #pptx = path + '//' + 'template.pptx'
-    prs = Presentation()
+    pptx = path + '//' + 'template.pptx'
+    prs = Presentation(pptx)
     title_slide_layout = prs.slide_layouts[0]
     bullet_slide_layout = prs.slide_layouts[1]
 
@@ -65,6 +83,8 @@ def create_presentation(topic, slide_content):
     subtitle.text = "Generated using OpenAI and Streamlit"
     slide_content = ast.literal_eval(slide_content)
     st.write(isinstance(slide_content, dict))
+
+    owner = ''
     for key, value in slide_content.items():
         if isinstance(value, list):
             print(f"{key}:")
@@ -76,6 +96,8 @@ def create_presentation(topic, slide_content):
                 title_shape.text = f"{key}"
                 tf = body_shape.text_frame
                 for sub_key, sub_value in item.items():
+                    if(sub_key == 'Franchisee')
+                        owner+= f"{sub_value}, "
                     print(f"  {sub_key}: {sub_value}")
                     p = tf.add_paragraph()
                     p.text+= f"  {sub_key}: {sub_value} \n\n"
@@ -102,6 +124,19 @@ def create_presentation(topic, slide_content):
             tf = body_shape.text_frame
             p = tf.add_paragraph()
             p.text = f"  {key}: {value} \n\n"
+    st.write(f"Owners: {owner}")
+    
+    first_slide = prs.slides[0]
+    shapes_1 = []
+
+    # create lists with shape objects
+    for shape in first_slide.shapes:
+        shapes_1.append(shape)
+
+    # initiate a dictionary of placeholders and values to replace
+    replaces_1 = {
+        '{o}': owner}
+    replace_text(replaces_1, shapes_1)
     
     # Save the presentation
     file_path = "generated_presentation.pptx"
