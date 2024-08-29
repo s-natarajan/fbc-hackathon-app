@@ -59,7 +59,7 @@ def generate_slide_content(content):
     )
     generated_text = response.choices[0].message.content
     generated_text = generated_text.removeprefix("```python")
-    st.write(isinstanceof(generated_text, dict))
+    st.write(isinstance(generated_text, dict))
     st.write(f"Response: {generated_text}")
     return ast.literal_eval(generated_text)
 
