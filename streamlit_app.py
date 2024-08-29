@@ -139,16 +139,28 @@ def create_presentation(topic, slide_content):
                 owner.append(f"{first_name} {last_name}")
                 #print()  # Line break between items
         elif isinstance(value, dict):
-            st.write(f" when does it come here - {key} {value}")
-            slide = prs.slides.add_slide(bullet_slide_layout)
-            shapes = slide.shapes
-            title_shape = shapes.title
-            body_shape = shapes.placeholders[1]
-            tf = body_shape.text_frame
-            title_shape.text = f"{details_dict[key]}"
-            for sub_key, sub_value in value.items():
+            if key == 'AggregateMetrics' or key == 'aggregate_metrics':
+                st.write(f"If block - {key} {value}")
+                slide = prs.slides.add_slide(bullet_slide_layout)
+                shapes = slide.shapes
+                title_shape = shapes.title
+                body_shape = shapes.placeholders[1]
+                tf = body_shape.text_frame
+                title_shape.text = f"{details_dict[key]}"
+                for sub_key, sub_value in value.items():
+                    p = tf.add_paragraph()
+                    p.text+= f"{details_dict[sub_key]}: {sub_value}\n"
+            elif key == 'key_insights' or key == 'KeyInsights':
+                st.write(f"Else block - {key} {value}")
+                slide = prs.slides.add_slide(bullet_slide_layout)
+                shapes = slide.shapes
+                title_shape = shapes.title
+                body_shape = shapes.placeholders[1]
+                tf = body_shape.text_frame
+                title_shape.text = f"{details_dict[key]}"
                 p = tf.add_paragraph()
-                p.text+= f"{details_dict[sub_key]}: {sub_value}\n"
+                p.text+= f"{sub_value}"
+            
         else:
             #print(f"{key}: {value}")
             slide = prs.slides.add_slide(bullet_slide_layout)
