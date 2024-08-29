@@ -139,7 +139,7 @@ def create_presentation(topic, slide_content):
                 owner.append(f"{first_name} {last_name}")
                 #print()  # Line break between items
         elif isinstance(value, dict):
-            st.write(f" when does it come here - {key}")
+            st.write(f" when does it come here - {key} {value}")
             slide = prs.slides.add_slide(bullet_slide_layout)
             shapes = slide.shapes
             title_shape = shapes.title
@@ -147,9 +147,8 @@ def create_presentation(topic, slide_content):
             tf = body_shape.text_frame
             title_shape.text = f"{details_dict[key]}"
             for sub_key, sub_value in value.items():
-                if sub_key in details_dict:
-                    p = tf.add_paragraph()
-                    p.text+= f"  {details_dict[sub_key]}: {sub_value}\n"
+                p = tf.add_paragraph()
+                p.text+= f"{details_dict[sub_key]}: {sub_value}\n"
         else:
             #print(f"{key}: {value}")
             slide = prs.slides.add_slide(bullet_slide_layout)
