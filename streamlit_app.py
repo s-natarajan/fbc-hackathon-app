@@ -12,7 +12,7 @@ import ast
 
 # Load environment variables from a .env file if present
 load_dotenv()
-#path = os.path.dirname(__file__)
+path = os.path.dirname(__file__)
 # Set your OpenAI API key
 openai.api_key = st.text_input("OpenAI API Key", type="password")
 
@@ -84,7 +84,7 @@ def create_presentation(topic, slide_content):
     slide_content = ast.literal_eval(slide_content)
     st.write(isinstance(slide_content, dict))
 
-    owner = ''
+    owner = []
     for key, value in slide_content.items():
         if isinstance(value, list):
             print(f"{key}:")
@@ -97,7 +97,7 @@ def create_presentation(topic, slide_content):
                 tf = body_shape.text_frame
                 for sub_key, sub_value in item.items():
                     if(sub_key == 'Franchisee'):
-                        owner+= f"{sub_value}, "
+                        owner.append{sub_value}
                     print(f"  {sub_key}: {sub_value}")
                     p = tf.add_paragraph()
                     p.text+= f"  {sub_key}: {sub_value} \n\n"
@@ -124,8 +124,12 @@ def create_presentation(topic, slide_content):
             tf = body_shape.text_frame
             p = tf.add_paragraph()
             p.text = f"  {key}: {value} \n\n"
-    st.write(f"Owners: {owner}")
-    owner = owner[:-1]
+    
+    owner = list(set(owner))
+    st.write(owner)
+    # Convert the array to a comma-separated string
+    comma_separated_string = ", ".join(owner)
+    st.write(f"comma separated unique list: {comma_separated_string}"
     first_slide = prs.slides[0]
     shapes_1 = []
 
@@ -135,7 +139,7 @@ def create_presentation(topic, slide_content):
 
     # initiate a dictionary of placeholders and values to replace
     replaces_1 = {
-        '{o}': owner}
+        '{o}': comma_separated_string}
     replace_text(replaces_1, shapes_1)
     
     # Save the presentation
