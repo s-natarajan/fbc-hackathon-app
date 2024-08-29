@@ -21,7 +21,6 @@ openai.api_key = st.text_input("OpenAI API Key", type="password")
 # Title of the Streamlit app
 st.title('Slide Content Generator')
 def get_franchise_data(topic):
-
     conn = st.connection('s3', type=FilesConnection)
     #st.write("conn obtained")
     
@@ -32,7 +31,7 @@ def get_franchise_data(topic):
     df = df.to_dict()
     #st.write(df)
     keys_to_keep = topic.split(',')
-    #st.write(keys_to_keep)
+    st.write(keys_to_keep)
     filtered_dict = {}
     #st.write(df.items())
     for data in df:
