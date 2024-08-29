@@ -102,8 +102,8 @@ def create_presentation(topic, slide_content):
                 slide = prs.slides.add_slide(bullet_slide_layout)
                 shapes = slide.shapes
                 title_shape = shapes.title
-                title_shape.text = f"Franchise {value['Number']} - {value['FirstName']} {value['LastName']}"
-                owner.append(f"{value['FirstName']} {value['LastName']}")
+                title_shape.text = f"Franchise {item['Number']} - {item['FirstName']} {item['LastName']}"
+                owner.append(f"{item['FirstName']} {item['LastName']}")
                 body_shape = shapes.placeholders[1]
                 tf = body_shape.text_frame
                 for sub_key, sub_value in item.items():
