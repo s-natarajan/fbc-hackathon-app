@@ -35,14 +35,14 @@ def generate_slide_content(topic, content):
     #st.write(df)
     keys_to_keep = topic.split(',')
     st.write(keys_to_keep)
-    filtered_dict = []
+    filtered_dict = {}
     #st.write(df.items())
     for data in df:
         if str(data) in keys_to_keep:
             st.write(data)
             st.write(df.get(data))
             st.write(df[data])
-            filtered_dict.append(df.get(data))
+            filtered_dict[str(data)] = df[data]
      
     st.write(filtered_dict)
     #st.write("df obtained")
