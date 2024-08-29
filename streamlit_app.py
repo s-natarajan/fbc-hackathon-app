@@ -111,6 +111,8 @@ def create_presentation(topic, slide_content):
             title_shape.text = f"{key}"
             tf = body_shape.text_frame
             for sub_key, sub_value in value.items():
+                if(sub_key == 'Franchisee'):
+                    owner.append(sub_value)
                 print(f"  {sub_key}: {sub_value}")
                 p = tf.add_paragraph()
                 p.text+= f"  {sub_key}: {sub_value} \n\n"
@@ -124,7 +126,8 @@ def create_presentation(topic, slide_content):
             tf = body_shape.text_frame
             p = tf.add_paragraph()
             p.text = f"  {key}: {value} \n\n"
-    
+            if(key == 'Franchisee'):
+                owner.append(value)
     owner = list(set(owner))
     st.write(owner)
     # Convert the array to a comma-separated string
