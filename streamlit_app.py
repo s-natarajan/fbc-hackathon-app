@@ -110,8 +110,8 @@ def create_presentation(franchise_data, slide_content):
     owner = []
     aggregate_metrics = {}
     key_insights = {}
-    st.write(f"so far so good")
-    st.write(isinstance(slide_content, dict))
+    #st.write(f"so far so good")
+    #st.write(isinstance(slide_content, dict))
     for item in slide_content:
         st.write(item)
     if 'aggregate_metrics' in slide_content:
@@ -159,7 +159,7 @@ def create_presentation(franchise_data, slide_content):
     #st.write(f"comma separated unique list: {comma_separated_string}")
     first_slide = prs.slides[0]
     shapes_1 = []
-
+    st.write(isinstance(aggregate_metrics), dict)
     for k, v in aggregate_metrics:
         st.write("aggregate_metrics")
         st.write(k)
