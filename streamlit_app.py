@@ -167,19 +167,12 @@ def create_presentation(franchise_data, slide_content):
         slide = prs.slides.add_slide(bullet_slide_layout)
         shapes = slide.shapes
         title_shape = shapes.title
+        title_shape.text = f"The Enterprise Journey of {owner}"
         body_shape = shapes.placeholders[1]
         tf = body_shape.text_frame
-        agg_data = aggregate_metrics[str(agg)]
-        st.write("agg_data")
-        st.write(agg_data)
-        for k in agg_data:
-            st.write(k)
-            #if k in details_dict:
-            p = tf.add_paragraph()
-            p.text+= f"  {k}: {ind_fran[k]}\n"
-            title_shape.text = f"The Enterprise Journey of {owner}"
-            #owner.append(f"{first_name} {last_name}")
-
+        p = tf.add_paragraph()
+        p.text+= f"  {k}: {aggregate_metrics[k]}\n"
+        
     # create lists with shape objects
     for shape in first_slide.shapes:
         shapes_1.append(shape)
