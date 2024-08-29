@@ -10,6 +10,7 @@ import pandas as pd
 import re
 import ast
 import csv
+import io
 
 # Load environment variables from a .env file if present
 load_dotenv()
