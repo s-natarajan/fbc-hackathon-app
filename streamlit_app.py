@@ -19,24 +19,29 @@ openai.api_key = st.text_input("OpenAI API Key", type="password")
 # Title of the Streamlit app
 st.title('Slide Content Generator')
 
-# Function to generate slide content
-def generate_slide_content(topic, content):
-
+def get_raw_data_as_dict():
     conn = st.connection('s3', type=FilesConnection)
     #st.write("conn obtained")
     
     df = conn.read("fbc-hackathon-test/growth.csv", input_format="csv", ttl=600)
     #st.write("df obtained")
+    df_dict = ast.literal_eval(df.to_string())
+    st.write(df_dict)
+    return df_dict
+
+def get_median_data_as_dict():
+    conn = st.connection('s3', type=FilesConnection)
+    #st.write("conn obtained")
+    
     median = conn.read("fbc-hackathon-test/Network_Median.csv", input_format="csv", ttl=600)
-    #st.table(df)
-    # Print results.
-    #st.write(median.to_dict())
-    #for row in median.itertuples():
-    #    st.write(f"{row}")
-    st.write(f"Raw CSV: {df.to_dtring()}")
-    st.write(f"Raw dict: {df.to_dict()}")
-    prompt_txt = f"Wait for user input to return a response. Use this data to generate the output as a single python dictionary:\n\n{df.to_string()}"
-    prompt = f"You are a helpful assistant that generates an executive summary of Franchise's performance metrics. For each comma separated Franchise number in the list {topic} return all the data as a list of Python dict object. Then calculate aggregate metrics for all Franchises and return output as a python dict. Lastly summarizekey insights on Franchise metrics. Return all output as a single python dict object. Do not return anything else."
+    #st.write("df obtained")
+    median_dict = ast.literal_eval(median.to_string())
+    return median_dict
+
+# Function to generate slide content
+def generate_slide_content(df):
+    prompt_txt = f"Wait for user input to return a response. Use this data to generate the output as a single python dictionary:\n\n{str(df)}"
+    prompt = f"You are a helpful assistant that generates an executive summary of Franchise's performance metrics. Calculate aggregate metrics for all Franchises using the data provided and return aggregate metrics output as a python dict. Then summarize key insights on Franchise metrics. Return all output as a single python dict object. Do not return anything else."
 
     # Use ChatCompletion with the new model and API method
     response = openai.chat.completions.create(
@@ -70,7 +75,7 @@ def replace_text(replacements, shapes):
                             paragraph.runs[0].text = whole_text
 
 # Function to create a PowerPoint presentation
-def create_presentation(topic, slide_content):
+def create_presentation(df_dict, slide_content):
     pptx = path + '//' + 'template.pptx'
     prs = Presentation(pptx)
     #title_slide_layout = prs.slide_layouts[0]
@@ -83,8 +88,8 @@ def create_presentation(topic, slide_content):
     #title.text = topic
     #subtitle.text = "Generated using OpenAI and Streamlit"
     
-    slide_content = ast.literal_eval(slide_content)
-    st.write(isinstance(slide_content, dict))
+    #slide_content = ast.literal_eval(slide_content)
+    #st.write(isinstance(slide_content, dict))
 
     details_dict = {
     'Franchisee': 'Franchisee',
@@ -163,13 +168,14 @@ content = st.text_area("Enter the themes for the slides:")
 
 # Generate button
 if st.button("Generate Slide Content"):
-    if topic and content:
-        generated_content = generate_slide_content(topic, content)
+    if topic:
+        df_dict = get_raw_data_as_dict()
+        generated_content = generate_slide_content(topic)
         st.subheader("Generated Slide Content:")
         #st.write(generated_content)
         
         # Create and offer download of the PowerPoint presentation
-        file_path = create_presentation(topic, generated_content)
+        file_path = create_presentation(df_dict, generated_content)
         with open(file_path, "rb") as file:
             btn = st.download_button(
                 label="Download PowerPoint Presentation",
