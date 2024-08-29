@@ -9,6 +9,7 @@ from st_files_connection import FilesConnection
 import pandas as pd
 import re
 import ast
+import csv
 
 # Load environment variables from a .env file if present
 load_dotenv()
@@ -24,8 +25,10 @@ def get_raw_data_as_dict():
     #st.write("conn obtained")
     
     df = conn.read("fbc-hackathon-test/growth.csv", input_format="csv", ttl=600)
+    reader = csv.DictReader(df)
+    # Convert the CSV data to a list of dictionaries
+    df_dict = [row for row in reader]
     #st.write("df obtained")
-    df_dict = ast.literal_eval(df.to_string())
     st.write(df_dict)
     return df_dict
 
