@@ -38,7 +38,7 @@ def generate_slide_content(topic, content):
     filtered_dict = []
     for key in keys_to_keep:
         st.write(key)
-        filtered_dict.append(df.items().get(key))
+        filtered_dict.append(df.get("100"))
     #filtered_dict = {key: df[key] for key in keys_to_keep if key in df}
      
     st.write(filtered_dict)
