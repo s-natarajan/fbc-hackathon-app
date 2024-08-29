@@ -85,6 +85,13 @@ def create_presentation(topic, slide_content):
     slide_content = ast.literal_eval(slide_content)
     st.write(isinstance(slide_content, dict))
 
+    details_dict = {
+    'Franchisee': 'Franchisee',
+    'NetworkPerformancePartner': 'FBC',
+    'Region': 'DO',
+    'WeightedScore': 'Your Total Score' 
+    }
+
     owner = []
     for key, value in slide_content.items():
         if isinstance(value, list):
@@ -100,8 +107,9 @@ def create_presentation(topic, slide_content):
                         title_shape.text = f"{key} - {sub_value}"
                         owner.append(sub_value)
                     #st.write(f"  {sub_key}: {sub_value}")
-                    p = tf.add_paragraph()
-                    p.text+= f"  {sub_key}: {sub_value} \n\n"
+                    if sub_key in details_dict:
+                        p = tf.add_paragraph()
+                        p.text+= f"  {details_dict[sub_key]}: {sub_value}\n"
                 #print()  # Line break between items
         elif isinstance(value, dict):
             #print(f"{key}:")
@@ -115,8 +123,9 @@ def create_presentation(topic, slide_content):
                     title_shape.text = f"{key} - {sub_value}"
                     owner.append(sub_value)
                 #print(f"  {sub_key}: {sub_value}")
-                p = tf.add_paragraph()
-                p.text+= f"  {sub_key}: {sub_value} \n\n"
+               if sub_key in details_dict:
+                    p = tf.add_paragraph()
+                    p.text+= f"  {details_dict[sub_key]}: {sub_value}\n"
         else:
             #print(f"{key}: {value}")
             slide = prs.slides.add_slide(bullet_slide_layout)
@@ -124,8 +133,9 @@ def create_presentation(topic, slide_content):
             title_shape = shapes.title
             body_shape = shapes.placeholders[1]
             tf = body_shape.text_frame
-            p = tf.add_paragraph()
-            p.text = f"  {key}: {value} \n\n"
+            if sub_key in details_dict:
+                p = tf.add_paragraph()
+                p.text+= f"  {details_dict[sub_key]}: {sub_value}\n"
             if(key == 'Franchisee'):
                 title_shape.text = f"{key} - {value}"
                 owner.append(value)
