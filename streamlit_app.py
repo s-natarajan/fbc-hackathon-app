@@ -120,7 +120,8 @@ def create_presentation(topic, slide_content):
             tf = body_shape.text_frame
             for sub_key, sub_value in value.items():
                 if(sub_key == 'Franchisee'):
-                    title_shape.text = f"{key} - {sub_value}"
+                    st.write('definitely should work')
+                    title_shape.text = f"{sub_key} - {sub_value}"
                     owner.append(sub_value)
                 #print(f"  {sub_key}: {sub_value}")
                 if sub_key in details_dict:
@@ -131,14 +132,12 @@ def create_presentation(topic, slide_content):
             slide = prs.slides.add_slide(bullet_slide_layout)
             shapes = slide.shapes
             title_shape = shapes.title
+            title_shape.text = f"{key} - {value}"
             body_shape = shapes.placeholders[1]
             tf = body_shape.text_frame
-            if sub_key in details_dict:
+            if key in details_dict:
                 p = tf.add_paragraph()
-                p.text+= f"  {details_dict[sub_key]}: {sub_value}\n"
-            if(key == 'Franchisee'):
-                title_shape.text = f"{key} - {value}"
-                owner.append(value)
+                p.text+= f"  {details_dict[key]}: {value}\n"
     owner = list(set(owner))
     #st.write(owner)
     # Convert the array to a comma-separated string
