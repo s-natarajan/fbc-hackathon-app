@@ -54,7 +54,7 @@ def generate_slide_content(topic, content):
     #    st.write(f"{row}")
     #st.write(f"Raw CSV: {df.to_string()}")
     #st.write(f"Raw dict: {df.to_dict()}")
-    prompt_txt = f"Wait for user input to return a response. Use this data to generate the output as a single python dictionary:\n\n{filtered_dict.to_string()}"
+    prompt_txt = f"Wait for user input to return a response. Use this data to generate the output as a single python dictionary:\n\n{filtered_dict}"
     prompt = f"You are a helpful assistant that generates an executive summary of Franchise's performance metrics. For each comma separated Franchise number in the list {topic} return all the data as a list of Python dict object with key as franchise_data. Then calculate aggregate metrics for all Franchises and return output as a python dict with key as aggregate_metrics. Lastly summarizekey insights on Franchise metrics as python dict object with key as key_insights. Return all output as a single python dict object. Do not return anything else."
 
     # Use ChatCompletion with the new model and API method
