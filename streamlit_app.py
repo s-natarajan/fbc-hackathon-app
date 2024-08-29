@@ -128,7 +128,7 @@ def create_presentation(franchise_data, slide_content):
 
     for franchise in franchise_data:
         st.write("for loop")
-        st.write(franchise_data[str(franchise))
+        st.write(franchise_data[str(franchise)])
         slide = prs.slides.add_slide(bullet_slide_layout)
         shapes = slide.shapes
         title_shape = shapes.title
