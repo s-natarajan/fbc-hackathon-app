@@ -99,7 +99,7 @@ def replace_text(replacements, shapes):
                             paragraph.runs[0].text = whole_text
 
 # Function to create a PowerPoint presentation
-def create_presentation(franchise_data, slide_content):
+def create_presentation(franchise_data, slide_content, key_insights):
     pptx = path + '//' + 'template.pptx'
     prs = Presentation(pptx)
     #title_slide_layout = prs.slide_layouts[0]
@@ -128,7 +128,7 @@ def create_presentation(franchise_data, slide_content):
 
     owner = []
     aggregate_metrics = {}
-    key_insights = {}
+    #key_insights = {}
     #st.write(f"so far so good")
     #st.write(isinstance(slide_content, dict))
     for item in slide_content:
@@ -137,10 +137,10 @@ def create_presentation(franchise_data, slide_content):
         aggregate_metrics = slide_content['aggregate_metrics']
     if 'AggregateMetrics' in slide_content:
         aggregate_metrics = slide_content['AggregateMetrics']
-    if 'key_insights' in slide_content:
-        key_insights = slide_content['key_insights']
-    if 'KeyInsights' in slide_content:
-        key_insights = slide_content['KeyInsights']
+    #if 'key_insights' in slide_content:
+     #   key_insights = slide_content['key_insights']
+    #if 'KeyInsights' in slide_content:
+     #   key_insights = slide_content['KeyInsights']
     #st.write(franchise_data)
     #st.write(key_insights)
     st.write(aggregate_metrics)
@@ -189,9 +189,11 @@ def create_presentation(franchise_data, slide_content):
     title_shape.text = f"Key Insights"
     body_shape = shapes.placeholders[1]
     tf = body_shape.text_frame
-    for k in key_insights:
-        p = tf.add_paragraph()
-        p.text+= f"  {k}: {key_insights[k]}\n\n\n"
+    p = tf.add_paragraph()
+    p.text+= key_insights
+    #for k in key_insights:
+    #    p = tf.add_paragraph()
+    #    p.text+= f"  {k}: {key_insights[k]}\n\n\n"
         
     # create lists with shape objects
     for shape in first_slide.shapes:
@@ -219,11 +221,13 @@ if st.button("Generate Slide Content"):
         franchise_data = get_franchise_data(topic)
         #st.write(franchise_data)
         generated_content = generate_slide_content(franchise_data)
+        
         key_insights = generate_key_insights(franchise_data)
         st.subheader("Generated Slide Content:")
         
         # Create and offer download of the PowerPoint presentation
-        file_path = create_presentation(franchise_data, generated_content)
+        file_path = create_presentation(franchise_data, generated_content, key_insights)
+        
         with open(file_path, "rb") as file:
             btn = st.download_button(
                 label="Download PowerPoint Presentation",
