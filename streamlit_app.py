@@ -151,7 +151,7 @@ def create_presentation(franchise_data, slide_content, key_insights):
         p.text+= f"FBC: {ind_fran['NetworkPerformancePartner']}\n\n"
         p.text+= f"DO: {ind_fran['Region']}\n\n"
         p.text+= f"Your Score: {weighted_score}\n\n"
-        p.text+= f"Rank: {ind_fran['Rank']}\n\n"
+        p.text+= f"Rank: {ind_fran['Rank']}\n\n\n\n\n"
         performance_standing = ''
         if weighted_score >=0 and weighted_score < 1.99:
             performance_standing = "Significantly Below Target"
@@ -163,11 +163,9 @@ def create_presentation(franchise_data, slide_content, key_insights):
             performance_standing = "Above Target"
         elif weighted_score >=4.99:
             performance_standing = "Significantly Above Target"
-        #perf_shape.text = performance_standing
+        p.text+= f"Performance Standing: {performance_standing}\n\n"
         for placeholder in shapes.placeholders:
             st.write(placeholder.name)
-            if placeholder.name == 'Text Placeholder 3':
-                placeholder.text = performance_standing
             if placeholder.name == 'Picture Placeholder 1':
                 df = pd.DataFrame(
                     [[str(franchise), float(ind_fran['RevenueGrowth']), float(ind_fran['HoursGrowth']), float(ind_fran['RPNLeadsGrowth'])], 
@@ -179,13 +177,34 @@ def create_presentation(franchise_data, slide_content, key_insights):
                 left = Inches(2.5)
                 top = Inches(1)
                 fig = px.bar(df, x="Franchise", y=["Revenue", "Billable Hours", "RPN Leads"], barmode='group', height=400)
+                fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)')
                 # st.dataframe(df) # if need to display dataframe
                 st.plotly_chart(fig)
-
-                fig.write_image("metrics.png")
                 metrics_im = 'metrics.png'
 
-                add_image(placeholder, image=metrics_im, left=left, width=width, top=top)
+                fig.write_image(metrics_im)
+                with Image.open(metrics_im) as img:
+                    image_width, image_height = img.size
+                placeholder_width = placeholder.width
+                placeholder_height = placeholder.height
+
+                # Calculate aspect ratios
+                image_ratio = image_width / image_height
+                placeholder_ratio = placeholder_width / placeholder_height
+
+                # Determine the scaling factor
+                if image_ratio > placeholder_ratio:
+                    # Image is wider than placeholder
+                    scale_factor = placeholder_width / image_width
+                else:
+                    # Image is taller than placeholder
+                    scale_factor = placeholder_height / image_height
+
+                # Calculate new dimensions for the image
+                new_width = int(image_width * scale_factor)
+                new_height = int(image_height * scale_factor)    
+                
+                add_image(placeholder, image=metrics_im, left=left, width=new_width, height=new_height, top=top)
                 os.remove('metrics.png')
         #for k in ind_fran:
         #    if k in details_dict:
