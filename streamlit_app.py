@@ -163,7 +163,7 @@ def create_presentation(franchise_data, slide_content, key_insights):
             performance_standing = "Above Target"
         elif weighted_score >=4.99:
             performance_standing = "Significantly Above Target"
-        perf_shape.text = performance_standing
+        #perf_shape.text = performance_standing
         for placeholder in shapes.placeholders:
             if placeholder.name == 'Text Placeholder 3':
                 placeholder.text = performance_standing
