@@ -166,14 +166,14 @@ def create_presentation(franchise_data, slide_content, key_insights):
         st.write(float(ind_fran['HoursGrowth']))
         st.write(float(ind_fran['RPNLeadsGrowth']))
         df = pd.DataFrame(
-            [["YoY", float(ind_fran['RevenueGrowth']), float(ind_fran['HoursGrowth']), float(ind_fran['RPNLeadsGrowth'])]],
-            columns=["Growth", "Revenue", "Billable Hours", "RPN Leads"]
+            [[float(ind_fran['RevenueGrowth']), float(ind_fran['HoursGrowth']), float(ind_fran['RPNLeadsGrowth'])]],
+            columns=["Revenue", "Billable Hours", "RPN Leads"]
         )
 
-        width = Inches(8)
-        left = Inches(2.5)
+        width = Inches(4)
+        left = Inches(1.5)
         top = Inches(1)
-        fig = px.bar(df, x="Year", y=["Revenue", "Billable Hours", "RPN Leads"], barmode='group', height=400)
+        fig = px.bar(df, x="Growth", y=["Revenue", "Billable Hours", "RPN Leads"], barmode='group', height=150)
         # st.dataframe(df) # if need to display dataframe
         st.plotly_chart(fig)
 
