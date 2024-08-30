@@ -166,7 +166,7 @@ def create_presentation(franchise_data, slide_content, key_insights):
         #perf_shape.text = performance_standing
         for placeholder in shapes.placeholders:
             st.write(placeholder.name)
-            if placeholder.name == 'Title 2':
+            if placeholder.name == 'Text Placeholder 3':
                 placeholder.text = performance_standing
             if placeholder.name == 'Picture Placeholder 1':
                 df = pd.DataFrame(
