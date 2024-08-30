@@ -128,7 +128,9 @@ def create_presentation(franchise_data, slide_content, key_insights):
     'RevenueGrowth': 'Your Revenue Growth %'
     }
 
-    median_data = get_median_data()
+    #median_data = get_median_data()
+    median_data = {"RPNLeadsGrowth": 14.22, "HoursGrowth": 3.97, "RevenueGrowth": 10.23}
+
 
     owner = []
     owner_full_name = []
@@ -165,7 +167,7 @@ def create_presentation(franchise_data, slide_content, key_insights):
 
         df = pd.DataFrame(
             [[str(franchise), float(ind_fran['RevenueGrowth']), float(ind_fran['HoursGrowth']), float(ind_fran['RPNLeadsGrowth'])], 
-             ["N/W Median", float(median_data['Revenue Growth']), float(median_data['Hours Growth']), float(median_data['RPN Leads Growth'])]],
+             ["N/W Median", float(median_data['RevenueGrowth']), float(median_data['HoursGrowth']), float(median_data['RPNLeadsGrowth'])]],
             columns=["Franchise", "Revenue", "Billable Hours", "RPN Leads"]
         )
 
