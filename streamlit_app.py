@@ -159,8 +159,8 @@ def create_presentation(franchise_data, slide_content, key_insights):
         title_shape.text = f"Franchise {franchise} - {ind_fran['FirstName']} {ind_fran['LastName']}"
         for k in ind_fran:
             if k in details_dict:
-                #p = tf.add_paragraph()
-                #p.text+= f"  {details_dict[k]}: {ind_fran[k]}\n\n"
+                p = tf.add_paragraph()
+                p.text+= f"  {details_dict[k]}: {ind_fran[k]}\n\n"
 
         df = pd.DataFrame(
             ["YoY", ind_fran['RevenueGrowth'], ind_fran['HoursGrowth'], ind_fran['RPNLeadsGrowth']],
