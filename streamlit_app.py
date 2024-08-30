@@ -163,7 +163,7 @@ def create_presentation(franchise_data, slide_content, key_insights):
                 #p.text+= f"  {details_dict[k]}: {ind_fran[k]}\n\n"
 
         df = pd.DataFrame(
-        [["YoY", ind_fran['RevenueGrowth'], ind_fran['HoursGrowth'], ind_fran['RPNLeadsGrowth']],
+        ["YoY", ind_fran['RevenueGrowth'], ind_fran['HoursGrowth'], ind_fran['RPNLeadsGrowth']],
         columns=["Growth %", "Revenue", "Billable Hours", "RPN Leads"]
         )
 
