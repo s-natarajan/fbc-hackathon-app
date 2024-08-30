@@ -4,3 +4,5 @@ st-files-connection
 python-pptx 
 python-dotenv
 openai
+plotly
+requests
