@@ -24,29 +24,31 @@ today = date.today()
 st.title('Slide Content Generator')
 def get_franchise_data(topic):
     conn = st.connection('s3', type=FilesConnection)
-    #st.write("conn obtained")
-    
     df = conn.read("fbc-hackathon-test/growth.csv", input_format="csv", ttl=600) 
     df = df.transpose()
     df.columns = df.iloc[0]  # Use the first row as the header
     df = df.drop(df.index[0])  # Drop the first row since it is now the header
     df = df.to_dict()
-    #st.write(df)
     keys_to_keep = topic.split(',')
     keys_to_keep = [key.strip() for key in topic.split(',')]
-    #st.write(keys_to_keep)
     filtered_dict = {}
     for data in df:
         if str(data) in keys_to_keep:
-            #st.write("should come here multiple times")
-            #st.write(data)
-            #st.write(df.get(data))
-            #st.write(df[data])
             filtered_dict[str(data)] = df[data]
     return filtered_dict
+
+def get_median_data():
+    conn = st.connection('s3', type=FilesConnection)
+    df = conn.read("fbc-hackathon-test/Network_Median.csv", input_format="csv", ttl=600) 
+    df = df.transpose()
+    df.columns = df.iloc[0]  # Use the first row as the header
+    df = df.drop(df.index[0])  # Drop the first row since it is now the header
+    df = df.to_dict()
+    st.write(df)
+    return df
     
 # Function to generate slide content
-def generate_slide_content(content):
+def generate_aggregate_metrics(content):
     prompt_txt = f"Wait for user input to return a response. Use this data to generate the output as a valid dictionary object:\n\n{str(content)}"
     prompt = f"You are a helpful assistant that generates an executive summary of Franchise's performance metrics. Calculate aggregate metrics for given Franchises and return output a valid dictionary object with key as aggregate_metrics. Do not return anything else."
 
@@ -104,29 +106,17 @@ def replace_text(replacements, shapes):
 def create_presentation(franchise_data, slide_content, key_insights):
     pptx = path + '//' + 'template.pptx'
     prs = Presentation(pptx)
-    #title_slide_layout = prs.slide_layouts[0]
     bullet_slide_layout = prs.slide_layouts.get_by_name('Purple_Circle_Corners')
 
-    # Title slide
-    #slide = prs.slides.add_slide(title_slide_layout)
-    #title = slide.shapes.title
-    #subtitle = slide.placeholders[1]
-    #title.text = topic
-    #subtitle.text = "Generated using OpenAI and Streamlit"
-    
-    #slide_content = ast.literal_eval(slide_content)
-    #st.write(isinstance(slide_content, dict))
-    #st.write(slide_content)
     details_dict = {
     'Franchisee': 'Franchisee',
     'NetworkPerformancePartner': 'FBC',
     'Region': 'DO',
     'WeightedScore': 'Your Total Score',
-    'aggregate_metrics': 'Aggregate Metrics',    
-    'key_insights': 'Key Insights',
-    'AggregateMetrics': 'Aggregate Metrics',    
-    'KeyInsights': 'Key Insights'
+    
     }
+
+    median_data = get_median_data()
 
     owner = []
     owner_full_name = []
@@ -140,12 +130,6 @@ def create_presentation(franchise_data, slide_content, key_insights):
         aggregate_metrics = slide_content['aggregate_metrics']
     if 'AggregateMetrics' in slide_content:
         aggregate_metrics = slide_content['AggregateMetrics']
-    #if 'key_insights' in slide_content:
-     #   key_insights = slide_content['key_insights']
-    #if 'KeyInsights' in slide_content:
-     #   key_insights = slide_content['KeyInsights']
-    #st.write(franchise_data)
-    #st.write(key_insights)
     st.write(aggregate_metrics)
 
     franchise_numbers = []
@@ -244,7 +228,7 @@ if st.button("Generate Slide Content"):
     if topic:
         franchise_data = get_franchise_data(topic)
         #st.write(franchise_data)
-        generated_content = generate_slide_content(franchise_data)
+        generated_content = generate_aggregate_metrics(franchise_data)
         
         key_insights = generate_key_insights(franchise_data)
         st.subheader("Generated Slide Content:")
