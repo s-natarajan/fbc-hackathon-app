@@ -46,7 +46,7 @@ def get_franchise_data(topic):
 # Function to generate slide content
 def generate_slide_content(content):
     prompt_txt = f"Wait for user input to return a response. Use this data to generate the output as a valid python dictionary:\n\n{str(content)}"
-    prompt = f"You are a helpful assistant that generates an executive summary of Franchise's performance metrics. Calculate aggregate metrics for given Franchises and return output as a python dictionary with key as aggregate_metrics."
+    prompt = f"You are a helpful assistant that generates an executive summary of Franchise's performance metrics. Calculate aggregate metrics for given Franchises and return output as a python dictionary with key as aggregate_metrics. Do not return anything else."
 
     # Use ChatCompletion with the new model and API method
     response = openai.chat.completions.create(
