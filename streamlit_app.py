@@ -167,7 +167,7 @@ def create_presentation(franchise_data, slide_content, key_insights):
             performance_standing = "Significantly Above Target"
         p.text+= f"Performance Standing: {performance_standing}\n\n"
         for placeholder in shapes.placeholders:
-            st.write(placeholder.name)
+            #st.write(placeholder.name)
             if placeholder.name == 'Picture Placeholder 1':
                 df = pd.DataFrame(
                     [[str(franchise), float(ind_fran['RevenueGrowth']), float(ind_fran['HoursGrowth']), float(ind_fran['RPNLeadsGrowth'])], 
@@ -216,10 +216,6 @@ def create_presentation(franchise_data, slide_content, key_insights):
         #        p.text+= f"  {details_dict[k]}: {ind_fran[k]}\n\n"
 
 
-        
-
-    
-
     franchise_numbers_string = ", ".join(franchise_numbers)
     owner = list(set(owner))
     #st.write(owner)
@@ -229,7 +225,7 @@ def create_presentation(franchise_data, slide_content, key_insights):
 
     owner_full_name = list(set(owner_full_name))
     owner_full_name_string = ", ".join(owner_full_name)
-    st.write(f"comma separated unique list: {owner_full_name_string}")
+    #st.write(f"comma separated unique list: {owner_full_name_string}")
     
     first_slide = prs.slides[0]
     shapes_1 = []
@@ -254,6 +250,8 @@ def create_presentation(franchise_data, slide_content, key_insights):
     shapes = slide.shapes
     title_shape = shapes.title
     title_shape.text = f"Key Insights"
+    for placeholder.shapes.placeholders:
+        st.write(placeholder.name)
     body_shape = shapes.placeholders[1]
     tf = body_shape.text_frame
     p = tf.add_paragraph()
