@@ -59,7 +59,7 @@ def aggr_graph():
         x=franchises,
         y=sales,
         name='Sales',
-        marker_color='amber'
+        marker_color='yellow'
     ))
 
     # Add a line representing the median value
@@ -225,7 +225,7 @@ def create_presentation(franchise_data, slide_content, key_insights):
                 width = Inches(8)
                 left = Inches(2.5)
                 top = Inches(1)
-                fig = px.bar(df, x="Franchise", y=["Revenue", "Billable Hours", "RPN Leads"], color_discrete_sequence=['amber'], barmode='group', height=400)
+                fig = px.bar(df, x="Franchise", y=["Revenue", "Billable Hours", "RPN Leads"], color_discrete_sequence=['yellow'], barmode='group', height=400)
                 fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)')
                 # st.dataframe(df) # if need to display dataframe
                 #st.plotly_chart(fig)
