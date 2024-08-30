@@ -64,9 +64,7 @@ def generate_slide_content(content):
 
 def generate_key_insights(content):
     prompt_txt = f"Wait for user input to return a response. Use this data to generate the output as a valid python dictionary:\n\n{str(content)}"
-    prompt = f"You are a helpful assistant that generates an executive summary of Franchise's performance metrics. Analyze the data and summarize the following trends. 
-    If the franchise shows growth in billable hours, is it due to increase in clients, increase in the number of hours per client or a combination of both? 
-    If the franchise shows growth in Revenue, is it due to price per client, increase in new clients, increase in hours served for clients or combination of all factors" 
+    prompt = f"You are a helpful assistant that generates an executive summary of Franchise's performance metrics. Analyze the data and summarize the following trends. If the franchise shows growth in billable hours, is it due to increase in clients, increase in the number of hours per client or a combination of both? If the franchise shows growth in Revenue, is it due to price per client, increase in new clients, increase in hours served for clients or combination of all factors" 
    
     # Use ChatCompletion with the new model and API method
     response = openai.chat.completions.create(
