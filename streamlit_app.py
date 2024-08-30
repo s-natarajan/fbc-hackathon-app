@@ -167,7 +167,7 @@ def create_presentation(franchise_data, slide_content, key_insights):
         st.write(float(ind_fran['RPNLeadsGrowth']))
         df = pd.DataFrame(
             [["YoY", float(ind_fran['RevenueGrowth']), float(ind_fran['HoursGrowth']), float(ind_fran['RPNLeadsGrowth'])]],
-            columns=["Growth %", "Revenue", "Billable Hours", "RPN Leads"]
+            columns=["Growth", "Revenue", "Billable Hours", "RPN Leads"]
         )
 
         width = Inches(8)
