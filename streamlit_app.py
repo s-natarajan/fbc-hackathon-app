@@ -140,7 +140,7 @@ def create_presentation(franchise_data, slide_content, key_insights):
         shapes = slide.shapes
         title_shape = shapes.title
         for placeholder in slide.placeholders:
-            st.write(f"Placeholder Index: {placeholder.idx}, Placeholder Type: {placeholder.placeholder_format.type}")
+            st.write(placeholder)
         body_shape = shapes.placeholders[1]
         perf_shape = slide.placeholders[2]
         tf = body_shape.text_frame
