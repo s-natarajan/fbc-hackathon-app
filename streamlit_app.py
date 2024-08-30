@@ -12,6 +12,8 @@ import ast
 from datetime import date
 import plotly.express as px
 from PIL import Image
+import plotly.graph_objs as go
+import numpy as np
 
 # Load environment variables from a .env file if present
 load_dotenv()
@@ -40,6 +42,49 @@ def get_franchise_data(topic):
     #st.write(filtered_dict)
     return filtered_dict
 
+
+def aggr_graph():
+    # Example data for multiple franchises
+    franchises = ['Franchise A', 'Franchise B', 'Franchise C', 'Franchise D', 'Franchise E']
+    sales = [120, 150, 130, 170, 160]
+
+    # Calculate the median value
+    median_sales = np.median(sales)
+
+    # Create the bar chart
+    fig = go.Figure()
+
+    # Add bars for each franchise
+    fig.add_trace(go.Bar(
+        x=franchises,
+        y=sales,
+        name='Sales',
+        marker_color='blue'
+    ))
+
+    # Add a line representing the median value
+    fig.add_trace(go.Scatter(
+        x=franchises,
+        y=[median_sales] * len(franchises),  # Repeat the median value for each franchise
+        mode='lines',
+        name='Median Sales',
+        line=dict(color='red', dash='dash')
+    ))
+
+    # Update layout for better visuals
+    fig.update_layout(
+        title='Comparative Sales Data Between Franchises and Median Value',
+        xaxis_title='Franchise',
+        yaxis_title='Sales',
+        legend_title='Legend',
+        yaxis=dict(showgrid=True),
+        xaxis=dict(showgrid=False),
+        bargap=0.2  # Gap between bars
+    )
+
+    # Show the graph
+    fig.show()
+    st.plotly_chart(fig)
 
 def add_image(slide, image, left, top, width, height):
     """function to add an image to the PowerPoint slide and specify its position and width"""
@@ -181,7 +226,7 @@ def create_presentation(franchise_data, slide_content, key_insights):
                 fig = px.bar(df, x="Franchise", y=["Revenue", "Billable Hours", "RPN Leads"], barmode='group', height=400)
                 fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)')
                 # st.dataframe(df) # if need to display dataframe
-                st.plotly_chart(fig)
+                #st.plotly_chart(fig)
                 metrics_im = 'metrics.png'
 
                 fig.write_image(metrics_im)
@@ -244,6 +289,7 @@ def create_presentation(franchise_data, slide_content, key_insights):
     #    p = tf.add_paragraph()
     #    p.text+= f"  {k}: {aggregate_metrics[k]}\n\n"
 
+    aggr_graph()
 
     #Key Insights
     slide = prs.slides.add_slide(insights_slide_layout)
