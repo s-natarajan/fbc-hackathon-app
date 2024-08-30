@@ -43,7 +43,7 @@ def get_franchise_data(topic):
 
 def add_image(slide, image, left, top, width, height):
     """function to add an image to the PowerPoint slide and specify its position and width"""
-    slide.add_picture(image, left, top, width=width, height=height)
+    slide.shapes.add_picture(image, left=left, top=top, width=width, height=height)
     
 # Function to generate slide content
 def generate_aggregate_metrics(content):
