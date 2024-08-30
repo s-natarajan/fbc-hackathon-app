@@ -1,19 +1,15 @@
 import streamlit as st
 import openai
-import json
 from pptx import Presentation
 from pptx.util import Inches
 from dotenv import load_dotenv
 import os
 from st_files_connection import FilesConnection
 import pandas as pd
-import re
 import io
 import csv
 import ast
 from datetime import date
-import requests
-import base64
 import plotly.express as px
 
 # Load environment variables from a .env file if present
@@ -110,30 +106,6 @@ def replace_text(replacements, shapes):
                             paragraph.runs[0].text = whole_text
 
 
-
-def generate_graph(aggregate_metrics):
-
-    # Step 1: Generate the graph image using OpenAPI API
-    # (Example placeholder code - this will depend on your specific API)
-
-    api_url = "https://api.openai.com/v1/images/generate"
-    headers = {"Authorization": "Bearer " + openapi_key}
-    data = {
-        "prompt": "A bar graph showing total revenue growth between current and previous years from this data: {aggregate_metrics}",
-        "size": "1024x1024"
-    }
-    response = requests.post(api_url, headers=headers, json=data)
-    st.write(response)
-    st.write(response.json())
-    # Assuming the API returns an image in base64 format
-    image_data = base64.b64decode(response.json()['image'])
-
-    # Step 2: Save the image to a file
-    with open("graph.png", "wb") as image_file:
-        image_file.write(image_data)
-
-    st.write('image data received')
-
 # Function to create a PowerPoint presentation
 def create_presentation(franchise_data, slide_content, key_insights):
     pptx = path + '//' + 'template.pptx'
@@ -187,18 +159,18 @@ def create_presentation(franchise_data, slide_content, key_insights):
         title_shape.text = f"Franchise {franchise} - {ind_fran['FirstName']} {ind_fran['LastName']}"
         for k in ind_fran:
             if k in details_dict:
-                p = tf.add_paragraph()
-                p.text+= f"  {details_dict[k]}: {ind_fran[k]}\n\n"
+                #p = tf.add_paragraph()
+                #p.text+= f"  {details_dict[k]}: {ind_fran[k]}\n\n"
 
         df = pd.DataFrame(
-        [["YoY", -14.38, -10.64, -14]],
-        columns=["Year", "Revenue", "Billable Hours", "RPN Leads"]
+        [["YoY", ind_fran['RevenueGrowth'], ind_fran['HoursGrowth'], ind_fran['RPNLeadsGrowth']],
+        columns=["Growth %", "Revenue", "Billable Hours", "RPN Leads"]
         )
 
-        width = Inches(8)
-        left = Inches(2.5)
+        width = Inches(4)
+        left = Inches(1.5)
         top = Inches(1)
-        fig = px.bar(df, x="Year", y=["Revenue", "Billable Hours", "RPN Leads"], barmode='group', height=200)
+        fig = px.bar(df, x="Year", y=["Revenue", "Billable Hours", "RPN Leads"], barmode='group', height=50)
         # st.dataframe(df) # if need to display dataframe
         #st.plotly_chart(fig)
 
