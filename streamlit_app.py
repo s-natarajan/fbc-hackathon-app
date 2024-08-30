@@ -226,7 +226,7 @@ content = st.text_area("Enter the themes for the slides:")
 if st.button("Generate Slide Content"):
     if topic:
         franchise_data = get_franchise_data(topic)
-        #st.write(franchise_data)
+        st.write(franchise_data)
         generated_content = generate_aggregate_metrics(franchise_data)
         
         key_insights = generate_key_insights(franchise_data)
