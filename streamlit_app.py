@@ -295,9 +295,9 @@ def create_presentation(franchise_data, slide_content, key_insights):
     metrics_im = 'metrics.png'
     fig.write_image(metrics_im)
     with Image.open(metrics_im) as img:
-            image_width, image_height = img.size
-    placeholder_width = placeholder.width
-    placeholder_height = placeholder.height
+        image_width, image_height = img.size
+    placeholder_width = body_shape.width
+    placeholder_height = body_shape.height
     left = placeholder.left
     top = placeholder.top
                 
