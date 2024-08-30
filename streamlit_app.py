@@ -44,6 +44,7 @@ def get_median_data():
     df.columns = df.iloc[0]  # Use the first row as the header
     df = df.drop(df.index[0])  # Drop the first row since it is now the header
     df = df.to_dict()
+    st.write("median data)
     st.write(df)
     return df
     
@@ -62,8 +63,7 @@ def generate_aggregate_metrics(content):
         temperature=0.7,
     )
     generated_text = response.choices[0].message.content
-    #generated_text = generated_text.removeprefix('```python' )
-    st.write(f"Response: {generated_text}")
+    #st.write(f"Response: {generated_text}")
     return ast.literal_eval(generated_text)
 
 def generate_key_insights(content):
@@ -80,8 +80,7 @@ def generate_key_insights(content):
         temperature=0.7,
     )
     generated_text = response.choices[0].message.content
-    #generated_text = generated_text.removeprefix('```python' )
-    st.write(f"Response: {generated_text}")
+    #st.write(f"Response: {generated_text}")
     return generated_text
 
 # function to replace text in pptx first slide with selected filters
@@ -130,7 +129,7 @@ def create_presentation(franchise_data, slide_content, key_insights):
         aggregate_metrics = slide_content['aggregate_metrics']
     if 'AggregateMetrics' in slide_content:
         aggregate_metrics = slide_content['AggregateMetrics']
-    st.write(aggregate_metrics)
+    #st.write(aggregate_metrics)
 
     franchise_numbers = []
     
@@ -142,8 +141,6 @@ def create_presentation(franchise_data, slide_content, key_insights):
         body_shape = shapes.placeholders[1]
         tf = body_shape.text_frame
         ind_fran = franchise_data[str(franchise)]
-        st.write(franchise)
-        st.write(ind_fran['FirstName'])
         owner_full_name.append(ind_fran['FirstName'] + ' ' + ind_fran['LastName']) 
         owner.append(ind_fran['LastName'])
         title_shape.text = f"Franchise {franchise} - {ind_fran['FirstName']} {ind_fran['LastName']}"
@@ -154,10 +151,10 @@ def create_presentation(franchise_data, slide_content, key_insights):
 
     franchise_numbers_string = ", ".join(franchise_numbers)
     owner = list(set(owner))
-    st.write(owner)
+    #st.write(owner)
     # Convert the array to a comma-separated string
     owner_string = ", ".join(owner)
-    st.write(f"comma separated unique list: {owner_string}")
+    #st.write(f"comma separated unique list: {owner_string}")
 
     owner_full_name = list(set(owner_full_name))
     owner_full_name_string = ", ".join(owner_full_name)
@@ -189,9 +186,6 @@ def create_presentation(franchise_data, slide_content, key_insights):
     tf = body_shape.text_frame
     p = tf.add_paragraph()
     p.text+= key_insights
-    #for k in key_insights:
-    #    p = tf.add_paragraph()
-    #    p.text+= f"  {k}: {key_insights[k]}\n\n\n"
         
     # create lists with shape objects
     for shape in first_slide.shapes:
@@ -212,8 +206,6 @@ def create_presentation(franchise_data, slide_content, key_insights):
         '{franchise_numbers}': franchise_numbers_string }
     replace_text(replaces_2, shapes_2)
 
-    st.write(key_insights)
-    
     # Save the presentation
     file_path = "generated_presentation.pptx"
     prs.save(file_path)
