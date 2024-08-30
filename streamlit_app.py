@@ -163,22 +163,23 @@ def create_presentation(franchise_data, slide_content, key_insights):
         #        p.text+= f"  {details_dict[k]}: {ind_fran[k]}\n\n"
 
         df = pd.DataFrame(
-            [["Product A", 5.6, 7.8, 5]],
-            columns=['Revenue', 'Billable Hours', 'RPN Leads']
-            )
+            [["YoY", -14.38, -10.64, -14]],
+            columns=["Year", "Revenue", "Billable Hours", "RPN Leads"]
+        )
 
-        width = Inches(4)
-        left = Inches(1.5)
+        width = Inches(8)
+        left = Inches(2.5)
         top = Inches(1)
-        fig = px.bar(df, x="Year", y=["Revenue", "Billable Hours", "RPN Leads"], barmode='group', height=50)
+        fig = px.bar(df, x="Year", y=["Revenue", "Billable Hours", "RPN Leads"], barmode='group', height=400)
         # st.dataframe(df) # if need to display dataframe
-        #st.plotly_chart(fig)
+        st.plotly_chart(fig)
 
         fig.write_image("metrics.png")
         metrics_im = 'metrics.png'
 
         add_image(slide, image=metrics_im, left=left, width=width, top=top)
         os.remove('metrics.png')
+
     
 
     franchise_numbers_string = ", ".join(franchise_numbers)
