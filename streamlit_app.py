@@ -129,6 +129,7 @@ def create_presentation(franchise_data, slide_content, key_insights):
     }
 
     owner = []
+    owner_full_name = []
     aggregate_metrics = {}
     #key_insights = {}
     #st.write(f"so far so good")
@@ -147,7 +148,10 @@ def create_presentation(franchise_data, slide_content, key_insights):
     #st.write(key_insights)
     st.write(aggregate_metrics)
 
+    franchise_numbers = []
+    
     for franchise in franchise_data:
+        franchise_numbers.append(str(franchise))
         slide = prs.slides.add_slide(bullet_slide_layout)
         shapes = slide.shapes
         title_shape = shapes.title
@@ -156,22 +160,30 @@ def create_presentation(franchise_data, slide_content, key_insights):
         ind_fran = franchise_data[str(franchise)]
         st.write(franchise)
         st.write(ind_fran['FirstName'])
-        owner_name = ind_fran['LastName']
-        st.write(owner_name)
-        owner.append(owner_name)
+        owner_full_name.append(ind_fran['FirstName'] + ' ' + ind_fran['LastName']) 
+        owner.append(ind_fran['LastName'])
         title_shape.text = f"Franchise {franchise} - {ind_fran['FirstName']} {ind_fran['LastName']}"
         for k in ind_fran:
             if k in details_dict:
                 p = tf.add_paragraph()
                 p.text+= f"  {details_dict[k]}: {ind_fran[k]}\n\n"
-            
+
+    franchise_numbers_string = ", ".join(franchise_numbers)
     owner = list(set(owner))
     st.write(owner)
     # Convert the array to a comma-separated string
-    comma_separated_string = ", ".join(owner)
-    st.write(f"comma separated unique list: {comma_separated_string}")
+    owner_string = ", ".join(owner)
+    st.write(f"comma separated unique list: {owner_string}")
+
+    owner_full_name = list(set(owner_full_name))
+    owner_full_name_string = ", ".join(owner_full_name)
+    st.write(f"comma separated unique list: {owner_full_name_string}")
+    
     first_slide = prs.slides[0]
     shapes_1 = []
+
+    third_slide = prs.slides[2]
+    shapes_2 = []
 
     #Aggregate Metrics
     slide = prs.slides.add_slide(bullet_slide_layout)
@@ -201,11 +213,20 @@ def create_presentation(franchise_data, slide_content, key_insights):
     for shape in first_slide.shapes:
         shapes_1.append(shape)
 
+    # create lists with shape objects
+    for shape in third_slide.shapes:
+        shapes_2.append(shape)
+
     # initiate a dictionary of placeholders and values to replace
     replaces_1 = {
         '{owner}': comma_separated_string,
         '{date}': today }
     replace_text(replaces_1, shapes_1)
+
+    replaces_2 = {
+        '{owner_name}': owner_full_name_string,
+        '{franchise_numbers}': franchise_numbers_string }
+    replace_text(replaces_2, shapes_2)
 
     st.write(key_insights)
     
