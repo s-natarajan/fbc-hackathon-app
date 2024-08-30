@@ -20,7 +20,7 @@ load_dotenv()
 path = os.path.dirname(__file__)
 # Set your OpenAI API key
 openapi_key = st.text_input("OpenAI API Key", type="password")
-openai.api_key = st.text_input("OpenAI API Key", type="password")
+openai.api_key = openapi_key
 today = date.today()
 
 # Title of the Streamlit app
