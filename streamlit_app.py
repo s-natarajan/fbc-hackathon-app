@@ -36,6 +36,8 @@ def get_franchise_data(topic):
     for data in df:
         if str(data) in keys_to_keep:
             filtered_dict[str(data)] = df[data]
+
+    st.write(filtered_dict)
     return filtered_dict
 
 def get_median_data():
