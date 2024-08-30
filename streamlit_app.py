@@ -139,10 +139,8 @@ def create_presentation(franchise_data, slide_content, key_insights):
         slide = prs.slides.add_slide(bullet_slide_layout)
         shapes = slide.shapes
         title_shape = shapes.title
-        for placeholder in shapes.placeholders:
-            st.write(placeholder.name)
         body_shape = shapes.placeholders[1]
-        perf_shape = slide.placeholders[2]
+        #perf_shape = slide.placeholders[2]
         tf = body_shape.text_frame
         ind_fran = franchise_data[str(franchise)]
         owner_full_name.append(ind_fran['FirstName'] + ' ' + ind_fran['LastName']) 
@@ -166,6 +164,11 @@ def create_presentation(franchise_data, slide_content, key_insights):
         elif weighted_score >=4.99:
             performance_standing = "Significantly Above Target"
         perf_shape.text = performance_standing
+        for placeholder in shapes.placeholders:
+            if placeholder.name == 'Text Placeholder 3':
+                placeholder.text = performance_standing
+                
+            st.write(placeholder.name)
         #for k in ind_fran:
         #    if k in details_dict:
         #        p = tf.add_paragraph()
