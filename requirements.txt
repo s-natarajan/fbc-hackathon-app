@@ -5,4 +5,4 @@ python-pptx
 python-dotenv
 openai
 plotly
-requests
+kaleido
