@@ -213,7 +213,14 @@ def create_presentation(franchise_data, slide_content, key_insights):
         p = tf.add_paragraph()
         p.text+= f"  {k}: {aggregate_metrics[k]}\n\n"
 
-    generate_graph(aggregate_metrics)
+    df = pd.DataFrame(
+        [["Current", 1234567, 3450, 100], ["Previous", 8758758, 73877, 800]],
+        columns=["Year", "Revenue", "Billable Hours", "RPN Leads"]
+    )
+
+    fig = px.bar(df, x="Year", y=["Revenue", "Billable Hours", "RPN Leads"], barmode='group', height=400)
+    # st.dataframe(df) # if need to display dataframe
+    st.plotly_chart(fig)
 
     #Key Insights
     slide = prs.slides.add_slide(bullet_slide_layout)
