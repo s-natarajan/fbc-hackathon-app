@@ -12,11 +12,14 @@ import io
 import csv
 import ast
 from datetime import date
+import requests
+import base64
 
 # Load environment variables from a .env file if present
 load_dotenv()
 path = os.path.dirname(__file__)
 # Set your OpenAI API key
+openapi_key = st.text_input("OpenAI API Key", type="password")
 openai.api_key = st.text_input("OpenAI API Key", type="password")
 today = date.today()
 
@@ -100,6 +103,30 @@ def replace_text(replacements, shapes):
                                 p.remove(run._r)
                         if bool(paragraph.runs):
                             paragraph.runs[0].text = whole_text
+
+
+
+def generate_graph(aggregate_metrics)
+
+    # Step 1: Generate the graph image using OpenAPI API
+    # (Example placeholder code - this will depend on your specific API)
+
+    api_url = "https://api.openai.com/v1/images/generate"
+    headers = {"Authorization": "Bearer " + openapi_key}
+    data = {
+        "prompt": "A bar graph showing total revenue growth between current and previous years from this data: {aggregate_metrics}",
+        "size": "1024x1024"
+    }
+    response = requests.post(api_url, headers=headers, json=data)
+
+    # Assuming the API returns an image in base64 format
+    image_data = base64.b64decode(response.json()['image'])
+
+    # Step 2: Save the image to a file
+    with open("graph.png", "wb") as image_file:
+        image_file.write(image_data)
+
+    st.write('image data received')
 
 # Function to create a PowerPoint presentation
 def create_presentation(franchise_data, slide_content, key_insights):
@@ -185,6 +212,8 @@ def create_presentation(franchise_data, slide_content, key_insights):
         p = tf.add_paragraph()
         p.text+= f"  {k}: {aggregate_metrics[k]}\n\n"
 
+    generate_graph(aggregate_metrics)
+
     #Key Insights
     slide = prs.slides.add_slide(bullet_slide_layout)
     shapes = slide.shapes
@@ -213,6 +242,15 @@ def create_presentation(franchise_data, slide_content, key_insights):
         '{owner_name}': owner_full_name_string,
         '{franchise_numbers}': franchise_numbers_string }
     replace_text(replaces_2, shapes_2)
+
+    aggregate_metrics['TotalCurrentYearRevenue']
+    revenue_comapre = plot_graph(df=marketcap_df, x='Year', y='Market Cap', title='Market Cap USD')
+
+    marketcap_fig.write_image("marketcap.png")
+    marketcap_im = 'marketcap.png'
+
+    add_image(prs.slides[4], image=marketcap_im, left=left, width=width, top=top)
+    os.remove('marketcap.png')
 
     # Save the presentation
     file_path = "generated_presentation.pptx"
