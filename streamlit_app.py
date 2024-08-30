@@ -26,7 +26,6 @@ def get_franchise_data(topic):
     conn = st.connection('s3', type=FilesConnection)
     df = conn.read("fbc-hackathon-test/growth.csv", input_format="csv", ttl=600) 
     df = df.transpose()
-    df = df.drop(df.index[0])
     df.columns = df.iloc[1]  # Use the first row as the header
     df = df.drop(df.index[1])  # Drop the first row since it is now the header
     df = df.to_dict()
