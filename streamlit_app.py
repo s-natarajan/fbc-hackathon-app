@@ -163,8 +163,8 @@ def create_presentation(franchise_data, slide_content, key_insights):
         #        p.text+= f"  {details_dict[k]}: {ind_fran[k]}\n\n"
 
         df = pd.DataFrame(
-            [["Product A", 5.6, 7.8, 5], ["Product B", 5.8, 7.2, 4.9]],
-            columns=['Growth %', 'Revenue', 'Billable Hours', 'RPN Leads']
+            [["Product A", 5.6, 7.8, 5]],
+            columns=['Revenue', 'Billable Hours', 'RPN Leads']
             )
 
         width = Inches(4)
