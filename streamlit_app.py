@@ -111,7 +111,15 @@ def create_presentation(franchise_data, slide_content, key_insights):
     'NetworkPerformancePartner': 'FBC',
     'Region': 'DO',
     'WeightedScore': 'Your Total Score',
-    
+    'Rank': 'Network Ranking',
+    'CurrentYearTotalBillableHours': 'Current Year Billable Hours',
+    'LastYearTotalBillableHours' : 'Previous Year Billable Hours', 
+    'CurrentYearTotalRevenue': 'Current Year Total Revenue',
+    'LastYearYearTotalRevenue' : 'Previous Year Total Revenue',     
+    'HoursGrowth': 'Your Hours Growth %',
+    'RevenueGrowth': 'Your Revenue Growth %',
+    'HoursGrowth': 'Your Hours Growth %', 
+    'RevenueGrowth': 'Your Revenue Growth %'
     }
 
     median_data = get_median_data()
