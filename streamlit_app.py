@@ -14,6 +14,7 @@ import ast
 from datetime import date
 import requests
 import base64
+import plotly.express as px
 
 # Load environment variables from a .env file if present
 load_dotenv()
