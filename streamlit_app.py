@@ -190,6 +190,25 @@ def create_presentation(franchise_data, slide_content, key_insights):
                 p = tf.add_paragraph()
                 p.text+= f"  {details_dict[k]}: {ind_fran[k]}\n\n"
 
+        df = pd.DataFrame(
+        [["YoY", -14.38, -10.64, -14]],
+        columns=["Year", "Revenue", "Billable Hours", "RPN Leads"]
+        )
+
+        width = Inches(8)
+        left = Inches(2.5)
+        top = Inches(1)
+        fig = px.bar(df, x="Year", y=["Revenue", "Billable Hours", "RPN Leads"], barmode='group', height=200)
+        # st.dataframe(df) # if need to display dataframe
+        #st.plotly_chart(fig)
+
+        fig.write_image("metrics.png")
+        metrics_im = 'metrics.png'
+
+        add_image(slide, image=metrics_im, left=left, width=width, top=top)
+        os.remove('metrics.png')
+    
+
     franchise_numbers_string = ", ".join(franchise_numbers)
     owner = list(set(owner))
     #st.write(owner)
