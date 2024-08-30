@@ -41,8 +41,6 @@ def get_franchise_data(topic):
 def get_median_data():
     conn = st.connection('s3', type=FilesConnection)
     df = conn.read("fbc-hackathon-test/Network_Median.csv", input_format="csv", ttl=600) 
-    df = df.transpose()
-    df.columns = df.iloc[0]  # Use the first row as the header
     df = df.drop(df.index[0])  # Drop the first row since it is now the header
     df = df.to_dict()
     st.write("median data")
