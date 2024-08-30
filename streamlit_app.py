@@ -59,7 +59,7 @@ def aggr_graph():
         x=franchises,
         y=sales,
         name='Sales',
-        marker_color='blue'
+        marker_color='amber'
     ))
 
     # Add a line representing the median value
@@ -225,7 +225,7 @@ def create_presentation(franchise_data, slide_content, key_insights):
                 width = Inches(8)
                 left = Inches(2.5)
                 top = Inches(1)
-                fig = px.bar(df, x="Franchise", y=["Revenue", "Billable Hours", "RPN Leads"], color_discrete_sequence=['yellow'], barmode='group', height=400)
+                fig = px.bar(df, x="Franchise", y=["Revenue", "Billable Hours", "RPN Leads"], color_discrete_sequence=['amber'], barmode='group', height=400)
                 fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)')
                 # st.dataframe(df) # if need to display dataframe
                 #st.plotly_chart(fig)
@@ -286,8 +286,6 @@ def create_presentation(franchise_data, slide_content, key_insights):
     title_shape = shapes.title
     title_shape.text = f"Enterprise Business Overview"
     body_shape = shapes.placeholders[1]
-    for placeholder in shapes.placeholders:
-        st.write(placeholder.name)
     #tf = body_shape.text_frame
     #for k in aggregate_metrics:
     #    p = tf.add_paragraph()
@@ -357,14 +355,14 @@ def create_presentation(franchise_data, slide_content, key_insights):
     return file_path
 
 # Streamlit input fields
-topic = st.text_input("Enter the Franchise number:")
-content = st.text_area("Enter the themes for the slides:")
+topic = st.text_input("Enter the Franchise numbers:")
+content = st.text_area("Enter the themes for key insights:")
 
 # Generate button
 if st.button("Generate Slide Content"):
     if topic:
         franchise_data = get_franchise_data(topic)
-        st.write(franchise_data)
+        #st.write(franchise_data)
         generated_content = generate_aggregate_metrics(franchise_data)
         
         key_insights = generate_key_insights(franchise_data)
