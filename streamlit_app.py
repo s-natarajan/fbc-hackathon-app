@@ -118,7 +118,8 @@ def generate_graph(aggregate_metrics):
         "size": "1024x1024"
     }
     response = requests.post(api_url, headers=headers, json=data)
-
+    st.write(response)
+    st.write(response.json())
     # Assuming the API returns an image in base64 format
     image_data = base64.b64decode(response.json()['image'])
 
