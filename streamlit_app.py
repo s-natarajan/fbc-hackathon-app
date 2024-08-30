@@ -36,17 +36,9 @@ def get_franchise_data(topic):
         if str(data) in keys_to_keep:
             filtered_dict[str(data)] = df[data]
 
-    st.write(filtered_dict)
+    #st.write(filtered_dict)
     return filtered_dict
 
-def get_median_data():
-    conn = st.connection('s3', type=FilesConnection)
-    df = conn.read("fbc-hackathon-test/Network_Median.csv", input_format="csv", ttl=600) 
-    df = df.drop(df.index[0])  # Drop the first row since it is now the header
-    df = df.to_dict()
-    st.write("median data")
-    st.write(df)
-    return df
 
 def add_image(slide, image, left, top, width):
     """function to add an image to the PowerPoint slide and specify its position and width"""
@@ -67,7 +59,7 @@ def generate_aggregate_metrics(content):
         temperature=0.7,
     )
     generated_text = response.choices[0].message.content
-    st.write(f"Response: {generated_text}")
+    #st.write(f"Response: {generated_text}")
     return ast.literal_eval(generated_text)
 
 def generate_key_insights(content):
@@ -128,18 +120,12 @@ def create_presentation(franchise_data, slide_content, key_insights):
     'RevenueGrowth': 'Your Revenue Growth %'
     }
 
-    #median_data = get_median_data()
     median_data = {"RPNLeadsGrowth": 14.22, "HoursGrowth": 3.97, "RevenueGrowth": 10.23}
 
 
     owner = []
     owner_full_name = []
     aggregate_metrics = {}
-    #key_insights = {}
-    #st.write(f"so far so good")
-    #st.write(isinstance(slide_content, dict))
-    for item in slide_content:
-        st.write(item)
     if 'aggregate_metrics' in slide_content:
         aggregate_metrics = slide_content['aggregate_metrics']
     if 'AggregateMetrics' in slide_content:
@@ -153,6 +139,7 @@ def create_presentation(franchise_data, slide_content, key_insights):
         slide = prs.slides.add_slide(bullet_slide_layout)
         shapes = slide.shapes
         title_shape = shapes.title
+        st.write(placeholders)
         body_shape = shapes.placeholders[1]
         perf_shape = shapes.placeholders[2]
         tf = body_shape.text_frame
