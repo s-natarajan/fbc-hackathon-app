@@ -11,6 +11,7 @@ import csv
 import ast
 from datetime import date
 import plotly.express as px
+from PIL import Image
 
 # Load environment variables from a .env file if present
 load_dotenv()
