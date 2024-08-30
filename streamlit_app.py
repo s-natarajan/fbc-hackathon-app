@@ -110,7 +110,7 @@ def replace_text(replacements, shapes):
 def create_presentation(franchise_data, slide_content, key_insights):
     pptx = path + '//' + 'template.pptx'
     prs = Presentation(pptx)
-    bullet_slide_layout = prs.slide_layouts.get_by_name('Purple_Circle_Corners')
+    bullet_slide_layout = prs.slide_layouts.get_by_name('Purple_Speaker_1')
 
     details_dict = {
     'Franchisee': 'Franchisee',
@@ -154,11 +154,30 @@ def create_presentation(franchise_data, slide_content, key_insights):
         shapes = slide.shapes
         title_shape = shapes.title
         body_shape = shapes.placeholders[1]
+        perf_shape = shapes.placeholders[2]
         tf = body_shape.text_frame
         ind_fran = franchise_data[str(franchise)]
         owner_full_name.append(ind_fran['FirstName'] + ' ' + ind_fran['LastName']) 
         owner.append(ind_fran['LastName'])
         title_shape.text = f"Franchise {franchise} - {ind_fran['FirstName']} {ind_fran['LastName']}"
+        p = tf.add_paragraph()
+        weighted_score =  ind_fran['WeightedScore']
+        p.text+= f"FBC: {ind_fran['NetworkPerformancePartner']}\n\n"
+        p.text+= f"DO: {ind_fran['Region']}\n\n"
+        p.text+= f"Your Score: {weighted_score}\n\n"
+        p.text+= f"Rank: {ind_fran['Rank']}\n\n"
+        performance_standing = ''
+        if weighted_score >=0 and weighted_score < 1.99:
+            performance_standing = "Significantly Below Target"
+        elif weighted_score >=1.99 and weighted_score < 2.99:
+            performance_standing = "Below Target"
+        elif weighted_score >=2.99 and weighted_score < 3.99:
+            performance_standing = "On Target"
+        elif weighted_score >=3.99 and weighted_score < 4.99:
+            performance_standing = "Above Target"
+        elif weighted_score >=4.99:
+            performance_standing = "Significantly Above Target"
+        perf_shape.text = performance_standing
         #for k in ind_fran:
         #    if k in details_dict:
         #        p = tf.add_paragraph()
