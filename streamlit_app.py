@@ -157,13 +157,13 @@ def create_presentation(franchise_data, slide_content, key_insights):
         owner_full_name.append(ind_fran['FirstName'] + ' ' + ind_fran['LastName']) 
         owner.append(ind_fran['LastName'])
         title_shape.text = f"Franchise {franchise} - {ind_fran['FirstName']} {ind_fran['LastName']}"
-        for k in ind_fran:
-            if k in details_dict:
-                p = tf.add_paragraph()
-                p.text+= f"  {details_dict[k]}: {ind_fran[k]}\n\n"
+        #for k in ind_fran:
+        #    if k in details_dict:
+        #        p = tf.add_paragraph()
+        #        p.text+= f"  {details_dict[k]}: {ind_fran[k]}\n\n"
 
         df = pd.DataFrame(
-            ['YoY', 1, 3, 5],
+            [["Product A", 5.6, 7.8, 5], ["Product B", 5.8, 7.2, 4.9]],
             columns=['Growth %', 'Revenue', 'Billable Hours', 'RPN Leads']
             )
 
