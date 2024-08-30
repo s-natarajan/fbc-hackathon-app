@@ -219,7 +219,7 @@ def create_presentation(franchise_data, slide_content, key_insights):
 
     # initiate a dictionary of placeholders and values to replace
     replaces_1 = {
-        '{owner}': comma_separated_string,
+        '{owner}': owner_string,
         '{date}': today }
     replace_text(replaces_1, shapes_1)
 
