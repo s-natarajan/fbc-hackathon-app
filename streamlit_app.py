@@ -110,7 +110,7 @@ def replace_text(replacements, shapes):
 def create_presentation(franchise_data, slide_content, key_insights):
     pptx = path + '//' + 'template.pptx'
     prs = Presentation(pptx)
-    bullet_slide_layout = prs.slide_layouts.get_by_name('Purple_Speaker_1')
+    bullet_slide_layout = prs.slide_layouts.get_by_name('Purple_Speaker1')
 
     details_dict = {
     'Franchisee': 'Franchisee',
