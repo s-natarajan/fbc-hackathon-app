@@ -40,9 +40,9 @@ def get_franchise_data(topic):
     return filtered_dict
 
 
-def add_image(slide, image, left, top, width):
+def add_image(placeholder, image, left, top, width):
     """function to add an image to the PowerPoint slide and specify its position and width"""
-    slide.shapes.placeholder['Picture Placeholder 1'].add_picture(image, left=left, top=top, width=width)
+    placeholder.add_picture(image, left=left, top=top, width=width)
     
 # Function to generate slide content
 def generate_aggregate_metrics(content):
@@ -167,32 +167,34 @@ def create_presentation(franchise_data, slide_content, key_insights):
         for placeholder in shapes.placeholders:
             if placeholder.name == 'Title 2':
                 placeholder.text = performance_standing
+            if placeholder.name == 'Picture Placeholder 1':
+                df = pd.DataFrame(
+                    [[str(franchise), float(ind_fran['RevenueGrowth']), float(ind_fran['HoursGrowth']), float(ind_fran['RPNLeadsGrowth'])], 
+                    ["N/W Median", float(median_data['RevenueGrowth']), float(median_data['HoursGrowth']), float(median_data['RPNLeadsGrowth'])]],
+                columns=["Franchise", "Revenue", "Billable Hours", "RPN Leads"]
+                )
+
+                width = Inches(5)
+                left = Inches(1.5)
+                top = Inches(1)
+                fig = px.bar(df, x="Franchise", y=["Revenue", "Billable Hours", "RPN Leads"], barmode='group', height=300)
+                # st.dataframe(df) # if need to display dataframe
+                st.plotly_chart(fig)
+
+                fig.write_image("metrics.png")
+                metrics_im = 'metrics.png'
+
+                add_image(placeholder, image=metrics_im, left=left, width=width, top=top)
+                os.remove('metrics.png')
                 
-            st.write(placeholder.name)
+                st.write(placeholder.name)
         #for k in ind_fran:
         #    if k in details_dict:
         #        p = tf.add_paragraph()
         #        p.text+= f"  {details_dict[k]}: {ind_fran[k]}\n\n"
 
 
-        df = pd.DataFrame(
-            [[str(franchise), float(ind_fran['RevenueGrowth']), float(ind_fran['HoursGrowth']), float(ind_fran['RPNLeadsGrowth'])], 
-             ["N/W Median", float(median_data['RevenueGrowth']), float(median_data['HoursGrowth']), float(median_data['RPNLeadsGrowth'])]],
-            columns=["Franchise", "Revenue", "Billable Hours", "RPN Leads"]
-        )
-
-        width = Inches(5)
-        left = Inches(1.5)
-        top = Inches(1)
-        fig = px.bar(df, x="Franchise", y=["Revenue", "Billable Hours", "RPN Leads"], barmode='group', height=300)
-        # st.dataframe(df) # if need to display dataframe
-        st.plotly_chart(fig)
-
-        fig.write_image("metrics.png")
-        metrics_im = 'metrics.png'
-
-        add_image(slide, image=metrics_im, left=left, width=width, top=top)
-        os.remove('metrics.png')
+        
 
     
 
