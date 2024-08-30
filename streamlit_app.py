@@ -152,7 +152,7 @@ def create_presentation(franchise_data, slide_content, key_insights):
         p.text+= f"FBC: {ind_fran['NetworkPerformancePartner']}\n\n"
         p.text+= f"DO: {ind_fran['Region']}\n\n"
         p.text+= f"Your Score: {weighted_score}\n\n"
-        p.text+= f"Rank: {ind_fran['Rank']}\n\n\n\n\n"
+        p.text+= f"Rank: {ind_fran['Rank']}\n\n"
         performance_standing = ''
         if weighted_score >=0 and weighted_score < 1.99:
             performance_standing = "Significantly Below Target"
