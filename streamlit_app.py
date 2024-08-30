@@ -219,7 +219,7 @@ def create_presentation(franchise_data, slide_content, key_insights):
     #    p.text+= f"  {k}: {aggregate_metrics[k]}\n\n"
 
     df = pd.DataFrame(
-        [["Current", 1234567, 3450, 100], ["Previous", 8758758, 73877, 800]],
+        [["YoY", -14.38, -10.64, -14]],
         columns=["Year", "Revenue", "Billable Hours", "RPN Leads"]
     )
 
