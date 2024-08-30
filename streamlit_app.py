@@ -41,9 +41,9 @@ def get_franchise_data(topic):
     return filtered_dict
 
 
-def add_image(placeholder, image, left, top, width):
+def add_image(slide, image, left, top, width, height):
     """function to add an image to the PowerPoint slide and specify its position and width"""
-    placeholder.insert_picture(image)
+    slide.add_picture(image, left, top, width=width, height=height)
     
 # Function to generate slide content
 def generate_aggregate_metrics(content):
@@ -188,7 +188,9 @@ def create_presentation(franchise_data, slide_content, key_insights):
                     image_width, image_height = img.size
                 placeholder_width = placeholder.width
                 placeholder_height = placeholder.height
-
+                left = placeholder.left
+                top = placeholder.top
+                
                 # Calculate aspect ratios
                 image_ratio = image_width / image_height
                 placeholder_ratio = placeholder_width / placeholder_height
@@ -205,7 +207,7 @@ def create_presentation(franchise_data, slide_content, key_insights):
                 new_width = int(image_width * scale_factor)
                 new_height = int(image_height * scale_factor)    
                 
-                add_image(placeholder, image=metrics_im, left=left, width=new_width, height=new_height, top=top)
+                add_image(slide, image=metrics_im, left=left, width=new_width, height=new_height, top=top)
                 os.remove('metrics.png')
         #for k in ind_fran:
         #    if k in details_dict:
