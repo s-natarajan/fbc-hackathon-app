@@ -162,11 +162,9 @@ def create_presentation(franchise_data, slide_content, key_insights):
         #        p = tf.add_paragraph()
         #        p.text+= f"  {details_dict[k]}: {ind_fran[k]}\n\n"
 
-        st.write(float(ind_fran['RevenueGrowth']))
-        st.write(float(ind_fran['HoursGrowth']))
-        st.write(float(ind_fran['RPNLeadsGrowth']))
+
         df = pd.DataFrame(
-            [[float(ind_fran['RevenueGrowth']), float(ind_fran['HoursGrowth']), float(ind_fran['RPNLeadsGrowth'])]],
+            [[1,2,3]],
             columns=["Revenue", "Billable Hours", "RPN Leads"]
         )
 
