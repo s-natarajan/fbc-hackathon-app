@@ -106,7 +106,7 @@ def replace_text(replacements, shapes):
 
 
 
-def generate_graph(aggregate_metrics)
+def generate_graph(aggregate_metrics):
 
     # Step 1: Generate the graph image using OpenAPI API
     # (Example placeholder code - this will depend on your specific API)
