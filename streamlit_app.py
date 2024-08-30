@@ -111,7 +111,7 @@ def generate_aggregate_metrics(content):
 
 def generate_key_insights(content):
     prompt_txt = f"Wait for user input to return a response. Use this data to generate the output as a valid dictionary object:\n\n{str(content)}"
-    prompt = f"You are a helpful assistant that generates an executive summary of Franchise's performance metrics. Analyze the data and summarize the following trends as brief bullets comparing the performance of the franchises in the enterprise. If the franchise has shown growth, what are the factors contributing to it according to the data given?"
+    prompt = f"You are a helpful assistant that generates an executive summary of Franchise's performance metrics. Summarize what factors have contributed to the increase or decrease of growth in revenue, hours and whether the franchise is performing well."
    
     # Use ChatCompletion with the new model and API method
     response = openai.chat.completions.create(
@@ -225,7 +225,7 @@ def create_presentation(franchise_data, slide_content, key_insights):
                 width = Inches(8)
                 left = Inches(2.5)
                 top = Inches(1)
-                fig = px.bar(df, x="Franchise", y=["Revenue", "Billable Hours", "RPN Leads"], color_discrete_sequence=['blue'], barmode='group', height=400)
+                fig = px.bar(df, x="Franchise", y=["Revenue", "Billable Hours", "RPN Leads"], color_discrete_sequence=['yellow'], barmode='group', height=400)
                 fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)')
                 # st.dataframe(df) # if need to display dataframe
                 #st.plotly_chart(fig)
