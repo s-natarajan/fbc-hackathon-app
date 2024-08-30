@@ -104,7 +104,7 @@ def create_presentation(franchise_data, slide_content, key_insights):
     pptx = path + '//' + 'template.pptx'
     prs = Presentation(pptx)
     bullet_slide_layout = prs.slide_layouts.get_by_name('Purple_Speaker1')
-    insights_slide_layout = prs.slide_layouts.get_by_name('Purple_Curve_Corners')
+    insights_slide_layout = prs.slide_layouts.get_by_name('Purple_Circle_Corners')
 
     details_dict = {
     'Franchisee': 'Franchisee',
