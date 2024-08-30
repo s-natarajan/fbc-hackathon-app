@@ -139,9 +139,10 @@ def create_presentation(franchise_data, slide_content, key_insights):
         slide = prs.slides.add_slide(bullet_slide_layout)
         shapes = slide.shapes
         title_shape = shapes.title
-        st.write(len(shapes.placeholders))
+        for placeholder in slide.placeholders:
+            st.write(f"Placeholder Index: {placeholder.idx}, Placeholder Type: {placeholder.placeholder_format.type}")
         body_shape = shapes.placeholders[1]
-        perf_shape = shapes.placeholders[2]
+        perf_shape = slide.placeholders[2]
         tf = body_shape.text_frame
         ind_fran = franchise_data[str(franchise)]
         owner_full_name.append(ind_fran['FirstName'] + ' ' + ind_fran['LastName']) 
