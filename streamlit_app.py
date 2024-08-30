@@ -166,7 +166,7 @@ def create_presentation(franchise_data, slide_content, key_insights):
         elif weighted_score >=4.99:
             performance_standing = "Significantly Above Target"
         p.text+= f"Performance Standing: {performance_standing}\n\n"
-        for placeholder in shapes.placeholder:
+        for placeholder in shapes.placeholders:
             #st.write(placeholder.name)
             if placeholder.name == 'Picture Placeholder 1':
                 df = pd.DataFrame(
