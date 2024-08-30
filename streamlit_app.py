@@ -165,7 +165,7 @@ def create_presentation(franchise_data, slide_content, key_insights):
 
         df = pd.DataFrame(
             [[str(franchise), float(ind_fran['RevenueGrowth']), float(ind_fran['HoursGrowth']), float(ind_fran['RPNLeadsGrowth'])], 
-             ["N/W Median",median_data['Median REV'], median_data['Median HOURS'], median_data['Median RPN']]],
+             ["N/W Median",median_data['Revenue Growth'], median_data['Hours Growth'], median_data['RPN Leads Growth']]],
             columns=["Franchise", "Revenue", "Billable Hours", "RPN Leads"]
         )
 
