@@ -64,7 +64,7 @@ def generate_slide_content(content):
     if isinstance(generated_text, str):
         #generated_text = generated_text.encode('utf-8')
         try:
-            generated_text = ast.literal_eval(generated_text)
+            generated_text = ast.literal_eval(generated_text.strip())
             return result
         except (SyntaxError, ValueError, TypeError) as e:
             st.write(f"Error: {e}")
