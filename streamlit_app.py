@@ -17,6 +17,7 @@ load_dotenv()
 path = os.path.dirname(__file__)
 # Set your OpenAI API key
 openai.api_key = st.text_input("OpenAI API Key", type="password")
+today = date.today()
 
 # Title of the Streamlit app
 st.title('Slide Content Generator')
@@ -154,10 +155,10 @@ def create_presentation(franchise_data, slide_content, key_insights):
         ind_fran = franchise_data[str(franchise)]
         st.write(franchise)
         st.write(ind_fran['FirstName'])
-        owner_name = f"Franchise {franchise} - {ind_fran['FirstName']} {ind_fran['LastName']}"
+        owner_name = ind_fran['LastName']
         st.write(owner_name)
         owner.append(owner_name)
-        title_shape.text = owner_name
+        title_shape.text = f"Franchise {franchise} - {ind_fran['FirstName']} {ind_fran['LastName']}"
         for k in ind_fran:
             if k in details_dict:
                 p = tf.add_paragraph()
@@ -201,7 +202,8 @@ def create_presentation(franchise_data, slide_content, key_insights):
 
     # initiate a dictionary of placeholders and values to replace
     replaces_1 = {
-        '{o}': comma_separated_string}
+        '{owner}': comma_separated_string,
+        '{date}': today }
     replace_text(replaces_1, shapes_1)
 
     st.write(key_insights)
