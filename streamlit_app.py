@@ -178,7 +178,7 @@ def create_presentation(franchise_data, slide_content, key_insights):
     slide = prs.slides.add_slide(bullet_slide_layout)
     shapes = slide.shapes
     title_shape = shapes.title
-    title_shape.text = f"The Enterprise Journey of {owner}"
+    title_shape.text = f"Enterprise Business Overview"
     body_shape = shapes.placeholders[1]
     tf = body_shape.text_frame
     for k in aggregate_metrics:
