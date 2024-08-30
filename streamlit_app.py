@@ -62,6 +62,23 @@ def generate_slide_content(content):
     st.write(f"Response: {generated_text}")
     return ast.literal_eval(generated_text)
 
+def generate_key_insights(content):
+    prompt_txt = f"Wait for user input to return a response. Use this data to generate the output as a valid python dictionary:\n\n{str(content)}"
+    prompt = f"You are a helpful assistant that generates an executive summary of Franchise's performance metrics. Analyze the data and summarize the following trends. If the franchise shows growth in billable hours, is it due to increase in clients, increase in the number of hours per client or a combination of both?If the franchise shows growth in Revenue, is it due to price per client, increase in new clients, increase in hours served for clients or combination of all? 
+    # Use ChatCompletion with the new model and API method
+    response = openai.chat.completions.create(
+        model="gpt-4o-2024-08-06",  # Specify the model
+        messages=[
+            {"role": "system", "content": prompt_txt},
+            {"role": "user", "content": prompt}
+        ],
+        temperature=0.7,
+    )
+    generated_text = response.choices[0].message.content
+    generated_text = generated_text.removeprefix('```python' )
+    st.write(f"Response: {generated_text}")
+    return ast.literal_eval(generated_text)
+
 # function to replace text in pptx first slide with selected filters
 def replace_text(replacements, shapes):
     """function to replace text on a PowerPoint slide. Takes dict of {match: replacement, ... } and replaces all matches"""
