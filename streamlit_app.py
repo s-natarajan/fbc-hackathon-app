@@ -223,6 +223,9 @@ def create_presentation(franchise_data, slide_content, key_insights):
         columns=["Year", "Revenue", "Billable Hours", "RPN Leads"]
     )
 
+    width = Inches(8)
+    left = Inches(2.5)
+    top = Inches(1)
     fig = px.bar(df, x="Year", y=["Revenue", "Billable Hours", "RPN Leads"], barmode='group', height=400)
     # st.dataframe(df) # if need to display dataframe
     st.plotly_chart(fig)
