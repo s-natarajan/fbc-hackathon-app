@@ -11,6 +11,7 @@ import re
 import io
 import csv
 import ast
+from datetime import date
 
 # Load environment variables from a .env file if present
 load_dotenv()
