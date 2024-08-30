@@ -223,6 +223,12 @@ def create_presentation(franchise_data, slide_content, key_insights):
     # st.dataframe(df) # if need to display dataframe
     st.plotly_chart(fig)
 
+    fig.write_image("metrics.png")
+    metrics_im = 'metrics.png'
+
+    add_image(prs.slides[4], image=metrics_im, left=left, width=width, top=top)
+    os.remove('metrics.png')
+
     #Key Insights
     slide = prs.slides.add_slide(bullet_slide_layout)
     shapes = slide.shapes
@@ -251,15 +257,6 @@ def create_presentation(franchise_data, slide_content, key_insights):
         '{owner_name}': owner_full_name_string,
         '{franchise_numbers}': franchise_numbers_string }
     replace_text(replaces_2, shapes_2)
-
-    aggregate_metrics['TotalCurrentYearRevenue']
-    revenue_comapre = plot_graph(df=marketcap_df, x='Year', y='Market Cap', title='Market Cap USD')
-
-    marketcap_fig.write_image("marketcap.png")
-    marketcap_im = 'marketcap.png'
-
-    add_image(prs.slides[4], image=marketcap_im, left=left, width=width, top=top)
-    os.remove('marketcap.png')
 
     # Save the presentation
     file_path = "generated_presentation.pptx"
