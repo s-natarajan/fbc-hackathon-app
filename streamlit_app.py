@@ -212,11 +212,11 @@ def create_presentation(franchise_data, slide_content, key_insights):
     shapes = slide.shapes
     title_shape = shapes.title
     title_shape.text = f"Enterprise Business Overview"
-    body_shape = shapes.placeholders[1]
-    tf = body_shape.text_frame
-    for k in aggregate_metrics:
-        p = tf.add_paragraph()
-        p.text+= f"  {k}: {aggregate_metrics[k]}\n\n"
+    #body_shape = shapes.placeholders[1]
+    #tf = body_shape.text_frame
+    #for k in aggregate_metrics:
+    #    p = tf.add_paragraph()
+    #    p.text+= f"  {k}: {aggregate_metrics[k]}\n\n"
 
     df = pd.DataFrame(
         [["Current", 1234567, 3450, 100], ["Previous", 8758758, 73877, 800]],
@@ -233,7 +233,7 @@ def create_presentation(franchise_data, slide_content, key_insights):
     fig.write_image("metrics.png")
     metrics_im = 'metrics.png'
 
-    add_image(prs.slides[4], image=metrics_im, left=left, width=width, top=top)
+    add_image(prs.slides[7], image=metrics_im, left=left, width=width, top=top)
     os.remove('metrics.png')
 
     #Key Insights
