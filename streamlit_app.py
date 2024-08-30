@@ -46,7 +46,7 @@ def get_franchise_data(topic):
 # Function to generate slide content
 def generate_slide_content(content):
     prompt_txt = f"Wait for user input to return a response. Use this data to generate the output as a valid python dictionary:\n\n{str(content)}"
-    prompt = f"You are a helpful assistant that generates an executive summary of Franchise's performance metrics. Calculate aggregate metrics for given Franchises and return output as a python dictionary with key as aggregate_metrics. Then summarize 3 Key insights comparing metrics between previous and current year as a python dictionary object with key as key_insights. Validate and return only a python dictionary as output. Do not return anything else."
+    prompt = f"You are a helpful assistant that generates an executive summary of Franchise's performance metrics. Calculate aggregate metrics for given Franchises and return output as a python dictionary with key as aggregate_metrics."
 
     # Use ChatCompletion with the new model and API method
     response = openai.chat.completions.create(
@@ -64,7 +64,10 @@ def generate_slide_content(content):
 
 def generate_key_insights(content):
     prompt_txt = f"Wait for user input to return a response. Use this data to generate the output as a valid python dictionary:\n\n{str(content)}"
-    prompt = f"You are a helpful assistant that generates an executive summary of Franchise's performance metrics. Analyze the data and summarize the following trends. If the franchise shows growth in billable hours, is it due to increase in clients, increase in the number of hours per client or a combination of both?If the franchise shows growth in Revenue, is it due to price per client, increase in new clients, increase in hours served for clients or combination of all? 
+    prompt = f"You are a helpful assistant that generates an executive summary of Franchise's performance metrics. Analyze the data and summarize the following trends. 
+    If the franchise shows growth in billable hours, is it due to increase in clients, increase in the number of hours per client or a combination of both? 
+    If the franchise shows growth in Revenue, is it due to price per client, increase in new clients, increase in hours served for clients or combination of all factors" 
+   
     # Use ChatCompletion with the new model and API method
     response = openai.chat.completions.create(
         model="gpt-4o-2024-08-06",  # Specify the model
@@ -218,6 +221,7 @@ if st.button("Generate Slide Content"):
         franchise_data = get_franchise_data(topic)
         #st.write(franchise_data)
         generated_content = generate_slide_content(franchise_data)
+        key_insights = generate_key_insights(franchise_data)
         st.subheader("Generated Slide Content:")
         
         # Create and offer download of the PowerPoint presentation
