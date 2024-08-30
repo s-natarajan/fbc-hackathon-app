@@ -186,8 +186,6 @@ def create_presentation(franchise_data, slide_content, key_insights):
 
                 add_image(placeholder, image=metrics_im, left=left, width=width, top=top)
                 os.remove('metrics.png')
-                
-                st.write(placeholder.name)
         #for k in ind_fran:
         #    if k in details_dict:
         #        p = tf.add_paragraph()
