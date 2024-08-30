@@ -165,6 +165,7 @@ def create_presentation(franchise_data, slide_content, key_insights):
             performance_standing = "Significantly Above Target"
         #perf_shape.text = performance_standing
         for placeholder in shapes.placeholders:
+            st.write(placeholder.name)
             if placeholder.name == 'Title 2':
                 placeholder.text = performance_standing
             if placeholder.name == 'Picture Placeholder 1':
@@ -174,10 +175,10 @@ def create_presentation(franchise_data, slide_content, key_insights):
                 columns=["Franchise", "Revenue", "Billable Hours", "RPN Leads"]
                 )
 
-                width = Inches(5)
-                left = Inches(1.5)
+                width = Inches(8)
+                left = Inches(2.5)
                 top = Inches(1)
-                fig = px.bar(df, x="Franchise", y=["Revenue", "Billable Hours", "RPN Leads"], barmode='group', height=300)
+                fig = px.bar(df, x="Franchise", y=["Revenue", "Billable Hours", "RPN Leads"], barmode='group', height=400)
                 # st.dataframe(df) # if need to display dataframe
                 st.plotly_chart(fig)
 
