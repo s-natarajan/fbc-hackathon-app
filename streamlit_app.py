@@ -85,6 +85,7 @@ def aggr_graph():
     # Show the graph
     fig.show()
     st.plotly_chart(fig)
+    return fig
 
 def add_image(slide, image, left, top, width, height):
     """function to add an image to the PowerPoint slide and specify its position and width"""
@@ -150,6 +151,7 @@ def create_presentation(franchise_data, slide_content, key_insights):
     prs = Presentation(pptx)
     bullet_slide_layout = prs.slide_layouts.get_by_name('Purple_Speaker1')
     insights_slide_layout = prs.slide_layouts.get_by_name('Purple_Circle_Corners')
+    aggr_slide_layout = prs.slide_layouts.get_by_name('Purple_Curve_Right')
 
     details_dict = {
     'Franchisee': 'Franchisee',
@@ -279,17 +281,44 @@ def create_presentation(franchise_data, slide_content, key_insights):
     shapes_2 = []
 
     #Aggregate Metrics
-    slide = prs.slides.add_slide(bullet_slide_layout)
+    slide = prs.slides.add_slide(aggr_slide_layout)
     shapes = slide.shapes
     title_shape = shapes.title
     title_shape.text = f"Enterprise Business Overview"
-    #body_shape = shapes.placeholders[1]
+    body_shape = shapes.placeholders[1]
     #tf = body_shape.text_frame
     #for k in aggregate_metrics:
     #    p = tf.add_paragraph()
     #    p.text+= f"  {k}: {aggregate_metrics[k]}\n\n"
 
-    aggr_graph()
+    fig = aggr_graph()
+    metrics_im = 'metrics.png'
+    fig.write_image(metrics_im)
+    with Image.open(metrics_im) as img:
+            image_width, image_height = img.size
+    placeholder_width = placeholder.width
+    placeholder_height = placeholder.height
+    left = placeholder.left
+    top = placeholder.top
+                
+    # Calculate aspect ratios
+    image_ratio = image_width / image_height
+    placeholder_ratio = placeholder_width / placeholder_height
+
+    # Determine the scaling factor
+    if image_ratio > placeholder_ratio:
+        # Image is wider than placeholder
+        scale_factor = placeholder_width / image_width
+    else:
+        # Image is taller than placeholder
+        scale_factor = placeholder_height / image_height
+
+    # Calculate new dimensions for the image
+    new_width = int(image_width * scale_factor)
+    new_height = int(image_height * scale_factor)    
+                
+    add_image(slide, image=metrics_im, left=left, width=new_width, height=new_height, top=top)
+    os.remove('metrics.png')
 
     #Key Insights
     slide = prs.slides.add_slide(insights_slide_layout)
