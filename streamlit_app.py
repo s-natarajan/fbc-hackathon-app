@@ -225,7 +225,7 @@ def create_presentation(franchise_data, slide_content, key_insights):
                 width = Inches(8)
                 left = Inches(2.5)
                 top = Inches(1)
-                fig = px.bar(df, x="Franchise", y=["Revenue", "Billable Hours", "RPN Leads"], barmode='group', height=400)
+                fig = px.bar(df, x="Franchise", y=["Revenue", "Billable Hours", "RPN Leads"], marker_color='blue', barmode='group', height=400)
                 fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)')
                 # st.dataframe(df) # if need to display dataframe
                 #st.plotly_chart(fig)
