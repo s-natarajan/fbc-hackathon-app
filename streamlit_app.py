@@ -285,7 +285,9 @@ def create_presentation(franchise_data, slide_content, key_insights):
     shapes = slide.shapes
     title_shape = shapes.title
     title_shape.text = f"Enterprise Business Overview"
-    body_shape = shapes.placeholders[2]
+    body_shape = shapes.placeholders[1]
+    for placeholder in shapes.placeholders:
+        st.write(placeholder.name)
     #tf = body_shape.text_frame
     #for k in aggregate_metrics:
     #    p = tf.add_paragraph()
@@ -296,8 +298,8 @@ def create_presentation(franchise_data, slide_content, key_insights):
     fig.write_image(metrics_im)
     with Image.open(metrics_im) as img:
         image_width, image_height = img.size
-    placeholder_width = body_shape.width
-    placeholder_height = body_shape.height
+    placeholder_width = placeholder.width
+    placeholder_height = placeholder.height
     left = placeholder.left
     top = placeholder.top
                 
